@@ -49,5 +49,5 @@ public class Constants {
     public static final int COUNTRY_NAME_MIN_LENGTH = 2;
 
 
-
+    public static final String BEERS_ROOT_MAPPING = "/api/beers";
 }
