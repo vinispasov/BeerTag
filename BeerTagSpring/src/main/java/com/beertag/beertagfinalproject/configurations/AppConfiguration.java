@@ -2,6 +2,7 @@ package com.beertag.beertagfinalproject.configurations;
 
 import com.beertag.beertagfinalproject.models.Beer;
 import com.beertag.beertagfinalproject.models.Rating;
+import com.beertag.beertagfinalproject.models.Tag;
 import com.beertag.beertagfinalproject.models.User;
 import com.beertag.beertagfinalproject.utils.Constants;
 import org.hibernate.SessionFactory;
@@ -17,6 +18,7 @@ public class AppConfiguration {
                 .addAnnotatedClass(Beer.class)
                 .addAnnotatedClass(Rating.class)
                 .addAnnotatedClass(User.class)
+                .addAnnotatedClass(Tag.class)
                 .buildSessionFactory();
     }
 }
