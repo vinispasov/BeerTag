@@ -50,4 +50,13 @@ public class Constants {
 
 
     public static final String BEERS_ROOT_MAPPING = "/api/beers";
+
+
+
+    public static final String TAGS_TABLE_NAME = "tags";
+    public static final String TAGS_TABLE_ID_COLUMN_NAME = "tag_id";
+    public static final String TAGS_TABLE_TAG_NAME_COLUMN_NAME = "tag";
+
+
+    public static final String BEERSTAGS_TABLE_NAME = "beerstags";
 }

@@ -8,6 +8,7 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = Constants.BEERS_TABLE_NAME)
@@ -49,6 +50,15 @@ public class Beer {
     @NotNull
     @Column(name=Constants.BEERS_TABLE_IS_DRANK_COLUMN)
     private boolean isDrank;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = Constants.BEERSTAGS_TABLE_NAME,
+            joinColumns = @JoinColumn(name = Constants.BEERS_TABLE_ID_COLUMN_NAME),
+            inverseJoinColumns = @JoinColumn(name = Constants.TAGS_TABLE_ID_COLUMN_NAME)
+    )
+    private List<Tag> tags;
+
 
     public Beer(){
 
@@ -137,5 +147,12 @@ public class Beer {
         isDrank = drank;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 
 }

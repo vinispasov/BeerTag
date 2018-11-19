@@ -20,10 +20,6 @@ public class User {
     @Column(name = Constants.USERS_TABLE_USER_NAME_COLUMN)
     private String userName;
 
-    @Size(min = Constants.TEXT_VALIDATION_MIN_VALUE, max = Constants.STRING_VALIDATION_MAX_TEXT)
-    @Column(name = Constants.USERS_TABLE_USER_PASSWORD_COLUMN)
-    private String userPassword;
-
     @NotNull
     @Size(min = Constants.FIRST_LAST_NAME_MIN_LENGTH, max = Constants.TEXT_VALIDATION_MAX_VALUE)
     @Column(name = Constants.USERS_TABLE_USER_FIRST_NAME_COLUMN)
@@ -42,9 +38,8 @@ public class User {
 
     }
 
-    public User(String userName, String userPassword, String firstName, String lastName,String userPicture) {
+    public User(String userName, String firstName, String lastName,String userPicture) {
         setUserName(userName);
-        setUserPassword(userPassword);
         setFirstName(firstName);
         setLastName(lastName);
         setUserPicture(userPicture);
@@ -65,14 +60,6 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
     }
 
     public String getFirstName() {
