@@ -5,6 +5,7 @@ import com.beertag.beertagfinalproject.utils.Constants;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = Constants.USERS_TABLE_NAME)
@@ -33,6 +34,9 @@ public class User {
     @Column(name = Constants.USERS_TABLE_USER_PICTURE_COLUMN)
     private String userPicture;
 
+    @OneToMany
+    @JoinColumn(name = Constants.USERS_TABLE_ID_COLUMN_NAME)
+    private List<Beer> beers;
 
     public User() {
 
@@ -86,4 +90,11 @@ public class User {
         this.userPicture = userPicture;
     }
 
+    public List<Beer> getBeers() {
+        return beers;
+    }
+
+    public void setBeers(List<Beer> beers) {
+        this.beers = beers;
+    }
 }
