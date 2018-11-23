@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.beerslist.BeersListActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_drawer_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimaryDark"
+        app:title="@string/toolbar_title_beers_list"
+        app:titleMarginStart="@dimen/MediumMargin">
+
+    </android.support.v7.widget.Toolbar>
+
+</RelativeLayout>
