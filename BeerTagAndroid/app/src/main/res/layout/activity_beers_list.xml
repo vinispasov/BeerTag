@@ -16,4 +16,12 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <FrameLayout
+        android:id="@+id/fr_beers_list_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tb_drawer_toolbar">
+
+    </FrameLayout>
+
 </RelativeLayout>

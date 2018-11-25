@@ -1,6 +1,8 @@
 package com.beertag.models;
 
-public class Beer {
+import java.io.Serializable;
+
+public class Beer implements Serializable{
     private int beerId;
     private String beerName;
     private double rating;
