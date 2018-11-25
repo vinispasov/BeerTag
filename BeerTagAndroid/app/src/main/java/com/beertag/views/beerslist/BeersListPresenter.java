@@ -1,7 +1,9 @@
 package com.beertag.views.beerslist;
 
+import com.beertag.async.base.SchedulerProvider;
+import com.beertag.services.base.BeersListService;
 import com.beertag.utils.Constants;
-import com.beertag.views.models.Beer;
+import com.beertag.models.Beer;
 
 import java.util.List;
 
@@ -14,11 +16,11 @@ import io.reactivex.disposables.Disposable;
 public class BeersListPresenter implements BeersListContracts.Presenter {
 
     private BeersListContracts.View mView;
-    private final BeersService mBeersService;
+    private final BeersListService mBeersService;
     private final SchedulerProvider mSchedulerProvider;
 
     @Inject
-    BeersListPresenter(BeersService beersService, SchedulerProvider schedulerProvider) {
+    BeersListPresenter(BeersListService beersService, SchedulerProvider schedulerProvider) {
 
         mBeersService = beersService;
         mSchedulerProvider = schedulerProvider;
@@ -43,8 +45,8 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
 
         Disposable observable = Observable
                 .create((ObservableOnSubscribe<List<Beer>>) emitter -> {
-                    List<Beer> songs = mBeerService.getAllBeers();
-                    emitter.onNext(songs);
+                    List<Beer> beers = mBeersService.getAllBeers();
+                    emitter.onNext(beers);
                     emitter.onComplete();
                 })
                 .subscribeOn(mSchedulerProvider.backgroundThread())
@@ -59,8 +61,8 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
 
         Disposable observable = Observable
                 .create((ObservableOnSubscribe<List<Beer>>) emitter -> {
-                    List<Beer> songsResultSet = mBeersService.getFilteredBeers(searchQuery);
-                    emitter.onNext(songsResultSet);
+                    List<Beer> beersResultSet = mBeersService.getFilteredBeers(searchQuery);
+                    emitter.onNext(beersResultSet);
                     emitter.onComplete();
                 })
                 .subscribeOn(mSchedulerProvider.backgroundThread())

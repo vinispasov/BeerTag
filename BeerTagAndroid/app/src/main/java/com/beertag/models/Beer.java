@@ -1,4 +1,4 @@
-package com.beertag.views.models;
+package com.beertag.models;
 
 public class Beer {
     private int beerId;
@@ -106,6 +106,9 @@ public class Beer {
         StringBuilder sb=new StringBuilder();
         sb.append(rating);
         return sb;
+    }
+    public double getAbvDouble(){
+        return abv;
     }
 
     public void setRating(double rating) {

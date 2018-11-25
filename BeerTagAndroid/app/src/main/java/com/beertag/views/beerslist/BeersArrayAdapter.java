@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.beertag.R;
-import com.beertag.views.models.Beer;
+import com.beertag.models.Beer;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;

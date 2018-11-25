@@ -1,6 +1,6 @@
 package com.beertag.views.beerslist;
 
-import com.beertag.views.models.Beer;
+import com.beertag.models.Beer;
 
 import java.util.List;
 

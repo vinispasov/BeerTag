@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.beertag.R;
 import com.beertag.utils.Constants;
-import com.beertag.views.models.Beer;
+import com.beertag.models.Beer;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import butterknife.OnItemLongClick;
-import butterknife.OnTextChanged;
+
 
 public class BeersListFragment extends Fragment implements BeersListContracts.View{
 
