@@ -3,6 +3,7 @@ package com.beertag.diconfig;
 import android.app.Application;
 
 import com.beertag.AndroidApplication;
+import com.beertag.views.BaseDrawerActivity;
 
 import javax.inject.Singleton;
 
