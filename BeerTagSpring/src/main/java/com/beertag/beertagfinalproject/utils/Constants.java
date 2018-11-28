@@ -3,7 +3,7 @@ package com.beertag.beertagfinalproject.utils;
 public class Constants {
     public static final String HIBERNATE_CONFIGURATION_FILE_NAME = "hibernate.cfg.xml";
 
-    public static final String USERS_ROOT_MAPPING = "users";
+    public static final String USERS_ROOT_MAPPING = "/api/users";
     public static final String USERS_TABLE_NAME ="users";
     public static final String USERS_TABLE_ID_COLUMN_NAME = "user_id";
     public static final String USERS_TABLE_USER_NAME_COLUMN = "user_name";

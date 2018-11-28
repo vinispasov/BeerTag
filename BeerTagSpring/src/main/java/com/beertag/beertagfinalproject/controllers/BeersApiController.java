@@ -41,15 +41,15 @@ public class BeersApiController {
     public List<Beer> getAllBeersSortedByName() {
         return beersService.getAllBeersSortedByName();
     }
-    @RequestMapping(value = "/{tag}", method = RequestMethod.GET)
+    @RequestMapping(value = "/tag/{tag}", method = RequestMethod.GET)
     public List<Beer> getBeersByTag(@PathVariable String tag) {
         return beersService.getBeersByTag(tag);
     }
-    @RequestMapping(value = "/{style}", method = RequestMethod.GET)
+    @RequestMapping(value = "/style/{style}", method = RequestMethod.GET)
     public List<Beer> getBeersByStyle(@PathVariable String style) {
         return beersService.getBeersByStyle(style);
     }
-    @RequestMapping(value = "/{country}", method = RequestMethod.GET)
+    @RequestMapping(value = "/country/{country}", method = RequestMethod.GET)
     public List<Beer> getBeersByCountry(@PathVariable String country) {
         return beersService.getBeersByCountry(country);
     }

@@ -15,11 +15,11 @@
         </property>
 
         <property name="connection.username">
-            root
+            landcomuser
         </property>
 
         <property name="connection.password">
-
+            landcomuser
         </property>
     </session-factory>
 </hibernate-configuration>
