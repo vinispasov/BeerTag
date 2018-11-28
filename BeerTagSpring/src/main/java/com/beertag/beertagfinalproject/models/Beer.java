@@ -51,6 +51,14 @@ public class Beer {
     @Column(name=Constants.BEERS_TABLE_IS_DRANK_COLUMN)
     private boolean isDrank;
 
+    @NotNull
+    @Column(name = Constants.BEERS_TABLE_USER_ID_FIELD)
+    private int userId;
+
+    @ManyToOne
+    @JoinColumn(name = Constants.BEERS_TABLE_USER_ID_FIELD, referencedColumnName = Constants.USERS_TABLE_ID_COLUMN_NAME, insertable = false, updatable = false)
+    private User user;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = Constants.BEERSTAGS_TABLE_NAME,
@@ -64,7 +72,7 @@ public class Beer {
 
     }
 
-    public Beer(String beerName,double beerAbv,String beerStyle,String beerDescription, String beerPicture,String brewery,String originCountry,boolean isDrank){
+    public Beer(String beerName,double beerAbv,String beerStyle,String beerDescription, String beerPicture,String brewery,String originCountry,boolean isDrank,int userId){
         setBeerName(beerName);
         setBeerAbv(beerAbv);
         setBeerStyle(beerStyle);
@@ -73,6 +81,7 @@ public class Beer {
         setBrewery(brewery);
         setOriginCountry(originCountry);
         setDrank(isDrank);
+        setUserId(userId);
     }
 
     public int getBeerId() {
@@ -153,6 +162,23 @@ public class Beer {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
 }

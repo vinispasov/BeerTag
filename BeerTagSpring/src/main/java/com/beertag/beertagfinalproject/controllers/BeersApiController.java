@@ -1,6 +1,7 @@
 package com.beertag.beertagfinalproject.controllers;
 
 import com.beertag.beertagfinalproject.models.Beer;
+import com.beertag.beertagfinalproject.models.dto_models.BeerDTO;
 import com.beertag.beertagfinalproject.services.base.BeersService;
 import com.beertag.beertagfinalproject.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class BeersApiController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Beer> getAllBeers() {
+    public List<BeerDTO> getAllBeers() {
         return beersService.getAllBeers();
     }
     @RequestMapping(value = "/sort/rating",method = RequestMethod.GET)

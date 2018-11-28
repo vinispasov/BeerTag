@@ -1,7 +1,10 @@
 package com.beertag.beertagfinalproject.repositories;
 
 import com.beertag.beertagfinalproject.models.Beer;
+import com.beertag.beertagfinalproject.models.dto_models.BeerDTO;
 import com.beertag.beertagfinalproject.repositories.base.BeersRepository;
+import com.beertag.beertagfinalproject.utils.mappers.BeersMapperImpl;
+import com.beertag.beertagfinalproject.utils.mappers.base.BeersMapper;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,6 +16,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class SqlBeersRepositoryImpl implements BeersRepository {
@@ -26,10 +30,12 @@ public class SqlBeersRepositoryImpl implements BeersRepository {
     private static final String COUNTRY_PARAMETER = "country";
     private static final String GET_BEERS_FILTERED_BY_COUNTRY_QUERY = "FROM Beer WHERE originCountry = :country";
     private final SessionFactory sessionFactory;
+    private BeersMapper mapper;
 
     @Autowired
     public SqlBeersRepositoryImpl(SessionFactory sessionFactory){
         this.sessionFactory=sessionFactory;
+        this.mapper=new BeersMapperImpl();
     }
 
     @Override
@@ -49,7 +55,7 @@ public class SqlBeersRepositoryImpl implements BeersRepository {
     }
 
     @Override
-    public List<Beer> getAllBeers() {
+    public List<BeerDTO> getAllBeers() {
         List<Beer> allBeers = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -62,11 +68,14 @@ public class SqlBeersRepositoryImpl implements BeersRepository {
                     .createQuery(criteriaQuery)
                     .getResultList();
 
+
             transaction.commit();
         } catch (HibernateException he) {
             he.printStackTrace();
         }
-        return allBeers;
+
+        List<BeerDTO> result=allBeers.stream().map(beer ->mapper.mapBeerToDTO(beer)).collect(Collectors.toList());
+        return result;
     }
 
     @Override

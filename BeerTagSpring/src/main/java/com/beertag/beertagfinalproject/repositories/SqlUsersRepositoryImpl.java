@@ -67,9 +67,10 @@ public class SqlUsersRepositoryImpl implements UsersRepository {
             Transaction transaction = session.beginTransaction();
 
             user = session.get(User.class, userId);
-
+            user.setUserName(userToUpdate.getUserName());
+            user.setFirstName(userToUpdate.getFirstName());
+            user.setLastName(userToUpdate.getLastName());
             user.setUserPicture(userToUpdate.getUserPicture());
-
             transaction.commit();
 
         } catch (Exception e) {
@@ -96,6 +97,7 @@ public class SqlUsersRepositoryImpl implements UsersRepository {
             e.printStackTrace();
         }
 
-        return users;
+
+          return users;
     }
 }

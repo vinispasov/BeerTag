@@ -1,12 +1,13 @@
 package com.beertag.beertagfinalproject.repositories.base;
 
 import com.beertag.beertagfinalproject.models.Beer;
+import com.beertag.beertagfinalproject.models.dto_models.BeerDTO;
 
 import java.util.List;
 
 public interface BeersRepository {
     Beer getBeerById(int id);
-    List<Beer> getAllBeers();
+    List<BeerDTO> getAllBeers();
     List<Beer> getAllBeersSortedByRating();
     List<Beer> getAllBeersSortedByAbv();
     List<Beer> getAllBeersSortedByName();

@@ -1,6 +1,7 @@
 package com.beertag.beertagfinalproject.services;
 
 import com.beertag.beertagfinalproject.models.Beer;
+import com.beertag.beertagfinalproject.models.dto_models.BeerDTO;
 import com.beertag.beertagfinalproject.repositories.base.BeersRepository;
 import com.beertag.beertagfinalproject.services.base.BeersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class BeersServiceImpl implements BeersService {
     }
 
     @Override
-    public List<Beer> getAllBeers() {
+    public List<BeerDTO> getAllBeers() {
         return beersRepository.getAllBeers();
     }
 
