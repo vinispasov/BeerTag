@@ -24,7 +24,7 @@ public class UsersApiController {
         return usersService.createUser(userToCreate);
     }
 
-    @RequestMapping(value = "/ {userId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public User getUserById(@PathVariable int userId) {
         return usersService.getUserById(userId);
 

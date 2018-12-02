@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BeersService {
     Beer getBeerById(int id);
-    List<BeerDTO> getAllBeers();
+    List<Beer> getAllBeers();
     List<Beer> getAllBeersSortedByRating();
     List<Beer> getAllBeersSortedByAbv();
     List<Beer> getAllBeersSortedByName();

@@ -59,6 +59,10 @@ public class Beer {
     @JoinColumn(name = Constants.BEERS_TABLE_USER_ID_FIELD, referencedColumnName = Constants.USERS_TABLE_ID_COLUMN_NAME, insertable = false, updatable = false)
     private User user;
 
+    @NotNull
+    @Column(name = Constants.BEERS_TABLE_TAG_ID_FIELD)
+    private int tagId;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = Constants.BEERSTAGS_TABLE_NAME,
@@ -72,7 +76,8 @@ public class Beer {
 
     }
 
-    public Beer(String beerName,double beerAbv,String beerStyle,String beerDescription, String beerPicture,String brewery,String originCountry,boolean isDrank,int userId){
+
+    public Beer(String beerName, double beerAbv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry, boolean isDrank, int userId, int tagId){
         setBeerName(beerName);
         setBeerAbv(beerAbv);
         setBeerStyle(beerStyle);
@@ -82,6 +87,7 @@ public class Beer {
         setOriginCountry(originCountry);
         setDrank(isDrank);
         setUserId(userId);
+        setTagId(tagId);
     }
 
     public int getBeerId() {
@@ -179,6 +185,14 @@ public class Beer {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getTagId() {
+        return tagId;
+    }
+
+    public void setTagId(int tagId) {
+        this.tagId = tagId;
     }
 
 }

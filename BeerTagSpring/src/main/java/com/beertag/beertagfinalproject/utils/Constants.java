@@ -27,7 +27,7 @@ public class Constants {
     public static final String BEERS_TABLE_MIN_ABV_VALUE ="0.0";
     public static final String BEERS_TABLE_MAX_ABV_VALUE = "70.0";
     public static final String BEERS_TABLE_USER_ID_FIELD = "user_id";
-
+    public static final String BEERS_TABLE_TAG_ID_FIELD = "tag_id";
 
     public static final String RATINGS_ROOT_MAPPING = "/api/ratings";
     public static final String RATINGS_TABLE_NAME = "ratings";
@@ -61,7 +61,6 @@ public class Constants {
     public static final int FIRST_LAST_NAME_MIN_LENGTH = 2;
     public static final int BEER_NAME_MIN_LENGTH = 2;
     public static final int COUNTRY_NAME_MIN_LENGTH = 2;
-
 
 
 }

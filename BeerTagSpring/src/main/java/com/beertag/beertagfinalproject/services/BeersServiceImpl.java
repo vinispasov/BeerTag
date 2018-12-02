@@ -25,7 +25,7 @@ public class BeersServiceImpl implements BeersService {
     }
 
     @Override
-    public List<BeerDTO> getAllBeers() {
+    public List<Beer> getAllBeers() {
         return beersRepository.getAllBeers();
     }
 

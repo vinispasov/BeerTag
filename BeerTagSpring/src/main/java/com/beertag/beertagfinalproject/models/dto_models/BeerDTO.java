@@ -1,10 +1,7 @@
 package com.beertag.beertagfinalproject.models.dto_models;
 
-import java.util.List;
 
 public class BeerDTO {
-
-    private int beerId;
 
     private String beerName;
 
@@ -24,14 +21,13 @@ public class BeerDTO {
 
     private int userId;
 
-    private List<TagDTO> tags;
+    private int tagId;
 
     public BeerDTO(){
 
     }
 
-    public BeerDTO(int beerId, String beerName, double beerAbv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry, boolean isDrank, int userId, List<TagDTO> tags) {
-        setBeerId(beerId);
+    public BeerDTO(String beerName, double beerAbv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry, boolean isDrank, int userId, int tagId) {
         setBeerName(beerName);
         setBeerAbv(beerAbv);
         setBeerStyle(beerStyle);
@@ -41,16 +37,9 @@ public class BeerDTO {
         setOriginCountry(originCountry);
         setDrank(isDrank);
         setUserId(userId);
-        setTags(tags);
+        setTagId(tagId);
     }
 
-    public int getBeerId() {
-        return beerId;
-    }
-
-    public void setBeerId(int beerId) {
-        this.beerId = beerId;
-    }
 
     public String getBeerName() {
         return beerName;
@@ -124,11 +113,11 @@ public class BeerDTO {
         this.userId = userId;
     }
 
-    public List<TagDTO> getTags() {
-        return tags;
+    public int getTagId() {
+        return tagId;
     }
 
-    public void setTags(List<TagDTO> tags) {
-        this.tags = tags;
+    public void setTagId(int tagId) {
+        this.tagId = tagId;
     }
 }

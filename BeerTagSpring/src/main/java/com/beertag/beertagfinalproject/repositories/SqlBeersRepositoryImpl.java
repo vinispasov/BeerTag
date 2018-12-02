@@ -55,7 +55,7 @@ public class SqlBeersRepositoryImpl implements BeersRepository {
     }
 
     @Override
-    public List<BeerDTO> getAllBeers() {
+    public List<Beer> getAllBeers() {
         List<Beer> allBeers = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -74,8 +74,8 @@ public class SqlBeersRepositoryImpl implements BeersRepository {
             he.printStackTrace();
         }
 
-        List<BeerDTO> result=allBeers.stream().map(beer ->mapper.mapBeerToDTO(beer)).collect(Collectors.toList());
-        return result;
+        //List<Beer> result=allBeers.stream().map(beer ->mapper.mapBeerToDTO(beer)).collect(Collectors.toList());
+        return allBeers;
     }
 
     @Override

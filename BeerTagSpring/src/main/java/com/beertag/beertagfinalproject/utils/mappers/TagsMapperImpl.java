@@ -17,8 +17,8 @@ public class TagsMapperImpl implements TagsMapper {
         TagDTO tagDTO = new TagDTO();
 
         if (!Objects.equals(tagDTO, null)) {
-           // BeersMapper mapper=new BeersMapperImpl();
-           // List<BeerDTO> beerDTOS= tag.getBeers().stream().map(beer -> mapper.mapBeerToDTO(beer)).collect(Collectors.toList());
+           BeersMapper mapper=new BeersMapperImpl();
+           //List<BeerDTO> beerDTOS= tag.getBeers().stream().map(beer -> mapper.mapBeerToDTO(beer)).collect(Collectors.toList());
 
             tagDTO = new TagDTO(
                     tag.getTagId(),
