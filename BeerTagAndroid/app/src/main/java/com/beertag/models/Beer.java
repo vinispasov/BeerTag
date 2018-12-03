@@ -13,12 +13,15 @@ public class Beer implements Serializable{
     private String brewery;
     private String originCountry;
     private boolean isDrank;
+    private int userId;
+    private int tagId;
+    private User user;
 
     public Beer(){
 
     }
 
-    public Beer(String beerName,double rating, double abv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry, boolean isDrank) {
+    public Beer(String beerName,double rating, double abv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry, boolean isDrank,int userId,int tagId,User user) {
        setBeerName(beerName);
        setRating(rating);
        setAbv(abv);
@@ -28,6 +31,9 @@ public class Beer implements Serializable{
        setBrewery(brewery);
        setOriginCountry(originCountry);
        setDrank(isDrank);
+       setUserId(userId);
+       setTagId(tagId);
+       setUser(user);
     }
 
     public int getBeerId() {
@@ -115,5 +121,30 @@ public class Beer implements Serializable{
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getTagId() {
+        return tagId;
+    }
+
+    public void setTagId(int tagId) {
+        this.tagId = tagId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
