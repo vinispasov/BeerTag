@@ -63,13 +63,13 @@ public class Beer {
     @Column(name = Constants.BEERS_TABLE_TAG_ID_FIELD)
     private int tagId;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    /*@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = Constants.BEERSTAGS_TABLE_NAME,
             joinColumns = @JoinColumn(name = Constants.BEERS_TABLE_ID_COLUMN_NAME),
             inverseJoinColumns = @JoinColumn(name = Constants.TAGS_TABLE_ID_COLUMN_NAME)
     )
-    private List<Tag> tags;
+    private List<Tag> tags;*/
 
 
     public Beer(){
@@ -162,13 +162,13 @@ public class Beer {
         isDrank = drank;
     }
 
-    public List<Tag> getTags() {
+    /*public List<Tag> getTags() {
         return tags;
     }
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
-    }
+    }*/
 
     public User getUser() {
         return user;

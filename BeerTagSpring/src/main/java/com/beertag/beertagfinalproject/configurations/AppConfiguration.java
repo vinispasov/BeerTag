@@ -1,9 +1,6 @@
 package com.beertag.beertagfinalproject.configurations;
 
-import com.beertag.beertagfinalproject.models.Beer;
-import com.beertag.beertagfinalproject.models.Rating;
-import com.beertag.beertagfinalproject.models.Tag;
-import com.beertag.beertagfinalproject.models.User;
+import com.beertag.beertagfinalproject.models.*;
 import com.beertag.beertagfinalproject.utils.Constants;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +16,7 @@ public class AppConfiguration {
                 .addAnnotatedClass(Rating.class)
                 .addAnnotatedClass(User.class)
                 .addAnnotatedClass(Tag.class)
+                .addAnnotatedClass(BeerTag.class)
                 .buildSessionFactory();
     }
 }

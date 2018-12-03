@@ -47,9 +47,6 @@ public class Constants {
 
 
 
-    public static final String BEERSTAGS_TABLE_NAME = "beerstags";
-
-
 
 
 
@@ -64,7 +61,11 @@ public class Constants {
     public static final int BEER_NAME_MIN_LENGTH = 2;
     public static final int COUNTRY_NAME_MIN_LENGTH = 2;
 
+    public static final String BEERSTAGS_ROOT_MAPPING = "/api/beerstags";
+    public static final String BEERSTAGS_TABLE_NAME = "beerstags";
     public static final String BEERSTAGS_TABLE_ID_FIELD = "beertag_id";
     public static final String BEERSTAGS_TABLE_BEER_ID_FIELD = "beer_id";
     public static final String BEERSTAGS_TABLE_TAG_ID_FIELD = "tag_id";
+
+
 }
