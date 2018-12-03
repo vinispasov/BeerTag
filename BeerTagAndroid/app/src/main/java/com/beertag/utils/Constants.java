@@ -2,7 +2,7 @@ package com.beertag.utils;
 
 public class Constants {
 
-    public static final String BASE_SERVER_URL = "http://192.168.1.77:9607/api/";
+    public static final String BASE_SERVER_URL = "http://192.168.0.103:7777/api/";
 
     public static final float FROM_ALPHA_ANIMATION = 1F;
     public static final float TO_ALPHA_ANIMATION = 0.3F;
