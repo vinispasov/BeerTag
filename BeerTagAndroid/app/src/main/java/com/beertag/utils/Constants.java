@@ -2,7 +2,7 @@ package com.beertag.utils;
 
 public class Constants {
 
-    public static final String BASE_SERVER_URL = "http://192.168.0.103:7777/api/";
+    public static final String BASE_SERVER_URL = "http://192.168.0.106:7777/api/";
 
     public static final String BASE_SERVER_URL_VALUE_NAME = "baseServerUrl";
 
@@ -36,4 +36,5 @@ public class Constants {
 
     public static final String ADD_OF_USER_FAIL_MESSAGE = "You must fill in all fields correctly!";
 
+    public static final String NO_USERS_AVAILABLE_MESSAGE = "Your users list is empty";
 }

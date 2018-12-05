@@ -6,4 +6,5 @@
     <dimen name="SmallPadding">10dp</dimen>
     <dimen name="SmallText">20sp</dimen>
     <dimen name="BeerFieldTextSize">18sp</dimen>
+    <dimen name="UserFieldTextSize">18sp</dimen>
 </resources>

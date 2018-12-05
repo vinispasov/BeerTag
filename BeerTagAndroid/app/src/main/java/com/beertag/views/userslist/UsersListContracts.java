@@ -19,9 +19,9 @@ public interface UsersListContracts {
 
         void showAllUsers(List<User> allUsers);
 
-        void showDialogForDeletion(User userToDelete);
+       // void showDialogForDeletion(User userToDelete);
 
-        void hideDeletionDialog();
+        //void hideDeletionDialog();
 
         void showMessage(String message);
     }

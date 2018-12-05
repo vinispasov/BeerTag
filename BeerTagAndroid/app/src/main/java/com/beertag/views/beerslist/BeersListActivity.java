@@ -34,7 +34,7 @@ public class BeersListActivity extends BaseDrawerActivity implements BeersListCo
         mBeersListFragment.setNavigator(this);
         mBeersListFragment.setPresenter(mBeersListPresenter);
 
-        getFragmentManager()
+        getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fr_beers_list_fragment, mBeersListFragment)
                 .commit();

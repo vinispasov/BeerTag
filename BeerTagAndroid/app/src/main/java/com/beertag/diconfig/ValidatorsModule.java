@@ -1,6 +1,8 @@
 package com.beertag.diconfig;
 
+import com.beertag.models.User;
 import com.beertag.utils.validators.BeerValidator;
+import com.beertag.utils.validators.UserValidator;
 import com.beertag.utils.validators.base.Validator;
 import com.beertag.models.Beer;
 
@@ -16,4 +18,12 @@ public class ValidatorsModule {
     public Validator<Beer> beerValidator() {
         return new BeerValidator();
     }
+
+    @Provides
+    @Singleton
+    public Validator<User> userValidator() {
+        return new UserValidator();
+    }
+
+
 }

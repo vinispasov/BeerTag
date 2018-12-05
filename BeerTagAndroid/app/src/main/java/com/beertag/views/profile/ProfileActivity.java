@@ -13,6 +13,7 @@ import com.beertag.views.BaseDrawerActivity;
 public class ProfileActivity extends BaseDrawerActivity {
 
     public static final int DRAWER_IDENTIFIER = 111;
+    public static final String PROFILE_EXTRA_KEY = "PROFILE_EXTRA_KEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
