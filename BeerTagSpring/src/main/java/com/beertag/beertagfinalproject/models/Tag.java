@@ -20,13 +20,13 @@ public class Tag {
     private String tag;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+   /*@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = Constants.BEERSTAGS_TABLE_NAME,
             joinColumns = @JoinColumn(name = Constants.TAGS_TABLE_ID_COLUMN_NAME),
             inverseJoinColumns = @JoinColumn(name = Constants.BEERS_TABLE_ID_COLUMN_NAME)
     )
-    private List<Beer> beers;
+    private List<Beer> beers;*/
 
     public Tag(){
 
@@ -52,11 +52,11 @@ public class Tag {
         this.tag = tag;
     }
 
-    public List<Beer> getBeers() {
+    /*public List<Beer> getBeers() {
         return beers;
     }
 
     public void setBeers(List<Beer> beers) {
         this.beers = beers;
-    }
+    }*/
 }

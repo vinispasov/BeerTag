@@ -22,8 +22,8 @@ public class TagsMapperImpl implements TagsMapper {
 
             tagDTO = new TagDTO(
                     tag.getTagId(),
-                    tag.getTag(),
-                    tag.getBeers());
+                    tag.getTag());
+                   // tag.getBeers());
         }
         return tagDTO;
     }

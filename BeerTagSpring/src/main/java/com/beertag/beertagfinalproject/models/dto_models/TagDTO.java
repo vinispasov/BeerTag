@@ -16,10 +16,10 @@ public class TagDTO {
 
     }
 
-    public TagDTO(int tagId, String tag, List<Beer> beers) {
+    public TagDTO(int tagId, String tag /*List<Beer> beers*/) {
         this.tagId = tagId;
         this.tag = tag;
-        this.beers = beers;
+        //this.beers = beers;
     }
 
     public int getTagId() {
