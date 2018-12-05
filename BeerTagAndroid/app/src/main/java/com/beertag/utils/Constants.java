@@ -4,6 +4,8 @@ public class Constants {
 
     public static final String BASE_SERVER_URL = "http://192.168.0.103:7777/api/";
 
+    public static final String BASE_SERVER_URL_VALUE_NAME = "baseServerUrl";
+
     public static final float FROM_ALPHA_ANIMATION = 1F;
     public static final float TO_ALPHA_ANIMATION = 0.3F;
     public static final String ERROR_MESSAGE = "Error: ";
@@ -24,5 +26,14 @@ public class Constants {
     public static final int MAX_BEER_IMAGE_URL_LENGTH = 350;
 
 
-    public static final String BASE_SERVER_URL_VALUE_NAME = "baseServerUrl";
+
+    public static final int MIN_USERNAME_CHAR_COUNT = 2;
+    public static final int MAX_USERNAME_CHAR_COUNT = 20;
+    public static final int MIN_FIRSTNAME_CHAR_COUNT = 2;
+    public static final int MAX_FIRSTNAME_CHAR_COUNT = 40;
+    public static final int MIN_LASTNAME_CHAR_COUNT = 2;
+    public static final int MAX_LASTNAME_CHAR_COUNT = 40;
+
+    public static final String ADD_OF_USER_FAIL_MESSAGE = "You must fill in all fields correctly!";
+
 }
