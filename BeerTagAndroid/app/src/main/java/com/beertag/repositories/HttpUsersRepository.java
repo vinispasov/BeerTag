@@ -46,7 +46,7 @@ public class HttpUsersRepository implements UsersRepository {
 
     @Override
     public List<User> getUsers() throws IOException {
-        String itemsJson = mHttpRequester.get(mServerUrl);
+        String itemsJson = mHttpRequester.get(mServerUrl+"users");
         return mJsonParser.fromJsonArray(itemsJson);
     }
 }

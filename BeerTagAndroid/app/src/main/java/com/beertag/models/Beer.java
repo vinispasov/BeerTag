@@ -5,25 +5,28 @@ import java.io.Serializable;
 public class Beer implements Serializable{
     private int beerId;
     private String beerName;
-    private double rating;
+   // private double rating;
     private double abv;
     private String beerStyle;
     private String beerDescription;
     private String beerPicture;
     private String brewery;
     private String originCountry;
-    private boolean isDrank;
     private int userId;
-    private int tagId;
     private User user;
+    private int tagId;
+    private boolean isDrank;
+
+
+
 
     public Beer(){
 
     }
 
-    public Beer(String beerName,double rating, double abv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry, boolean isDrank,int userId,int tagId,User user) {
+    public Beer(String beerName,/*double rating,*/ double abv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry, int userId,User user, int tagId, boolean isDrank) {
        setBeerName(beerName);
-       setRating(rating);
+       //setRating(rating);
        setAbv(abv);
        setBeerStyle(beerStyle);
        setBeerDescription(beerDescription);
@@ -110,18 +113,20 @@ public class Beer implements Serializable{
         isDrank = drank;
     }
 
-    public CharSequence getRating() {
+  /*  public CharSequence getRating() {
         StringBuilder sb=new StringBuilder();
         sb.append(rating);
         return sb;
     }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }*/
     public double getAbvDouble(){
         return abv;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
+
 
 
     public int getUserId() {

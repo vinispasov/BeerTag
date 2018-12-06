@@ -88,8 +88,8 @@ public class BeersArrayAdapter extends ArrayAdapter<Beer> {
                 .setText(beer.getAbv());
         mBeerRatingFieldTextView
                 .setText(BEER_RATING_FIELD);
-        mBeerRatingTextView
-                .setText(beer.getRating());
+       /* mBeerRatingTextView
+                .setText(beer.getRating());*/
         mBeerStyleFieldTextView
                 .setText(BEER_STYLE_FIELD);
         mBeerStyleTextView
