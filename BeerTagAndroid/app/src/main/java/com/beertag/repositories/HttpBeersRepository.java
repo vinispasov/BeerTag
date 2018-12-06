@@ -2,20 +2,20 @@ package com.beertag.repositories;
 
 import com.beertag.http.base.HttpRequester;
 import com.beertag.parsers.base.JsonParser;
-import com.beertag.repositories.base.BeersListRepository;
 import com.beertag.models.Beer;
+import com.beertag.repositories.base.BeersRepository;
 
 import java.io.IOException;
 import java.util.List;
 
-public class HttpBeersListRepository implements BeersListRepository{
+public class HttpBeersRepository implements BeersRepository {
 
     private final HttpRequester mHttpRequester;
     private final String mServerUrl;
     private final JsonParser<Beer> mJsonParser;
 
 
-    public HttpBeersListRepository(String serverUrl, HttpRequester httpRequester, JsonParser<Beer> jsonParser) {
+    public HttpBeersRepository(String serverUrl, HttpRequester httpRequester, JsonParser<Beer> jsonParser) {
         mServerUrl = serverUrl;
         mHttpRequester = httpRequester;
         mJsonParser = jsonParser;

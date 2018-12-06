@@ -2,7 +2,7 @@ package com.beertag.views.userslist;
 
 import com.beertag.async.base.SchedulerProvider;
 import com.beertag.models.User;
-import com.beertag.services.base.UsersListService;
+import com.beertag.services.base.UsersService;
 import com.beertag.utils.Constants;
 
 import java.util.List;
@@ -15,13 +15,13 @@ import io.reactivex.disposables.Disposable;
 
 public class UsersListPresenter implements UsersListContracts.Presenter {
     private UsersListContracts.View mView;
-    private final UsersListService mUsersListService;
+    private final UsersService mUsersService;
     private final SchedulerProvider mSchedulerProvider;
 
     @Inject
-    UsersListPresenter(UsersListService usersListService, SchedulerProvider schedulerProvider) {
+    UsersListPresenter(UsersService usersService, SchedulerProvider schedulerProvider) {
 
-        mUsersListService =usersListService;
+        mUsersService =usersService;
         mSchedulerProvider = schedulerProvider;
 
     }
@@ -47,7 +47,7 @@ public class UsersListPresenter implements UsersListContracts.Presenter {
 
         Disposable observable = Observable
                 .create((ObservableOnSubscribe<List<User>>) emitter -> {
-                    List<User> users = mUsersListService.getUsers();
+                    List<User> users = mUsersService.getUsers();
                     emitter.onNext(users);
                     emitter.onComplete();
                 })

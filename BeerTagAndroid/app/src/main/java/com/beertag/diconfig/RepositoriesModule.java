@@ -3,8 +3,8 @@ package com.beertag.diconfig;
 import com.beertag.http.base.HttpRequester;
 import com.beertag.models.User;
 import com.beertag.parsers.base.JsonParser;
-import com.beertag.repositories.HttpBeersListRepository;
-import com.beertag.repositories.HttpUsersListRepository;
+import com.beertag.repositories.HttpBeersRepository;
+import com.beertag.repositories.HttpUsersRepository;
 import com.beertag.repositories.base.BeersListRepository;
 import com.beertag.repositories.base.UsersListRepository;
 import com.beertag.utils.Constants;
@@ -26,7 +26,7 @@ public class RepositoriesModule {
             HttpRequester httpRequester,
             JsonParser<Beer> jsonParser) {
 
-        return new HttpBeersListRepository(baseServerUrl, httpRequester, jsonParser);
+        return new HttpBeersRepository(baseServerUrl, httpRequester, jsonParser);
     }
 
     @Provides
@@ -36,6 +36,6 @@ public class RepositoriesModule {
             HttpRequester httpRequester,
             JsonParser<User> jsonParser) {
 
-        return new HttpUsersListRepository(baseServerUrl, httpRequester, jsonParser);
+        return new HttpUsersRepository(baseServerUrl, httpRequester, jsonParser);
     }
 }

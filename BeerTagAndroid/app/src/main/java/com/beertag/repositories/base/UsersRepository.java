@@ -5,7 +5,7 @@ import com.beertag.models.User;
 import java.io.IOException;
 import java.util.List;
 
-public interface UsersListRepository {
+public interface UsersRepository {
     User createUser(User userToCreate) throws IOException;
     User getUserById(int userId) throws IOException;
     User updateUser(User userToUpdate,int userId) throws IOException;

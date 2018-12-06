@@ -1,20 +1,20 @@
 package com.beertag.services;
 
 import com.beertag.models.User;
-import com.beertag.repositories.base.UsersListRepository;
-import com.beertag.services.base.UsersListService;
+import com.beertag.repositories.base.UsersRepository;
+import com.beertag.services.base.UsersService;
 import com.beertag.utils.Constants;
 import com.beertag.utils.validators.base.Validator;
 
 import java.io.IOException;
 import java.util.List;
 
-public class HttpUsersListService implements UsersListService {
-    private final UsersListRepository mUsersListRepository;
+public class HttpUsersService implements UsersService {
+    private final UsersRepository mUsersRepository;
     private final Validator<User> mUserValidator;
 
-    public HttpUsersListService(UsersListRepository usersListRepository, Validator<User> userValidator) {
-        mUsersListRepository = usersListRepository;
+    public HttpUsersService(UsersRepository usersRepository, Validator<User> userValidator) {
+        mUsersRepository = usersRepository;
         mUserValidator = userValidator;
     }
 
@@ -25,21 +25,21 @@ public class HttpUsersListService implements UsersListService {
         if (!isUserValid) {
             throw new Exception(Constants.ADD_OF_USER_FAIL_MESSAGE);
         }
-        return mUsersListRepository.createUser(userToCreate);
+        return mUsersRepository.createUser(userToCreate);
     }
 
     @Override
     public User getUserById(int userId) throws IOException {
-        return mUsersListRepository.getUserById(userId);
+        return mUsersRepository.getUserById(userId);
     }
 
     @Override
     public User updateUser(User userToUpdate, int userId) throws IOException {
-        return mUsersListRepository.updateUser(userToUpdate,userId);
+        return mUsersRepository.updateUser(userToUpdate,userId);
     }
 
     @Override
     public List<User> getUsers() throws IOException {
-        return mUsersListRepository.getUsers();
+        return mUsersRepository.getUsers();
     }
 }

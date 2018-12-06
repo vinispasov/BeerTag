@@ -1,7 +1,7 @@
 package com.beertag.views.beerslist;
 
 import com.beertag.async.base.SchedulerProvider;
-import com.beertag.services.base.BeersListService;
+import com.beertag.services.base.BeersService;
 import com.beertag.utils.Constants;
 import com.beertag.models.Beer;
 
@@ -16,12 +16,11 @@ import io.reactivex.disposables.Disposable;
 public class BeersListPresenter implements BeersListContracts.Presenter {
 
     private BeersListContracts.View mView;
-    private final BeersListService mBeersService;
+    private final BeersService mBeersService;
     private final SchedulerProvider mSchedulerProvider;
 
     @Inject
-    BeersListPresenter(BeersListService beersService, SchedulerProvider schedulerProvider) {
-
+    BeersListPresenter(BeersService beersService, SchedulerProvider schedulerProvider) {
         mBeersService = beersService;
         mSchedulerProvider = schedulerProvider;
 

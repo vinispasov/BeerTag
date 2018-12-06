@@ -3,18 +3,18 @@ package com.beertag.repositories;
 import com.beertag.http.base.HttpRequester;
 import com.beertag.models.User;
 import com.beertag.parsers.base.JsonParser;
-import com.beertag.repositories.base.UsersListRepository;
+import com.beertag.repositories.base.UsersRepository;
 
 import java.io.IOException;
 import java.util.List;
 
-public class HttpUsersListRepository implements UsersListRepository {
+public class HttpUsersRepository implements UsersRepository {
     private final HttpRequester mHttpRequester;
     private final String mServerUrl;
     private final JsonParser<User> mJsonParser;
 
 
-    public HttpUsersListRepository(String serverUrl, HttpRequester httpRequester, JsonParser<User> jsonParser) {
+    public HttpUsersRepository(String serverUrl, HttpRequester httpRequester, JsonParser<User> jsonParser) {
         mServerUrl = serverUrl;
         mHttpRequester = httpRequester;
         mJsonParser = jsonParser;

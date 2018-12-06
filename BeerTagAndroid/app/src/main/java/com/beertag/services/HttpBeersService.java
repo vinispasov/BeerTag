@@ -1,7 +1,7 @@
 package com.beertag.services;
 
-import com.beertag.repositories.base.BeersListRepository;
-import com.beertag.services.base.BeersListService;
+import com.beertag.repositories.base.BeersRepository;
+import com.beertag.services.base.BeersService;
 import com.beertag.utils.Constants;
 import com.beertag.utils.validators.base.Validator;
 import com.beertag.models.Beer;
@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HttpBeersListService implements BeersListService {
+public class HttpBeersService implements BeersService {
 
-    private final BeersListRepository mBeersListRepository;
+    private final BeersRepository mBeersRepository;
     private final Validator<Beer> mBeerValidator;
 
-    public HttpBeersListService(BeersListRepository beersListRepository, Validator<Beer> beerValidator) {
-        mBeersListRepository = beersListRepository;
+    public HttpBeersService(BeersRepository beersRepository, Validator<Beer> beerValidator) {
+        mBeersRepository = beersRepository;
         mBeerValidator = beerValidator;
     }
 
@@ -27,27 +27,27 @@ public class HttpBeersListService implements BeersListService {
         if (!isBeerValid) {
             throw new Exception(Constants.ADD_OF_BEER_FAIL_MESSAGE);
         }
-       return mBeersListRepository.addBeer(newBeer);
+       return mBeersRepository.addBeer(newBeer);
     }
 
     @Override
     public void deleteBeer(int id) throws Exception {
-        mBeersListRepository.deleteBeer(id);
+        mBeersRepository.deleteBeer(id);
     }
 
     @Override
     public Beer updateBeer(Beer beerToUpdate, int id) throws IOException{
-       return mBeersListRepository.updateBeer(beerToUpdate,id);
+       return mBeersRepository.updateBeer(beerToUpdate,id);
     }
 
     @Override
     public Beer getBeerById(int id) throws IOException {
-        return mBeersListRepository.getBeerById(id);
+        return mBeersRepository.getBeerById(id);
     }
 
     @Override
     public List<Beer> getAllBeers() throws IOException {
-        return mBeersListRepository.getAllBeers();
+        return mBeersRepository.getAllBeers();
     }
 
     @Override
