@@ -5,8 +5,8 @@ import com.beertag.models.User;
 import com.beertag.parsers.base.JsonParser;
 import com.beertag.repositories.HttpBeersRepository;
 import com.beertag.repositories.HttpUsersRepository;
-import com.beertag.repositories.base.BeersListRepository;
-import com.beertag.repositories.base.UsersListRepository;
+import com.beertag.repositories.base.BeersRepository;
+import com.beertag.repositories.base.UsersRepository;
 import com.beertag.utils.Constants;
 import com.beertag.models.Beer;
 
@@ -21,7 +21,7 @@ public class RepositoriesModule {
 
     @Provides
     @Singleton
-    public BeersListRepository beersListRepository(
+    public BeersRepository beersRepository(
             @Named(Constants.BASE_SERVER_URL_VALUE_NAME) String baseServerUrl,
             HttpRequester httpRequester,
             JsonParser<Beer> jsonParser) {
@@ -31,7 +31,7 @@ public class RepositoriesModule {
 
     @Provides
     @Singleton
-    public UsersListRepository usersListRepository(
+    public UsersRepository usersRepository(
             @Named(Constants.BASE_SERVER_URL_VALUE_NAME) String baseServerUrl,
             HttpRequester httpRequester,
             JsonParser<User> jsonParser) {
