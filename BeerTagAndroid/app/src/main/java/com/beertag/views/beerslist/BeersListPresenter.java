@@ -67,7 +67,7 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
                 .subscribe(allBeers -> presentBeersToView(allBeers, Constants.NO_BEERS_AVAILABLE_MESSAGE), mView::showError);
     }
 
-   /* @Override
+   @Override
     public void filterBeersWith(String searchQuery) {
         mView.showProgressBarLoading();
 
@@ -82,7 +82,7 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
                 .doFinally(mView::hideProgressBarLoading)
                 .subscribe(allBeers -> presentBeersToView(allBeers, Constants.NO_BEERS_FOUND_ON_SEARCH_MESSAGE),
                         error -> mView.showError(error));
-    }*/
+    }
 
     @Override
     public void presentBeersToView(List<Beer> allBeers, String message) {

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -32,10 +33,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import butterknife.OnItemLongClick;
+import butterknife.OnTextChanged;
 
 
 public class BeersListFragment extends Fragment implements BeersListContracts.View,AdapterView.OnItemSelectedListener{
 
+    @BindView(R.id.et_search_beers)
+    EditText mSearchBar;
 
     @BindView(R.id.lv_beers_list_view)
     ListView mBeersListView;
@@ -216,6 +220,15 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
         mBeersArrayAdapter.clear();
         mBeersArrayAdapter.addAll(beersResult);
         mBeersArrayAdapter.notifyDataSetChanged();
+    }
+
+
+    @OnTextChanged(R.id.et_search_beers)
+    public void onTextChanged() {
+        String searchQuery = mSearchBar
+                .getText()
+                .toString();
+        mPresenter.filterBeersWith(searchQuery);
     }
 
    /* @Override

@@ -16,7 +16,30 @@
             android:id="@+id/lv_beers_list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/sp_search_options"
             android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_search_icon"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimaryDark"
+            android:src="@drawable/search_icon" />
+
+        <EditText
+            android:id="@+id/et_search_beers"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/iv_search_icon"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="end"
+            android:hint="@string/edit_text_hint_search_beers"
+            android:inputType="text"
+            android:paddingEnd="@dimen/MediumMargin"
+            android:paddingStart="@dimen/MediumMargin" />
 
         <ProgressBar
             android:id="@+id/prb_loading_view"
@@ -24,11 +47,13 @@
             android:layout_height="75dp"
             android:layout_centerInParent="true"
             android:visibility="gone" />
+
         <org.angmarch.views.NiceSpinner
             android:id="@+id/sp_search_options"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
+            android:layout_below="@+id/et_search_beers"
             app:arrowTint="@color/colorAccent"
             app:textTint="@color/colorAccent" />
 

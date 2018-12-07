@@ -42,7 +42,7 @@ public interface BeersListContracts {
 
         void presentBeersToView(List<Beer> allBeers, String message);
 
-        //void filterBeersWith(String searchQuery);
+        void filterBeersWith(String searchQuery);
 
         void beerForDeletionIsSelected(Beer beerToDelete);
 

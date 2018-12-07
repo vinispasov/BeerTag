@@ -9,6 +9,8 @@
     <string name="deletion_answer_yes">Yes</string>
     <string name="deletion_answer_no">No</string>
 
+    <string name="edit_text_hint_search_beers">Search beers by tag,style,country</string>
+
     <!-- TODO: Remove or change this placeholder text -->
 
     <string-array name="filter_options">
