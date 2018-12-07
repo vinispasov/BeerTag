@@ -58,4 +58,22 @@ public class HttpBeersRepository implements BeersRepository {
         String itemsJson = mHttpRequester.get(mServerUrl+"/beers");
         return mJsonParser.fromJsonArray(itemsJson);
     }
+
+    @Override
+    public List<Beer> getAllBeersSortedByRating() throws IOException {
+        String itemsJson = mHttpRequester.get(mServerUrl+"/beers/sort/rating");
+        return mJsonParser.fromJsonArray(itemsJson);
+    }
+
+    @Override
+    public List<Beer> getAllBeersSortedByAbv() throws IOException {
+        String itemsJson = mHttpRequester.get(mServerUrl+"/beers/sort/abv");
+        return mJsonParser.fromJsonArray(itemsJson);
+    }
+
+    @Override
+    public List<Beer> getAllBeersSortedByName() throws IOException {
+        String itemsJson = mHttpRequester.get(mServerUrl+"/beers/sort/name");
+        return mJsonParser.fromJsonArray(itemsJson);
+    }
 }

@@ -19,6 +19,10 @@ public interface BeersListContracts {
 
         void showAllBeers(List<Beer> allBeers);
 
+        void showCompactBeersView(List<Beer> beersResult);
+
+        //void showDetailedBeersView(List<Beer> beersResult);
+
         void showDialogForDeletion(Beer beerToDelete);
 
         void hideDeletionDialog();
@@ -38,13 +42,15 @@ public interface BeersListContracts {
 
         void presentBeersToView(List<Beer> allBeers, String message);
 
-        void filterBeersWith(String searchQuery);
+        //void filterBeersWith(String searchQuery);
 
         void beerForDeletionIsSelected(Beer beerToDelete);
 
         void getActionOnCancelledDeletion();
 
         void getActionOnConfirmedDeletion(Beer beerToDelete);
+
+        void filterBeersWithOption(String preference, String selectedOption);
     }
 
     interface Navigator {

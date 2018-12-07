@@ -51,24 +51,19 @@ public class HttpBeersService implements BeersService {
     }
 
     @Override
-    public List<Beer> getFilteredBeers(String searchPattern) throws IOException {
-
-        String searchPatternLowerCase = searchPattern.toLowerCase();
-
-        List<Beer> allBeers = getAllBeers();
-        List<Beer> filteredBeers = new ArrayList<>();
-
-        allBeers
-                .stream()
-                .filter(beer ->beer.getBeerStyle().toLowerCase().contains(searchPatternLowerCase))
-                .forEach(filteredBeers::add);
-        allBeers
-                .stream()
-                .filter(beer -> beer.getOriginCountry().toLowerCase().contains(searchPatternLowerCase))
-                .forEach(filteredBeers::add);
-
-        return filteredBeers;
-
+    public List<Beer> getAllBeersSortedByRating() throws IOException {
+        return mBeersRepository.getAllBeersSortedByRating();
     }
+
+    @Override
+    public List<Beer> getAllBeersSortedByAbv() throws IOException {
+        return mBeersRepository.getAllBeersSortedByAbv();
+    }
+
+    @Override
+    public List<Beer> getAllBeersSortedByName() throws IOException {
+        return mBeersRepository.getAllBeersSortedByName();
+    }
+
 
 }

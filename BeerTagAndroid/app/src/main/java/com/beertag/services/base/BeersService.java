@@ -16,5 +16,8 @@ public interface BeersService {
 
     List<Beer> getAllBeers() throws IOException;
 
-    List<Beer> getFilteredBeers(String pattern) throws IOException;
+    List<Beer> getAllBeersSortedByRating() throws IOException;
+    List<Beer> getAllBeersSortedByAbv() throws IOException;
+    List<Beer> getAllBeersSortedByName() throws IOException;
+
 }

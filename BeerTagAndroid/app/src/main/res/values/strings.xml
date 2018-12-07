@@ -10,6 +10,13 @@
     <string name="deletion_answer_no">No</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="filter_options">
+        <item>All</item>
+        <item>Sort by rating</item>
+        <item>Sort by abv</item>
+        <item>Sort by alphabet</item>
+    </string-array>
+
     <string name="toolbar_title_my_users">USERS</string>
 </resources>

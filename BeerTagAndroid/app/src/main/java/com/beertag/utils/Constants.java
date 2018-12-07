@@ -37,4 +37,17 @@ public class Constants {
     public static final String ADD_OF_USER_FAIL_MESSAGE = "You must fill in all fields correctly!";
 
     public static final String NO_USERS_AVAILABLE_MESSAGE = "Your users list is empty";
+    public static final String PREFERENCES_BEERS_LISTING_TYPE_KEY = "listingType";
+    public static final String EMPTY_STRING = "";
+
+    public static final String FILTER_OPTION_ALL = "All";
+    public static final String FILTER_OPTION_BY_TAG = "Only by tag";
+    public static final String FILTER_OPTION_BY_STYLE = "Only by style";
+    public static final String FILTER_OPTION_BY_COUNTRY = "Only by country";
+
+    public static final String SORTED_OPTION_BY_RATING = "Sort by rating";
+    public static final String SORTED_OPTION_BY_ABV = "Sort by abv";
+    public static final String SORTED_OPTION_BY_ALPHABET = "Sort by alphabet";
+
+    public static final String COMPACT_VIEW_STYLE = "Compact";
 }

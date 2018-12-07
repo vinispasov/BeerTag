@@ -21,4 +21,5 @@ public class AdaptersModule {
     public ArrayAdapter<User> getUsersArrayAdapter(Context context) {
         return new UsersArrayAdapter(context);
     }
+
 }

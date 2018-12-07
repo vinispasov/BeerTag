@@ -1,5 +1,6 @@
 package com.beertag.diconfig;
 
+import com.beertag.models.BeerTag;
 import com.beertag.models.User;
 import com.beertag.parsers.GsonJsonParser;
 import com.beertag.parsers.base.JsonParser;
@@ -18,5 +19,9 @@ public class ParsersModule {
     @Provides
     public JsonParser<User> usersJsonParser() {
         return new GsonJsonParser<>(User.class, User[].class);
+    }
+    @Provides
+    public JsonParser<BeerTag> beerTagsJsonParser() {
+        return new GsonJsonParser<>(BeerTag.class, BeerTag[].class);
     }
 }

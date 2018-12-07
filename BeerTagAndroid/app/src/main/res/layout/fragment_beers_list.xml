@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".views.beerslist.BeersListFragment">
 
     <RelativeLayout
@@ -23,6 +24,32 @@
             android:layout_height="75dp"
             android:layout_centerInParent="true"
             android:visibility="gone" />
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/sp_search_options"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:arrowTint="@color/colorAccent"
+            app:textTint="@color/colorAccent" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_beers_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/sp_search_options"
+            android:layout_marginTop="15dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_no_beers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+
     </RelativeLayout>
 
 </FrameLayout>
