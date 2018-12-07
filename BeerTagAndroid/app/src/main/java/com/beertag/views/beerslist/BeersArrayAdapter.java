@@ -77,7 +77,7 @@ public class BeersArrayAdapter extends ArrayAdapter<Beer> {
 
         Picasso.get()
                 .load(beer.getBeerPicture())
-                .resize(150, 150)
+                .resize(350, 350)
                 .into(mBeerImageView);
 
         mBeerNameTextView

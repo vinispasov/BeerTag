@@ -20,9 +20,11 @@ import java.util.Objects;
 public class SqlBeersTagsRepositoryImpl implements BeersTagsRepository {
     private static final String GET_BEERTAG_BY_BEER_AND_TAG_QUERY ="FROM BeerTag WHERE beerId = :beerId AND tagId = :tagId";
     private static final String BEER_PARAMETER = "beerId";
-    private static final String TAG_PARAMETER = "tagId";
+    private static final String TAG_PARAMETER = "tag";
     private static final String GET_BEERTAG_BY_BEER_QUERY = "FROM BeerTag WHERE beerId = :beerId";
-    private static final String GET_BEERTAG_BY_TAG_QUERY = "FROM BeerTag WHERE tagId = :tagId";
+    private static final String GET_BEERTAG_BY_TAG_QUERY =
+            "FROM BeerTag beertags " +
+            "WHERE beertags.tagId in (SELECT tags.tagId from Tag tags where tags.tag=:tag)";
     private final SessionFactory sessionFactory;
 
     @Autowired
@@ -138,14 +140,14 @@ public class SqlBeersTagsRepositoryImpl implements BeersTagsRepository {
     }
 
     @Override
-    public List<BeerTag> getAllBeersTagsByTag(int tagId) {
+    public List<BeerTag> getAllBeersTagsByTag(String tag) {
         List<BeerTag> beersTags = new ArrayList<>();
 
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
 
             Query<BeerTag> query = session.createQuery(GET_BEERTAG_BY_TAG_QUERY,BeerTag.class);
-            query.setParameter(TAG_PARAMETER,tagId);
+            query.setParameter(TAG_PARAMETER,tag);
             beersTags = query.list();
 
             transaction.commit();

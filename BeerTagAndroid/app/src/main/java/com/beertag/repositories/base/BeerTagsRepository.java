@@ -16,5 +16,5 @@ public interface BeerTagsRepository {
 
     List<BeerTag> getAllBeersTagsByBeer(int beerId) throws IOException;
 
-    List<BeerTag> getAllBeersTagsByTag(int tagId) throws IOException;
+    List<BeerTag> getAllBeersTagsByTag(String tag) throws IOException;
 }

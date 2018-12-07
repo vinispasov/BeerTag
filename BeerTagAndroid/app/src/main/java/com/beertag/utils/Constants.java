@@ -50,4 +50,9 @@ public class Constants {
     public static final String SORTED_OPTION_BY_ALPHABET = "Sort by alphabet";
 
     public static final String COMPACT_VIEW_STYLE = "Compact";
+    public static final String BEERS_ROOT_MAPPING = "beers/";
+    public static final String BEERS_ROOT_MAPPING_SORT_BY_RATING = "beers/sort/rating";
+    public static final String BEERS_ROOT_MAPPING_SORT_BY_ABV = "beers/sort/abv";
+    public static final String BEERS_ROOT_MAPPING_SORT_BY_NAME = "beers/sort/name";
+
 }

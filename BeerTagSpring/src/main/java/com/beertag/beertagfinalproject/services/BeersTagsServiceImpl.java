@@ -40,7 +40,7 @@ public class BeersTagsServiceImpl implements BeersTagsService {
     }
 
     @Override
-    public List<BeerTag> getAllBeersTagsByTag(int tagId) {
-        return beersTagsRepository.getAllBeersTagsByTag(tagId);
+    public List<BeerTag> getAllBeersTagsByTag(String tag) {
+        return beersTagsRepository.getAllBeersTagsByTag(tag);
     }
 }

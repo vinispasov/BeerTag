@@ -1,6 +1,7 @@
 package com.beertag.views.beerslist;
 
 import com.beertag.async.base.SchedulerProvider;
+import com.beertag.models.BeerTag;
 import com.beertag.services.base.BeerTagsService;
 import com.beertag.services.base.BeersService;
 import com.beertag.utils.Constants;
@@ -74,6 +75,13 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
         Disposable observable = Observable
                 .create((ObservableOnSubscribe<List<Beer>>) emitter -> {
                     List<Beer> beersResultSet = mBeersService.getFilteredBeers(searchQuery);
+                    /*List<BeerTag>beersFilteredByTags= mBeerTagsService.getAllBeersTagsByTag(searchQuery);
+
+                    beersFilteredByTags
+                            .stream()
+                            .map(beerTag->beerTag.getBeer())
+                            .forEach(beersResultSet::add);*/
+
                     emitter.onNext(beersResultSet);
                     emitter.onComplete();
                 })

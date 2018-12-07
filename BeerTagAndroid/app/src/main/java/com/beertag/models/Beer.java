@@ -1,5 +1,7 @@
 package com.beertag.models;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.Serializable;
 
 public class Beer implements Serializable{
@@ -24,8 +26,8 @@ public class Beer implements Serializable{
 
     }
 
-    public Beer(String beerName,/*double rating,*/ double abv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry, int userId,User user, int tagId, boolean isDrank) {
-       setBeerName(beerName);
+    public Beer(String beerName,/*double rating,*/ double abv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry, int userId/*User user*/, int tagId, boolean isDrank) {
+        setBeerName(beerName);
        //setRating(rating);
        setAbv(abv);
        setBeerStyle(beerStyle);
@@ -36,7 +38,7 @@ public class Beer implements Serializable{
        setDrank(isDrank);
        setUserId(userId);
        setTagId(tagId);
-       setUser(user);
+      // setUser(user);
     }
 
     public int getBeerId() {
@@ -55,10 +57,10 @@ public class Beer implements Serializable{
         this.beerName = beerName;
     }
 
-    public CharSequence getAbv() {
+    public String getAbv() {
         StringBuilder sb=new StringBuilder();
         sb.append(abv);
-        return sb;
+        return sb.toString();
     }
 
     private void setAbv(double abv) {

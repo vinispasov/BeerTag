@@ -4,6 +4,7 @@ import com.beertag.http.base.HttpRequester;
 import com.beertag.parsers.base.JsonParser;
 import com.beertag.models.Beer;
 import com.beertag.repositories.base.BeersRepository;
+import com.beertag.utils.Constants;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,14 +32,14 @@ public class HttpBeersRepository implements BeersRepository {
 
     @Override
     public void deleteBeer(int id) throws IOException {
-        String deleteServerUrl = mServerUrl + "/" + id;
+        String deleteServerUrl = mServerUrl + Constants.BEERS_ROOT_MAPPING + id;
         mHttpRequester.delete(deleteServerUrl, id);
 
     }
 
     @Override
     public Beer updateBeer(Beer beerToUpdate, int id) throws IOException {
-        String updateServerUrl = mServerUrl + "/" + id;
+        String updateServerUrl = mServerUrl + Constants.BEERS_ROOT_MAPPING + id;
         String requestBody = mJsonParser.toJson(beerToUpdate);
 
         String responseBody = mHttpRequester.update(updateServerUrl, requestBody, id);
@@ -48,32 +49,33 @@ public class HttpBeersRepository implements BeersRepository {
 
     @Override
     public Beer getBeerById(int id) throws IOException {
-        String itemJson = mHttpRequester.get(mServerUrl + "/" + id);
+        String itemJson = mHttpRequester.get(mServerUrl + Constants.BEERS_ROOT_MAPPING + id);
         return mJsonParser.fromJson(itemJson);
     }
 
     @Override
     public List<Beer> getAllBeers() throws IOException {
 
-        String itemsJson = mHttpRequester.get(mServerUrl+"/beers");
+        String itemsJson = mHttpRequester.get(mServerUrl+Constants.BEERS_ROOT_MAPPING);
+
         return mJsonParser.fromJsonArray(itemsJson);
     }
 
     @Override
     public List<Beer> getAllBeersSortedByRating() throws IOException {
-        String itemsJson = mHttpRequester.get(mServerUrl+"/beers/sort/rating");
+        String itemsJson = mHttpRequester.get(mServerUrl+Constants.BEERS_ROOT_MAPPING_SORT_BY_RATING);
         return mJsonParser.fromJsonArray(itemsJson);
     }
 
     @Override
     public List<Beer> getAllBeersSortedByAbv() throws IOException {
-        String itemsJson = mHttpRequester.get(mServerUrl+"/beers/sort/abv");
+        String itemsJson = mHttpRequester.get(mServerUrl+Constants.BEERS_ROOT_MAPPING_SORT_BY_ABV);
         return mJsonParser.fromJsonArray(itemsJson);
     }
 
     @Override
     public List<Beer> getAllBeersSortedByName() throws IOException {
-        String itemsJson = mHttpRequester.get(mServerUrl+"/beers/sort/name");
+        String itemsJson = mHttpRequester.get(mServerUrl+Constants.BEERS_ROOT_MAPPING_SORT_BY_NAME);
         return mJsonParser.fromJsonArray(itemsJson);
     }
 }

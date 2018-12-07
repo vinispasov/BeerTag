@@ -37,7 +37,7 @@ public class HttpBeerTagsService implements BeerTagsService {
     }
 
     @Override
-    public List<BeerTag> getAllBeersTagsByTag(int tagId) throws IOException {
-        return mBeerTagsRepository.getAllBeersTagsByTag(tagId);
+    public List<BeerTag> getAllBeersTagsByTag(String tag) throws IOException {
+        return mBeerTagsRepository.getAllBeersTagsByTag(tag);
     }
 }

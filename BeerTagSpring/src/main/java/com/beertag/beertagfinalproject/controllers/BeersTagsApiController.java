@@ -41,9 +41,9 @@ public class BeersTagsApiController {
         return beersTagsService.getAllBeersTagsByBeer(beerId);
     }
 
-    @RequestMapping(value = "/tag/{tagId}", method = RequestMethod.GET)
-    public List<BeerTag> getAllBeersTagsByTag(@PathVariable int tagId) {
-        return beersTagsService.getAllBeersTagsByTag(tagId);
+    @RequestMapping(value = "/tag/{tag}", method = RequestMethod.GET)
+    public List<BeerTag> getAllBeersTagsByTag(@PathVariable String tag) {
+        return beersTagsService.getAllBeersTagsByTag(tag);
     }
 
 }

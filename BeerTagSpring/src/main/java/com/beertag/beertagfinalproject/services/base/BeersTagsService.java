@@ -14,5 +14,5 @@ public interface BeersTagsService {
 
     List<BeerTag> getAllBeersTagsByBeer(int beerId);
 
-    List<BeerTag> getAllBeersTagsByTag(int tagId);
+    List<BeerTag> getAllBeersTagsByTag(String tag);
 }

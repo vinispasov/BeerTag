@@ -68,13 +68,13 @@ public class HttpBeerTagsRepository implements BeerTagsRepository {
     }
 
     @Override
-    public List<BeerTag> getAllBeersTagsByTag(int tagId) throws IOException {
+    public List<BeerTag> getAllBeersTagsByTag(String tag) throws IOException {
         String url = new StringBuilder()
                 .append(mServerUrl)
-                .append("/")
+                .append("beerstags/")
                 .append("tag")
                 .append("/")
-                .append(tagId)
+                .append(tag)
                 .toString();
 
         String itemsJson = mHttpRequester.get(url);
