@@ -8,7 +8,7 @@ public class Beer implements Serializable{
     private int beerId;
     private String beerName;
    // private double rating;
-    private double abv;
+    private double beerAbv;
     private String beerStyle;
     private String beerDescription;
     private String beerPicture;
@@ -26,10 +26,10 @@ public class Beer implements Serializable{
 
     }
 
-    public Beer(String beerName,/*double rating,*/ double abv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry, int userId/*User user*/, int tagId, boolean isDrank) {
+    public Beer(String beerName,/*double rating,*/ double beerAbv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry, int userId/*User user*/, int tagId, boolean isDrank) {
         setBeerName(beerName);
        //setRating(rating);
-       setAbv(abv);
+       setAbv(beerAbv);
        setBeerStyle(beerStyle);
        setBeerDescription(beerDescription);
        setBeerPicture(beerPicture);
@@ -59,12 +59,12 @@ public class Beer implements Serializable{
 
     public String getAbv() {
         StringBuilder sb=new StringBuilder();
-        sb.append(abv);
+        sb.append(beerAbv);
         return sb.toString();
     }
 
     private void setAbv(double abv) {
-        this.abv = abv;
+        this.beerAbv = abv;
     }
 
     public String getBeerStyle() {
@@ -125,7 +125,7 @@ public class Beer implements Serializable{
         this.rating = rating;
     }*/
     public double getAbvDouble(){
-        return abv;
+        return beerAbv;
     }
 
 
