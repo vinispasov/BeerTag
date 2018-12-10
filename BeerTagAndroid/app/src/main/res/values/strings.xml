@@ -22,6 +22,7 @@
 
     <string name="toolbar_title_my_users">USERS</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rate">RATE</string>
+
+    <string name="toolbar_title_beer_details">Beer details</string>
 </resources>

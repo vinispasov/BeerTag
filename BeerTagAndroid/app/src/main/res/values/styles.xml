@@ -15,4 +15,16 @@
 
     </style>
 
+    <style name="MyDialogFadeAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">#641D79</item>
+        <item name="android:alpha">0.8</item>
+
+    </style>
+
 </resources>

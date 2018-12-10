@@ -55,4 +55,29 @@ public class Constants {
     public static final String BEERS_ROOT_MAPPING_SORT_BY_ABV = "beers/sort/abv";
     public static final String BEERS_ROOT_MAPPING_SORT_BY_NAME = "beers/sort/name";
 
+    public static final String BEER_ABV_FIELD = "ABV: ";
+    public static final String BEER_STYLE_FIELD = "Style: ";
+    public static final String BEER_BREWERY_FIELD = "Brewery: ";
+    public static final String BEER_COUNTRY_FIELD = "Country: ";
+    public static final String BEER_DESCRIPTION_FIELD = "Description: ";
+
+
+    public static final String RATE_DIALOG_TITLE_MESSAGE = "RATE BEER";
+    public static final String RATE_DIALOG_DESCRIPTION_MESSAGE = "Please select some stars and give your feedback!";
+    public static final String RATING_CANCELLED_MESSAGE = "Rating was cancelled!";
+    public static final String ALREADY_RATED_MESSAGE = "You have already submitted your rating!";
+    public static final String SUCCESSFUL_RATING = "Your feedback was successfully submitted!";
+
+    public static final String RATING_REPRESENTATION = "/5";
+
+    public static final String ONE_STAR_RATING_TEXT = "Very Bad";
+    public static final String TWO_STAR_RATING_TEXT = "Not Good";
+    public static final String THREE_STAR_RATING_TEXT = "Neutral";
+    public static final String FOUR_STAR_RATING_TEXT = "Very Good";
+    public static final String FIVE_STAR_RATING_TEXT = "Excellent!";
+
+    public static final String SUBMIT_OPTION = "Submit";
+    public static final String CANCEL_OPTION = "Cancel";
+
+    public static final String UNEXPECTED_ERROR = "Something went wrong. Please try again!";
 }

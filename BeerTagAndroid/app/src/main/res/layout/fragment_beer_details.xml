@@ -1,14 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.beerdetails.BeerDetailsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/beer_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="250dp"
+        android:scaleType="fitXY" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_beer_name_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/beer_image"
+        android:layout_marginStart="15dp" />
+    <TextView
+        android:id="@+id/tv_beer_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_beer_name_details"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:drawableStart="@drawable/ic_star_small"
+        android:drawablePadding="4dp"
+        android:textColor="@color/colorAccent"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_beer_abv_details_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_rate"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="10dp"
+        android:gravity="start"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/BeerFieldTextSize" />
+
+    <TextView
+        android:id="@+id/tv_beer_abv_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_beer_abv_details_field"
+        android:layout_marginStart="15dp" />
+
+    <TextView
+        android:id="@+id/tv_beer_style_details_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_beer_abv_details"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="10dp"
+        android:gravity="start"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/BeerFieldTextSize" />
+
+    <TextView
+        android:id="@+id/tv_beer_style_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_beer_style_details_field"
+        android:layout_marginStart="15dp" />
+
+
+
+    <TextView
+        android:id="@+id/tv_beer_brewery_details_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_beer_style_details"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="10dp"
+        android:gravity="start"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/BeerFieldTextSize" />
+
+    <TextView
+        android:id="@+id/tv_beer_brewery_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_beer_brewery_details_field"
+        android:layout_marginStart="15dp" />
+
+    <TextView
+        android:id="@+id/tv_beer_country_details_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_beer_brewery_details"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="10dp"
+        android:gravity="start"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/BeerFieldTextSize" />
+
+    <TextView
+        android:id="@+id/tv_beer_country_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_beer_country_details_field"
+        android:layout_marginStart="15dp" />
+
+    <TextView
+        android:id="@+id/tv_beer_description_details_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_beer_country_details"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="10dp"
+        android:gravity="start"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/BeerFieldTextSize" />
+
+    <TextView
+        android:id="@+id/tv_beer_description_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_beer_description_details_field"
+        android:layout_marginStart="15dp" />
+
+
+
+
+
+    <Button
+        android:id="@+id/btn_rate"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv_beer_rating"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded_button"
+        android:text="@string/rate"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/prb_load_view"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+</RelativeLayout>
