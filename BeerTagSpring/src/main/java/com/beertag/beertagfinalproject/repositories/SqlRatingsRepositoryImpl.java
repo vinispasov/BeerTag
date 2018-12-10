@@ -1,6 +1,7 @@
 package com.beertag.beertagfinalproject.repositories;
 
 import com.beertag.beertagfinalproject.models.Rating;
+import com.beertag.beertagfinalproject.models.dto_models.RatingDTO;
 import com.beertag.beertagfinalproject.repositories.base.RatingsRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -63,7 +64,7 @@ public class SqlRatingsRepositoryImpl implements RatingsRepository {
     }
 
     @Override
-    public Rating isAlreadyRated(Rating rating) {
+    public Rating isAlreadyRated(RatingDTO ratingDTO) {
         Rating result= null;
 
 
@@ -73,8 +74,8 @@ public class SqlRatingsRepositoryImpl implements RatingsRepository {
 
             result = session
                     .createQuery(IS_BEER_ALREADY_RATED_BY_USER_ID_QUERY, Rating.class)
-                    .setParameter(USER_ID_VOTER_PARAMETER, rating.getVoterId())
-                    .setParameter(BEER_ID_VOTED_FOR_PARAMETER, rating.getVotedForId())
+                    .setParameter(USER_ID_VOTER_PARAMETER, ratingDTO.getVoterId())
+                    .setParameter(BEER_ID_VOTED_FOR_PARAMETER, ratingDTO.getVotedForId())
                     .uniqueResult();
 
             transaction.commit();

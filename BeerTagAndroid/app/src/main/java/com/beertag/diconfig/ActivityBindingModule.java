@@ -1,5 +1,6 @@
 package com.beertag.diconfig;
 
+import com.beertag.views.beerdetails.BeerDetailsActivity;
 import com.beertag.views.beerslist.BeersListActivity;
 import com.beertag.views.userslist.UsersListActivity;
 
@@ -15,5 +16,9 @@ public abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = UsersListModule.class)
     abstract UsersListActivity usersListActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = BeerDetailsModule.class)
+    abstract BeerDetailsActivity beerDetailsActivity();
 
 }

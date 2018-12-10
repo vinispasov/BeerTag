@@ -1,6 +1,7 @@
 package com.beertag.beertagfinalproject.services;
 
 import com.beertag.beertagfinalproject.models.Rating;
+import com.beertag.beertagfinalproject.models.dto_models.RatingDTO;
 import com.beertag.beertagfinalproject.repositories.base.RatingsRepository;
 import com.beertag.beertagfinalproject.services.base.RatingsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class RatingsServiceImpl implements RatingsService {
     }
 
     @Override
-    public Rating isAlreadyRated(Rating rating) {
-        return ratingsRepository.isAlreadyRated(rating);
+    public Rating isAlreadyRated(RatingDTO ratingDTO) {
+        return ratingsRepository.isAlreadyRated(ratingDTO);
     }
 }

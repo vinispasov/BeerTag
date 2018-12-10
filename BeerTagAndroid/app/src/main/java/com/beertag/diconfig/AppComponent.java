@@ -26,6 +26,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         ValidatorsModule.class,
         BeersListModule.class,
         UsersListModule.class,
+        BeerDetailsModule.class,
 })
 public interface AppComponent extends AndroidInjector<AndroidApplication> {
 

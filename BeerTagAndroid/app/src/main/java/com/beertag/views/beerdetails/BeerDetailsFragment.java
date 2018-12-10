@@ -113,6 +113,8 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
                 .into(mBeerImageView);
 
         mRateBeerButton.setVisibility(View.VISIBLE);
+        mBeerRatingTextView.setVisibility(View.VISIBLE);
+
         mBeerNameTextView.setText(beer.getBeerName());
 
         mAbvFieldTextView.setText(Constants.BEER_ABV_FIELD);

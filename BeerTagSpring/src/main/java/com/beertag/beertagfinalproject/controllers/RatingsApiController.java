@@ -1,6 +1,7 @@
 package com.beertag.beertagfinalproject.controllers;
 
 import com.beertag.beertagfinalproject.models.Rating;
+import com.beertag.beertagfinalproject.models.dto_models.RatingDTO;
 import com.beertag.beertagfinalproject.services.base.RatingsService;
 import com.beertag.beertagfinalproject.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class RatingsApiController {
     }
 
     @RequestMapping(value = "/check", method = RequestMethod.POST)
-    public Rating isAlreadyRated(@RequestBody Rating rating) {
-        return ratingsService.isAlreadyRated(rating);
+    public Rating isAlreadyRated(@RequestBody RatingDTO ratingDTO) {
+        return ratingsService.isAlreadyRated(ratingDTO);
     }
 }

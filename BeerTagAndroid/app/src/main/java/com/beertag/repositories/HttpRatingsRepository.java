@@ -24,7 +24,7 @@ public class HttpRatingsRepository implements RatingsRepository {
     @Override
     public List<Rating> getBeerRatingById(int id) throws IOException {
 
-        String url = mServerUrl + "/" + id;
+        String url = mServerUrl + "/ratings/" + id;
         String itemsJson = mHttpRequester.get(url);
 
         return mJsonParser.fromJsonArray(itemsJson);
@@ -35,7 +35,7 @@ public class HttpRatingsRepository implements RatingsRepository {
     public Rating checkIfBeerAlreadyRatedByVoter(Rating rating) throws IOException {
         String requestBody = mJsonParser.toJson(rating);
 
-        String postServerUrl = mServerUrl +"/check";
+        String postServerUrl = mServerUrl +"/ratings/check";
         String responseBody = mHttpRequester.post(postServerUrl, requestBody);
 
         return mJsonParser.fromJson(responseBody);

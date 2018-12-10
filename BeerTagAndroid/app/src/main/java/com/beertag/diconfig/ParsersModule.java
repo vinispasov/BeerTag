@@ -1,6 +1,7 @@
 package com.beertag.diconfig;
 
 import com.beertag.models.BeerTag;
+import com.beertag.models.Rating;
 import com.beertag.models.User;
 import com.beertag.parsers.GsonJsonParser;
 import com.beertag.parsers.base.JsonParser;
@@ -23,5 +24,9 @@ public class ParsersModule {
     @Provides
     public JsonParser<BeerTag> beerTagsJsonParser() {
         return new GsonJsonParser<>(BeerTag.class, BeerTag[].class);
+    }
+    @Provides
+    public JsonParser<Rating> ratingsJsonParser() {
+        return new GsonJsonParser<>(Rating.class, Rating[].class);
     }
 }
