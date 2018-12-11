@@ -93,7 +93,7 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
        // mBeersAdapter.setOnBeerItemClickListener(this);
        // mBeersRecyclerView.setAdapter(mPsAdapter);
 
-        mBeersArrayAdapter.setView(this);
+
         mBeersGridLayoutManager = new LinearLayoutManager(getContext());
         mBeersRecyclerView.setLayoutManager(mBeersGridLayoutManager);
         mPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -168,7 +168,7 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
     @Override
     public void showBeerRating(double rating) {
         String ratingRepresentation = String.format(Locale.UK, "%.1f", rating) + Constants.RATING_REPRESENTATION;
-        mBeersArrayAdapter.setTextOnBeerRatings(ratingRepresentation);
+        //mBeersArrayAdapter.setTextOnBeerRatings(ratingRepresentation);
     }
 
 

@@ -21,6 +21,9 @@ public class User implements Serializable {
     }
 
     public int getUserId() {
+        if (userId==0){
+            userId=1;
+        }
         return userId;
     }
 

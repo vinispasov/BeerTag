@@ -13,9 +13,12 @@ import android.widget.Toast;
 
 import com.beertag.R;
 import com.beertag.models.User;
+import com.beertag.services.base.UsersService;
 import com.beertag.utils.Constants;
 import com.beertag.views.beerdetails.BeerDetailsContracts;
 import com.squareup.picasso.Picasso;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +53,7 @@ public class ProfileFragment extends Fragment implements ProfileContracts.View {
 
 
 
+    @Inject
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -121,5 +125,6 @@ public class ProfileFragment extends Fragment implements ProfileContracts.View {
                 .makeText(getContext(), message, Toast.LENGTH_SHORT)
                 .show();
     }
+
 
 }

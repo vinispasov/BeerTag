@@ -30,7 +30,7 @@ public class HttpUsersRepository implements UsersRepository {
 
     @Override
     public User getUserById(int userId) throws IOException {
-        String itemJson = mHttpRequester.get(mServerUrl + "/" + userId);
+        String itemJson = mHttpRequester.get(mServerUrl + "/users/" + userId);
         return mJsonParser.fromJson(itemJson);
     }
 

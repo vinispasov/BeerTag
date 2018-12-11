@@ -86,6 +86,11 @@ public class UsersListFragment extends Fragment implements UsersListContracts.Vi
     }
 
     @Override
+    public void showMyProfile(User user) {
+        mNavigator.navigateToProfileWithMyProfile(user);
+    }
+
+    @Override
     public void showProgressBarLoading() {
         mProgressBarView.setVisibility(View.VISIBLE);
         mUsersListView.setVisibility(View.GONE);

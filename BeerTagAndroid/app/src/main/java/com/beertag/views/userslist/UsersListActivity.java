@@ -53,4 +53,10 @@ public class UsersListActivity extends BaseDrawerActivity implements UsersListCo
         intent.putExtra(ProfileActivity.PROFILE_EXTRA_KEY, user);
         startActivity(intent);
     }
+    @Override
+    public void navigateToProfileWithMyProfile(User user) {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra(ProfileActivity.PROFILE_EXTRA_KEY_MY_PROFILE, user);
+        startActivity(intent);
+    }
 }

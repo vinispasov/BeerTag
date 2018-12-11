@@ -11,6 +11,8 @@ public interface UsersListContracts {
 
         void showUserDetails(User user);
 
+        void showMyProfile(User user);
+
         void showProgressBarLoading();
 
         void hideProgressBarLoading();
@@ -38,6 +40,8 @@ public interface UsersListContracts {
 
         void presentUsersToView(List<User> allUsers, String message);
 
+        void showMyProfile();
+
         //void filterUsersWith(String searchQuery);
 
         //void userForDeletionIsSelected(User userToDelete);
@@ -49,5 +53,6 @@ public interface UsersListContracts {
 
     interface Navigator {
         void navigateToProfileWith(User user);
+        void navigateToProfileWithMyProfile(User user);
     }
 }

@@ -1,6 +1,7 @@
 package com.beertag.views.profile;
 
 import com.beertag.models.User;
+import com.beertag.services.base.UsersService;
 
 public interface ProfileContracts {
 
@@ -28,6 +29,8 @@ public interface ProfileContracts {
         void loadUser();
 
         void setUserId(int id);
+
+
 
     }
 }

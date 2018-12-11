@@ -39,6 +39,7 @@ public class ProfilePresenter implements ProfileContracts.Presenter {
         mView.showLoading();
         Disposable observable = Observable
                 .create((ObservableOnSubscribe<User>) emitter -> {
+
                     User user= mUsersService.getUserById(mUserId);
                     emitter.onNext(user);
                     emitter.onComplete();
@@ -57,4 +58,6 @@ public class ProfilePresenter implements ProfileContracts.Presenter {
     public void setUserId(int id) {
         mUserId=id;
     }
+
+
 }

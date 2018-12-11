@@ -66,4 +66,22 @@ public class UsersListPresenter implements UsersListContracts.Presenter {
             mView.showAllUsers(allUsers);
         }
     }
+
+    @Override
+    public void showMyProfile() {
+        mView.showProgressBarLoading();
+
+        Disposable observable = Observable
+                .create((ObservableOnSubscribe<User>) emitter -> {
+                    User user= mUsersService.getUserById(1);
+                    emitter.onNext(user);
+                    emitter.onComplete();
+                })
+                .subscribeOn(mSchedulerProvider.backgroundThread())
+                .observeOn(mSchedulerProvider.uiThread())
+                .doFinally(mView::hideProgressBarLoading)
+                .subscribe(user ->mView.showMyProfile(user), mView::showError);
+    }
+
+
 }

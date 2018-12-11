@@ -1,7 +1,7 @@
 package com.beertag.views;
 
 import android.content.Intent;
-import  android.support.v7.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
 
 import com.beertag.R;
 import com.beertag.views.beerslist.BeersListActivity;
@@ -12,6 +12,8 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 import dagger.android.support.DaggerAppCompatActivity;
@@ -27,11 +29,15 @@ public abstract class BaseDrawerActivity extends DaggerAppCompatActivity{
 
     private Drawer mDrawer;
 
+
     public BaseDrawerActivity() {
         //empty constructor required
     }
 
+
     public void setupDrawer() {
+
+
         PrimaryDrawerItem myProfileItem = new PrimaryDrawerItem()
                 .withIdentifier(ProfileActivity.DRAWER_IDENTIFIER)
                 .withName(MY_PROFILE_DRAWER_NAME);
@@ -68,7 +74,12 @@ public abstract class BaseDrawerActivity extends DaggerAppCompatActivity{
                         return false;
                     }
 
-                    Intent intent = getNextIntent(identifier);
+                    Intent intent = null;
+                    try {
+                        intent = getNextIntent(identifier);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     if (intent == null) {
                         return false;
                     }
@@ -84,6 +95,7 @@ public abstract class BaseDrawerActivity extends DaggerAppCompatActivity{
 
     protected abstract long getIdentifier();
 
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -96,7 +108,7 @@ public abstract class BaseDrawerActivity extends DaggerAppCompatActivity{
         mDrawer.closeDrawer();
     }
 
-    private Intent getNextIntent(long identifier) {
+    private Intent getNextIntent(long identifier) throws IOException {
 
         Intent nextIntent;
 
@@ -113,4 +125,7 @@ public abstract class BaseDrawerActivity extends DaggerAppCompatActivity{
             return null;
         }
     }
+
+
+
 }

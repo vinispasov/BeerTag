@@ -2,6 +2,7 @@ package com.beertag.diconfig;
 
 import com.beertag.views.beerdetails.BeerDetailsActivity;
 import com.beertag.views.beerslist.BeersListActivity;
+import com.beertag.views.profile.ProfileActivity;
 import com.beertag.views.userslist.UsersListActivity;
 
 import dagger.Module;
@@ -20,5 +21,9 @@ public abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = BeerDetailsModule.class)
     abstract BeerDetailsActivity beerDetailsActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = ProfileModule.class)
+    abstract ProfileActivity profileActivity();
 
 }

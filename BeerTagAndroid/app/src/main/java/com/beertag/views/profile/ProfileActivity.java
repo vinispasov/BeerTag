@@ -12,6 +12,8 @@ import com.beertag.R;
 import com.beertag.models.User;
 import com.beertag.views.BaseDrawerActivity;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
@@ -20,6 +22,7 @@ public class ProfileActivity extends BaseDrawerActivity {
 
     public static final int DRAWER_IDENTIFIER = 111;
     public static final String PROFILE_EXTRA_KEY = "PROFILE_EXTRA_KEY";
+    public static final String PROFILE_EXTRA_KEY_MY_PROFILE = "PROFILE_EXTRA_KEY_MY_PROFILE";
 
     @Inject
     ProfileFragment mProfileFragment;
@@ -33,8 +36,15 @@ public class ProfileActivity extends BaseDrawerActivity {
         setContentView(R.layout.activity_profile);
 
         ButterKnife.bind(this);
+
         Intent intent = getIntent();
         User user = (User) intent.getSerializableExtra(ProfileActivity.PROFILE_EXTRA_KEY);
+
+        if(user==null){
+            
+            user=(User) intent.getSerializableExtra(ProfileActivity.PROFILE_EXTRA_KEY_MY_PROFILE);
+        }
+
 
         mProfilePresenter.setUserId(user.getUserId());
         mProfileFragment.setPresenter(mProfilePresenter);
