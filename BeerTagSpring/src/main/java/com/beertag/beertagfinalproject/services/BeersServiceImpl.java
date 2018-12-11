@@ -30,8 +30,8 @@ public class BeersServiceImpl implements BeersService {
     }
 
     @Override
-    public List<Beer> getAllBeersSortedByRating() {
-        return beersRepository.getAllBeersSortedByRating();
+    public List<Beer> getAllBeersSortedByRating(Beer beer) {
+        return beersRepository.getAllBeersSortedByRating(beer);
     }
 
     @Override

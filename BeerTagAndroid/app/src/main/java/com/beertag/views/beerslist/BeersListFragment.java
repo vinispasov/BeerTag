@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beertag.R;
+import com.beertag.models.Rating;
 import com.beertag.utils.Constants;
 import com.beertag.models.Beer;
 
@@ -26,6 +27,7 @@ import org.angmarch.views.NiceSpinner;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -40,6 +42,7 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
 
     @BindView(R.id.et_search_beers)
     EditText mSearchBar;
+
 
     @BindView(R.id.lv_beers_list_view)
     ListView mBeersListView;
@@ -59,8 +62,8 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
     @Inject
     BeersArrayAdapter mBeersArrayAdapter;
 
-   // @Inject
-    //BeersAdapter mBeersAdapter;
+
+
 
     private String[] mFilterOptions;
     private String mSelectedFilterOption;
@@ -89,6 +92,8 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
 
        // mBeersAdapter.setOnBeerItemClickListener(this);
        // mBeersRecyclerView.setAdapter(mPsAdapter);
+
+        mBeersArrayAdapter.setView(this);
         mBeersGridLayoutManager = new LinearLayoutManager(getContext());
         mBeersRecyclerView.setLayoutManager(mBeersGridLayoutManager);
         mPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -107,6 +112,7 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
         super.onResume();
         mPresenter.subscribe(this);
         mPresenter.showBeersList();
+        mPresenter.loadBeerRating();
     }
 
     @Override
@@ -157,6 +163,12 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
         Toast
                 .makeText(getContext(), message, Toast.LENGTH_LONG)
                 .show();
+    }
+
+    @Override
+    public void showBeerRating(double rating) {
+        String ratingRepresentation = String.format(Locale.UK, "%.1f", rating) + Constants.RATING_REPRESENTATION;
+        mBeersArrayAdapter.setTextOnBeerRatings(ratingRepresentation);
     }
 
 
@@ -255,4 +267,6 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
     public void onNothingSelected(AdapterView<?> adapterView) {
         mSelectedFilterOption = mFilterOptions[0];
     }
+
+
 }

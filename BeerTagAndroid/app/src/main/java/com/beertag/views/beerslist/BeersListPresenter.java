@@ -4,6 +4,7 @@ import com.beertag.async.base.SchedulerProvider;
 import com.beertag.models.BeerTag;
 import com.beertag.services.base.BeerTagsService;
 import com.beertag.services.base.BeersService;
+import com.beertag.services.base.RatingsService;
 import com.beertag.utils.Constants;
 import com.beertag.models.Beer;
 
@@ -29,13 +30,16 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
     private BeersListContracts.View mView;
     private final BeersService mBeersService;
     private final BeerTagsService mBeerTagsService;
+    private final RatingsService mRatingsService;
+    private int mBeerId;
     private final SchedulerProvider mSchedulerProvider;
     private String mCurrentSelectedOption;
 
     @Inject
-    BeersListPresenter(BeersService beersService,BeerTagsService beerTagsService, SchedulerProvider schedulerProvider) {
+    BeersListPresenter(BeersService beersService,BeerTagsService beerTagsService,RatingsService ratingsService, SchedulerProvider schedulerProvider) {
         mBeersService = beersService;
         mBeerTagsService=beerTagsService;
+        mRatingsService=ratingsService;
         mSchedulerProvider = schedulerProvider;
 
     }
@@ -147,6 +151,22 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
         mCurrentSelectedOption = selectedOption;
     }
 
+    @Override
+    public void loadBeerRating() {
+        mView.showProgressBarLoading();
+        Disposable observable = Observable
+                .create((ObservableOnSubscribe<Double>) emitter -> {
+                    double beerRating = mRatingsService.getBeerRatingById(mBeerId);
+                    emitter.onNext(beerRating);
+                    emitter.onComplete();
+                })
+                .subscribeOn(mSchedulerProvider.backgroundThread())
+                .observeOn(mSchedulerProvider.uiThread())
+                .doFinally(mView::hideProgressBarLoading)
+                .subscribe(beerRatingResult -> mView.showBeerRating(beerRatingResult),
+                        error -> mView.showError(error));
+    }
+
     private void presentBeersToViewAccordingToPreference(List<Beer> beersResult, String preference) {
 
         //if there is no preference chosen already or the preference is compact view
@@ -185,5 +205,10 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
                 .subscribe(beersResult -> presentBeersToViewAccordingToPreference(beersResult, preference),
                         error -> mView.showError(error));
 
+    }
+
+    @Override
+    public void setBeerId(int id) {
+        mBeerId=id;
     }
 }

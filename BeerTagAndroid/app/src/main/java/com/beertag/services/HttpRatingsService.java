@@ -18,15 +18,15 @@ public class HttpRatingsService implements RatingsService{
 
     @Override
     public double getBeerRatingById(int id) throws IOException {
-        List<Rating> userRatings = mRatingsRepository.getBeerRatingById(id);
+        List<Rating> beerRatings = mRatingsRepository.getBeerRatingById(id);
 
         double rating = 0;
-        int size = userRatings.size();
+        int size = beerRatings.size();
         if (size == 0) {
             return rating;
         } else {
-            for (int i = 0; i < userRatings.size(); i++) {
-                rating += userRatings.get(i).getRating();
+            for (int i = 0; i < beerRatings.size(); i++) {
+                rating += beerRatings.get(i).getRating();
             }
         }
         return rating / size;

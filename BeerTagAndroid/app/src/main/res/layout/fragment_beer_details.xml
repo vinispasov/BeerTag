@@ -5,6 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".views.beerdetails.BeerDetailsFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
     <ImageView
         android:id="@+id/beer_image"
         android:layout_width="match_parent"
@@ -19,16 +27,14 @@
         android:layout_marginStart="50dp" />
     <TextView
         android:id="@+id/tv_beer_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_beer_name_details"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/beer_image"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
-        android:drawableStart="@drawable/ic_star_small"
-        android:drawablePadding="4dp"
-        android:textColor="@color/colorAccent"
-        android:visibility="gone" />
+        android:layout_marginTop="-70dp"
+        android:background="@drawable/ic_star_rating"
+        android:gravity="center"
+        android:textColor="@color/colorWhite" />
 
     <TextView
         android:id="@+id/tv_beer_abv_details_field"
@@ -148,4 +154,6 @@
         android:layout_centerInParent="true"
         android:visibility="gone" />
 
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

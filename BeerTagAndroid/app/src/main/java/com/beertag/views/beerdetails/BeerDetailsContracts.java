@@ -38,6 +38,8 @@ public interface BeerDetailsContracts {
 
         void beerIsRated(int ratingValue);
 
+        void loadBeerRating();
+
 
     }
 }

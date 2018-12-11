@@ -127,4 +127,20 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
                         });
 
     }
+
+    @Override
+    public void loadBeerRating() {
+        mView.showLoading();
+        Disposable observable = Observable
+                .create((ObservableOnSubscribe<Double>) emitter -> {
+                    double beerRating = mRatingsService.getBeerRatingById(mBeerId);
+                    emitter.onNext(beerRating);
+                    emitter.onComplete();
+                })
+                .subscribeOn(mSchedulerProvider.backgroundThread())
+                .observeOn(mSchedulerProvider.uiThread())
+                .doFinally(mView::hideLoading)
+                .subscribe(beerRatingResult -> mView.showBeerRating(beerRatingResult),
+                        error -> mView.showError(error));
+    }
 }

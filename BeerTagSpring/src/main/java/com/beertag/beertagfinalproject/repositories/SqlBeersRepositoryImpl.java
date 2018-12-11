@@ -1,6 +1,7 @@
 package com.beertag.beertagfinalproject.repositories;
 
 import com.beertag.beertagfinalproject.models.Beer;
+import com.beertag.beertagfinalproject.models.Rating;
 import com.beertag.beertagfinalproject.models.dto_models.BeerDTO;
 import com.beertag.beertagfinalproject.repositories.base.BeersRepository;
 import com.beertag.beertagfinalproject.utils.mappers.BeersMapperImpl;
@@ -20,7 +21,10 @@ import java.util.stream.Collectors;
 
 @Repository
 public class SqlBeersRepositoryImpl implements BeersRepository {
-    private static final String GET_BEERS_SORTED_BY_RATING_QUERY = "";
+    private static final String GET_BEERS_SORTED_BY_RATING_QUERY ="";/*FROM Rating ratings " +
+            "WHERE ratings.votedForId in (SELECT beers.beerId from Beer beers where beers.beerId=:votedForId)"
+            +"ORDER BY ratings.rating desc */
+
     private static final String GET_BEERS_SORTED_BY_ABV_QUERY = "FROM Beer ORDER BY beerAbv DESC";
     private static final String GET_BEERS_SORTED_BY_NAME_QUERY = "FROM Beer ORDER BY beerName";
     private static final String GET_BEERS_FILTERED_BY_TAG_QUERY = "";
@@ -29,6 +33,7 @@ public class SqlBeersRepositoryImpl implements BeersRepository {
     private static final String STYLE_PARAMETER = "style";
     private static final String COUNTRY_PARAMETER = "country";
     private static final String GET_BEERS_FILTERED_BY_COUNTRY_QUERY = "FROM Beer WHERE originCountry = :country";
+    private static final String VOTED_FOR_ID_PARAMETER = "votedForId";
     private final SessionFactory sessionFactory;
     private BeersMapper mapper;
 
@@ -79,7 +84,7 @@ public class SqlBeersRepositoryImpl implements BeersRepository {
     }
 
     @Override
-    public List<Beer> getAllBeersSortedByRating() {
+    public List<Beer> getAllBeersSortedByRating(Beer beer) {
 
         List<Beer> beersSortedByRating = new ArrayList<>();
 
@@ -89,6 +94,7 @@ public class SqlBeersRepositoryImpl implements BeersRepository {
 
             beersSortedByRating = session
                     .createQuery(GET_BEERS_SORTED_BY_RATING_QUERY, Beer.class)
+                    .setParameter(VOTED_FOR_ID_PARAMETER,beer.getBeerId())
                     .list();
 
 

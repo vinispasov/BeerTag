@@ -3,6 +3,7 @@ package com.beertag.views.beerslist;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.beertag.R;
+import com.beertag.diconfig.BeersListModule;
 import com.beertag.models.Beer;
+import com.beertag.models.Rating;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
@@ -22,6 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class BeersArrayAdapter extends ArrayAdapter<Beer> {
+
     private static final String BEER_RATING_FIELD = "Rating";
     private static final String BEER_ABV_FIELD = "ABV";
     private static final String BEER_STYLE_FIELD = "Style";
@@ -35,6 +39,7 @@ public class BeersArrayAdapter extends ArrayAdapter<Beer> {
 
     @BindView(R.id.tv_beer_rating_item_field)
     TextView mBeerRatingFieldTextView;
+
 
     @BindView(R.id.tv_beer_rating_item)
     TextView mBeerRatingTextView;
@@ -72,6 +77,7 @@ public class BeersArrayAdapter extends ArrayAdapter<Beer> {
             view = inflater.inflate(R.layout.beer_item_arrayadapter_layout, parent, false);
         }
 
+
         ButterKnife.bind(this, view);
         Beer beer = getItem(position);
 
@@ -88,8 +94,7 @@ public class BeersArrayAdapter extends ArrayAdapter<Beer> {
                 .setText(beer.getAbv());
         mBeerRatingFieldTextView
                 .setText(BEER_RATING_FIELD);
-       /* mBeerRatingTextView
-                .setText(beer.getRating());*/
+
         mBeerStyleFieldTextView
                 .setText(BEER_STYLE_FIELD);
         mBeerStyleTextView
@@ -101,4 +106,8 @@ public class BeersArrayAdapter extends ArrayAdapter<Beer> {
 
         return view;
     }
+
+
+
+
 }

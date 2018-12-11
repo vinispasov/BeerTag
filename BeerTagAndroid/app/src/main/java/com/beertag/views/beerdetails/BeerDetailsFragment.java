@@ -97,6 +97,7 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
         super.onResume();
         mPresenter.subscribe(this);
         mPresenter.loadBeer();
+        mPresenter.loadBeerRating();
     }
 
     @Override
@@ -113,7 +114,7 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
                 .into(mBeerImageView);
 
         mRateBeerButton.setVisibility(View.VISIBLE);
-        mBeerRatingTextView.setVisibility(View.VISIBLE);
+       // mBeerRatingTextView.setVisibility(View.VISIBLE);
 
         mBeerNameTextView.setText(beer.getBeerName());
 
@@ -166,9 +167,8 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
 
 
     @Override
-    public void showBeerRating(double beerRating) {
-        String ratingRepresentation = String.format(Locale.UK, "%.1f", beerRating) + Constants.RATING_REPRESENTATION;
-        mBeerRatingTextView.setVisibility(View.VISIBLE);
+    public void showBeerRating(double rating) {
+        String ratingRepresentation = String.format(Locale.UK, "%.1f", rating) + Constants.RATING_REPRESENTATION;
         mBeerRatingTextView.setText(ratingRepresentation);
     }
     @OnClick(R.id.btn_rate)

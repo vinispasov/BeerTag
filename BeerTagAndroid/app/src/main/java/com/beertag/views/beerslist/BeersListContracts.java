@@ -28,6 +28,9 @@ public interface BeersListContracts {
         void hideDeletionDialog();
 
         void showMessage(String message);
+
+        void showBeerRating(double rating);
+
     }
 
     interface Presenter {
@@ -51,6 +54,10 @@ public interface BeersListContracts {
         void getActionOnConfirmedDeletion(Beer beerToDelete);
 
         void filterBeersWithOption(String preference, String selectedOption);
+
+        void loadBeerRating();
+
+        void setBeerId(int id);
     }
 
     interface Navigator {

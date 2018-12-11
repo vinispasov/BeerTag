@@ -22,9 +22,9 @@ public class HttpRatingsRepository implements RatingsRepository {
 
 
     @Override
-    public List<Rating> getBeerRatingById(int id) throws IOException {
+    public List<Rating> getBeerRatingById(int votedForId) throws IOException {
 
-        String url = mServerUrl + "/ratings/" + id;
+        String url = mServerUrl + "/ratings/" + votedForId;
         String itemsJson = mHttpRequester.get(url);
 
         return mJsonParser.fromJsonArray(itemsJson);
