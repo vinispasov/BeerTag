@@ -80,4 +80,7 @@ public class Constants {
     public static final String CANCEL_OPTION = "Cancel";
 
     public static final String UNEXPECTED_ERROR = "Something went wrong. Please try again!";
+    public static final String USER_NAME_FIELD = "Username";
+    public static final String FIRST_NAME_FIELD = "First name";
+    public static final String LAST_NAME_FIELD = "Last name";
 }

@@ -18,6 +18,7 @@ public class SqlRatingsRepositoryImpl implements RatingsRepository {
     private static final String USER_ID_VOTER_PARAMETER = "voterId";
     private static final String BEER_ID_VOTED_FOR_PARAMETER = "votedForId";
     private static final String IS_BEER_ALREADY_RATED_BY_USER_ID_QUERY = "FROM Rating WHERE voterId = :voterId AND votedForId = :votedForId";
+    private static final String GET_RATINGS_BY_USER_ID_QUERY = "FROM Rating WHERE voterId = :voterId";
 
 
     private final SessionFactory sessionFactory;
@@ -54,6 +55,24 @@ public class SqlRatingsRepositoryImpl implements RatingsRepository {
             ratings = session
                     .createQuery(GET_RATINGS_BY_BEER_ID_QUERY, Rating.class)
                     .setParameter(BEER_ID_VOTED_FOR_PARAMETER, id)
+                    .list();
+
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return ratings;
+    }
+    @Override
+    public List<Rating> getRatingsByUserId(int id) {
+        List<Rating> ratings = new ArrayList<>();
+
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            ratings = session
+                    .createQuery(GET_RATINGS_BY_USER_ID_QUERY, Rating.class)
+                    .setParameter(USER_ID_VOTER_PARAMETER, id)
                     .list();
 
             transaction.commit();

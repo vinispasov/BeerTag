@@ -26,7 +26,7 @@ public class RatingsApiController {
         return ratingsService.addRating(newRating);
     }
 
-    @RequestMapping(value = "/{beerId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/beers/{beerId}", method = RequestMethod.GET)
     public List<Rating> getRatingsByBeerId(@PathVariable int beerId) {
         return ratingsService.getRatingsByBeerId(beerId);
     }
@@ -34,5 +34,10 @@ public class RatingsApiController {
     @RequestMapping(value = "/check", method = RequestMethod.POST)
     public Rating isAlreadyRated(@RequestBody RatingDTO ratingDTO) {
         return ratingsService.isAlreadyRated(ratingDTO);
+    }
+
+    @RequestMapping(value = "/users/{userId}", method = RequestMethod.GET)
+    public List<Rating> getRatingsByUserId(@PathVariable int userId) {
+        return ratingsService.getRatingsByUserId(userId);
     }
 }

@@ -12,4 +12,6 @@ public interface RatingsService {
     List<Rating> getRatingsByBeerId(int id);
 
     Rating isAlreadyRated(RatingDTO ratingDTO);
+
+    List<Rating>getRatingsByUserId(int id);
 }

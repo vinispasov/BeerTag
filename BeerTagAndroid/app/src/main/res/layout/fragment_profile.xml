@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.profile.ProfileFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/user_image"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="fitXY" />
+
+
+
+            <TextView
+                android:id="@+id/tv_user_name_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_rate"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="10dp"
+                android:gravity="start"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/BeerFieldTextSize" />
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_user_name_field"
+                android:layout_marginStart="5dp" />
+
+            <TextView
+                android:id="@+id/tv_first_name_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_user_name"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="10dp"
+                android:gravity="start"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/BeerFieldTextSize" />
+
+            <TextView
+                android:id="@+id/tv_first_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_first_name_field"
+                android:layout_marginStart="5dp" />
+
+
+
+            <TextView
+                android:id="@+id/tv_last_name_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_first_name"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="10dp"
+                android:gravity="start"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/BeerFieldTextSize" />
+
+            <TextView
+                android:id="@+id/tv_last_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_last_name_field"
+                android:layout_marginStart="5dp" />
+
+
+
+            <ProgressBar
+                android:id="@+id/prb_load_view"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_centerInParent="true"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

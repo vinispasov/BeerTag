@@ -32,4 +32,9 @@ public class RatingsServiceImpl implements RatingsService {
     public Rating isAlreadyRated(RatingDTO ratingDTO) {
         return ratingsRepository.isAlreadyRated(ratingDTO);
     }
+
+    @Override
+    public List<Rating> getRatingsByUserId(int id) {
+        return ratingsRepository.getRatingsByUserId(id);
+    }
 }

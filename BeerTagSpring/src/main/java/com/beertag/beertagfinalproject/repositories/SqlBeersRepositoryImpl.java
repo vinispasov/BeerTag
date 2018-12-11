@@ -13,6 +13,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Parameter;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.ArrayList;
@@ -34,6 +35,8 @@ public class SqlBeersRepositoryImpl implements BeersRepository {
     private static final String COUNTRY_PARAMETER = "country";
     private static final String GET_BEERS_FILTERED_BY_COUNTRY_QUERY = "FROM Beer WHERE originCountry = :country";
     private static final String VOTED_FOR_ID_PARAMETER = "votedForId";
+    private static final String USER_PARAMETER = "userId";
+    private static final String GET_BY_USER_ID_QUERY = "FROM Beer WHERE userId=:userId";
     private final SessionFactory sessionFactory;
     private BeersMapper mapper;
 
@@ -276,4 +279,27 @@ public class SqlBeersRepositoryImpl implements BeersRepository {
             he.printStackTrace();
         }
     }
+
+    @Override
+    public List<Beer> getBeersByUserId(int userId) {
+        List<Beer> beers = new ArrayList<>();
+
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            beers = session
+                    .createQuery(GET_BY_USER_ID_QUERY, Beer.class)
+                    .setParameter(USER_PARAMETER, userId)
+                    .list();
+
+            transaction.commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return beers;
+    }
+
+
 }

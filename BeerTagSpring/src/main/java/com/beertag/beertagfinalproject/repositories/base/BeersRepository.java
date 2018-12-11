@@ -17,4 +17,5 @@ public interface BeersRepository {
     Beer addNewBeer(Beer newBeer);
     Beer editBeer(Beer beerToEdit,int id);
     void deleteBeer(int id);
+    List<Beer> getBeersByUserId(int userId);
 }
