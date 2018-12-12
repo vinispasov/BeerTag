@@ -31,25 +31,25 @@ public class HttpBeersRepository implements BeersRepository {
     }
 
     @Override
-    public void deleteBeer(int id) throws IOException {
-        String deleteServerUrl = mServerUrl + Constants.BEERS_ROOT_MAPPING + id;
-        mHttpRequester.delete(deleteServerUrl, id);
+    public void deleteBeer(int beerId) throws IOException {
+        String deleteServerUrl = mServerUrl + Constants.BEERS_ROOT_MAPPING + beerId;
+        mHttpRequester.delete(deleteServerUrl, beerId);
 
     }
 
     @Override
-    public Beer updateBeer(Beer beerToUpdate, int id) throws IOException {
-        String updateServerUrl = mServerUrl + Constants.BEERS_ROOT_MAPPING + id;
+    public Beer updateBeer(Beer beerToUpdate, int beerId) throws IOException {
+        String updateServerUrl = mServerUrl + Constants.BEERS_ROOT_MAPPING + beerId;
         String requestBody = mJsonParser.toJson(beerToUpdate);
 
-        String responseBody = mHttpRequester.update(updateServerUrl, requestBody, id);
+        String responseBody = mHttpRequester.update(updateServerUrl, requestBody, beerId);
 
         return mJsonParser.fromJson(responseBody);
     }
 
     @Override
-    public Beer getBeerById(int id) throws IOException {
-        String itemJson = mHttpRequester.get(mServerUrl + Constants.BEERS_ROOT_MAPPING + id);
+    public Beer getBeerById(int beerId) throws IOException {
+        String itemJson = mHttpRequester.get(mServerUrl + Constants.BEERS_ROOT_MAPPING + beerId);
         return mJsonParser.fromJson(itemJson);
     }
 

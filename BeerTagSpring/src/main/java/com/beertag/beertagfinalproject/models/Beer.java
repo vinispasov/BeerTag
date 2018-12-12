@@ -8,7 +8,7 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
+
 
 @Entity
 @Table(name = Constants.BEERS_TABLE_NAME)
@@ -47,21 +47,9 @@ public class Beer {
     @Column(name=Constants.BEERS_TABLE_ORIGIN_COUNTRY_COLUMN)
     private String originCountry;
 
-    @NotNull
-    @Column(name=Constants.BEERS_TABLE_IS_DRANK_COLUMN)
-    private boolean isDrank;
-
-    @NotNull
-    @Column(name = Constants.BEERS_TABLE_USER_ID_FIELD)
-    private int userId;
-
-    @ManyToOne
-    @JoinColumn(name = Constants.BEERS_TABLE_USER_ID_FIELD, referencedColumnName = Constants.USERS_TABLE_ID_COLUMN_NAME, insertable = false, updatable = false)
-    private User user;
-
-    @NotNull
+    /*@NotNull
     @Column(name = Constants.BEERS_TABLE_TAG_ID_FIELD)
-    private int tagId;
+    private int tagId;*/
 
     /*@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -77,7 +65,7 @@ public class Beer {
     }
 
 
-    public Beer(String beerName, double beerAbv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry, boolean isDrank, int userId, int tagId){
+    public Beer(String beerName, double beerAbv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry){
         setBeerName(beerName);
         setBeerAbv(beerAbv);
         setBeerStyle(beerStyle);
@@ -85,9 +73,6 @@ public class Beer {
         setBeerPicture(beerPicture);
         setBrewery(brewery);
         setOriginCountry(originCountry);
-        setDrank(isDrank);
-        setUserId(userId);
-        setTagId(tagId);
     }
 
     public int getBeerId() {
@@ -154,13 +139,6 @@ public class Beer {
         this.originCountry = originCountry;
     }
 
-    public boolean isDrank() {
-        return isDrank;
-    }
-
-    public void setDrank(boolean drank) {
-        isDrank = drank;
-    }
 
     /*public List<Tag> getTags() {
         return tags;
@@ -170,29 +148,7 @@ public class Beer {
         this.tags = tags;
     }*/
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(int tagId) {
-        this.tagId = tagId;
-    }
 
 }

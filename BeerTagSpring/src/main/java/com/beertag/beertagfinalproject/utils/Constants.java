@@ -68,4 +68,12 @@ public class Constants {
     public static final String BEERSTAGS_TABLE_TAG_ID_FIELD = "tag_id";
 
 
+    public static final String DRINKS_TABLE_NAME = "drinks";
+    public static final String DRINKS_TABLE_ID_FIELD = "drink_id";
+    public static final String DRINKS_TABLE_BEER_ID_FIELD = "beer_id";
+    public static final String DRINKS_TABLE_USER_ID_FIELD = "user_id";
+
+    public static final String DRINKS_TABLE_RATING_FIELD = "rating";
+    public static final String DRINKS_TABLE_IS_DRANK_FIELD = "isDrank";
+    public static final String DRINKS_ROOT_MAPPING = "/api/drinks";
 }

@@ -13,10 +13,10 @@ public class AppConfiguration {
         return new org.hibernate.cfg.Configuration()
                 .configure(Constants.HIBERNATE_CONFIGURATION_FILE_NAME)
                 .addAnnotatedClass(Beer.class)
-                .addAnnotatedClass(Rating.class)
                 .addAnnotatedClass(User.class)
                 .addAnnotatedClass(Tag.class)
                 .addAnnotatedClass(BeerTag.class)
+                .addAnnotatedClass(Drink.class)
                 .buildSessionFactory();
     }
 }

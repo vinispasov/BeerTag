@@ -36,7 +36,7 @@ public class HttpUsersRepository implements UsersRepository {
 
     @Override
     public User updateUser(User userToUpdate, int userId) throws IOException {
-        String updateServerUrl = mServerUrl + "/" + userId;
+        String updateServerUrl = mServerUrl + "/users/" + userId;
         String requestBody = mJsonParser.toJson(userToUpdate);
 
         String responseBody = mHttpRequester.update(updateServerUrl, requestBody, userId);
@@ -46,7 +46,7 @@ public class HttpUsersRepository implements UsersRepository {
 
     @Override
     public List<User> getUsers() throws IOException {
-        String itemsJson = mHttpRequester.get(mServerUrl+"users");
+        String itemsJson = mHttpRequester.get(mServerUrl+"/users");
         return mJsonParser.fromJsonArray(itemsJson);
     }
 }

@@ -17,17 +17,13 @@ public class BeerDTO {
 
     private String originCountry;
 
-    private boolean isDrank;
 
-    private int userId;
-
-    private int tagId;
 
     public BeerDTO(){
 
     }
 
-    public BeerDTO(String beerName, double beerAbv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry, boolean isDrank, int userId, int tagId) {
+    public BeerDTO(String beerName, double beerAbv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry) {
         setBeerName(beerName);
         setBeerAbv(beerAbv);
         setBeerStyle(beerStyle);
@@ -35,9 +31,6 @@ public class BeerDTO {
         setBeerPicture(beerPicture);
         setBrewery(brewery);
         setOriginCountry(originCountry);
-        setDrank(isDrank);
-        setUserId(userId);
-        setTagId(tagId);
     }
 
 
@@ -97,27 +90,5 @@ public class BeerDTO {
         this.originCountry = originCountry;
     }
 
-    public boolean isDrank() {
-        return isDrank;
-    }
 
-    public void setDrank(boolean drank) {
-        isDrank = drank;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(int tagId) {
-        this.tagId = tagId;
-    }
 }

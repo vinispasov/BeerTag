@@ -1,8 +1,6 @@
 package com.beertag.beertagfinalproject.repositories;
 
 import com.beertag.beertagfinalproject.models.Beer;
-import com.beertag.beertagfinalproject.models.Rating;
-import com.beertag.beertagfinalproject.models.dto_models.BeerDTO;
 import com.beertag.beertagfinalproject.repositories.base.BeersRepository;
 import com.beertag.beertagfinalproject.utils.mappers.BeersMapperImpl;
 import com.beertag.beertagfinalproject.utils.mappers.base.BeersMapper;
@@ -13,12 +11,10 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Parameter;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class SqlBeersRepositoryImpl implements BeersRepository {
@@ -253,7 +249,6 @@ public class SqlBeersRepositoryImpl implements BeersRepository {
             beer.setBeerPicture(beerToEdit.getBeerPicture());
             beer.setBrewery(beerToEdit.getBrewery());
             beer.setOriginCountry(beerToEdit.getOriginCountry());
-            beer.setDrank(beerToEdit.isDrank());
 
             transaction.commit();
 

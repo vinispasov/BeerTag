@@ -40,8 +40,8 @@ public class ProfileActivity extends BaseDrawerActivity {
         Intent intent = getIntent();
         User user = (User) intent.getSerializableExtra(ProfileActivity.PROFILE_EXTRA_KEY);
 
-        if(user==null){
-            
+        if(true){
+
             user=(User) intent.getSerializableExtra(ProfileActivity.PROFILE_EXTRA_KEY_MY_PROFILE);
         }
 

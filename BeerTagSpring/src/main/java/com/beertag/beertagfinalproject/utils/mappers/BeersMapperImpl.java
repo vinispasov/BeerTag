@@ -24,10 +24,8 @@ public class BeersMapperImpl implements BeersMapper {
                         beer.getBeerDescription(),
                         beer.getBeerPicture(),
                         beer.getBrewery(),
-                        beer.getOriginCountry(),
-                        beer.isDrank(),
-                        beer.getUserId(),
-                        beer.getTagId()
+                        beer.getOriginCountry()
+
                 );
 
 
