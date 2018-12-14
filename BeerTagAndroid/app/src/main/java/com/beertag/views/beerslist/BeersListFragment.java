@@ -223,15 +223,16 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
     }
 
     @Override
-    public void showCompactBeersView(List<BeerDTO> beersResult) {
-        mNoBeersTextView.setVisibility(View.GONE);
+    public void showSortedBeers(List<BeerDTO> beersResult) {
+       /* mNoBeersTextView.setVisibility(View.GONE);
         mFilterOptionsSpinner.setVisibility(View.VISIBLE);
         mBeersListView.setVisibility(View.VISIBLE);
-        mBeersRecyclerView.setVisibility(View.GONE);
+        mBeersRecyclerView.setVisibility(View.GONE);*/
 
         mBeersArrayAdapter.clear();
         mBeersArrayAdapter.addAll(beersResult);
         mBeersArrayAdapter.notifyDataSetChanged();
+        mFilterOptionsSpinner.setVisibility(View.VISIBLE);
     }
 
 
@@ -258,9 +259,7 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         mSelectedFilterOption = mFilterOptions[position];
-        String preference = mPreferences.getString(Constants.PREFERENCES_BEERS_LISTING_TYPE_KEY, Constants.EMPTY_STRING);
-
-        mPresenter.filterBeersWithOption(preference, mSelectedFilterOption);
+        mPresenter.filterBeersWithOption(mSelectedFilterOption);
     }
 
     @Override

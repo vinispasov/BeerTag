@@ -1,8 +1,11 @@
 package com.beertag.models.DTO;
 
+import com.beertag.models.Tag;
 import com.beertag.utils.Constants;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class BeerDTO implements Serializable{
@@ -15,6 +18,7 @@ public class BeerDTO implements Serializable{
     private String brewery;
     private String originCountry;
     private double rating;
+    private List<Tag> tags;
 
 
 
@@ -22,7 +26,7 @@ public class BeerDTO implements Serializable{
 
     }
 
-    public BeerDTO(int beerId,String beerName, double beerAbv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry,double rating) {
+    public BeerDTO(int beerId,String beerName, double beerAbv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry,double rating,List<Tag> tags) {
         setBeerId(beerId);
         setBeerName(beerName);
         setAbv(beerAbv);
@@ -32,6 +36,7 @@ public class BeerDTO implements Serializable{
         setBrewery(brewery);
         setOriginCountry(originCountry);
         setRating(rating);
+        setTags(tags);
     }
 
 
@@ -116,5 +121,21 @@ public class BeerDTO implements Serializable{
 
     public void setBeerId(int beerId) {
         this.beerId = beerId;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+    public List<String> getTagsAsString(){
+        List<String> tagsAsStrings=new ArrayList<>();
+        for (Tag tag:tags
+             ) {
+            tagsAsStrings.add(tag.getTag());
+        }
+        return tagsAsStrings;
     }
 }

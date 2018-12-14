@@ -2,6 +2,7 @@ package com.beertag.views.beerslist;
 
 import com.beertag.models.Beer;
 import com.beertag.models.DTO.BeerDTO;
+import com.beertag.models.Tag;
 import com.beertag.utils.mappers.base.BeersMapper;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ public interface BeersListContracts {
 
         void showAllBeers(List<BeerDTO> allBeers);
 
-        void showCompactBeersView(List<BeerDTO> beersResult);
+        void showSortedBeers(List<BeerDTO> beersResult);
 
         //void showDetailedBeersView(List<Beer> beersResult);
 
@@ -49,23 +50,29 @@ public interface BeersListContracts {
 
         void presentBeersToView(List<Beer> allBeers, String message) throws IOException;
 
-        void filterBeersWith(String searchQuery);
+        void filterBeers(String selectedOption );
 
         void beerForDeletionIsSelected(BeerDTO beerToDelete);
 
         void getActionOnCancelledDeletion();
 
+       // void presentSortedBeersToView(List<BeerDTO> sortedBeers);
+
         void getActionOnConfirmedDeletion(BeerDTO beerToDelete);
 
-        void filterBeersWithOption(String preference, String selectedOption);
+        void filterBeersWithOption(String selectedOption);
 
-        Map<Integer,Double> loadBeerRating() throws IOException;
+        Map<Integer,Double> loadBeerRating(List<Beer>allBeers) throws IOException;
 
         void setBeerId(int id);
 
         BeersMapper getMapper();
 
         void setMapper(BeersMapper mapper);
+
+        Map<Integer,List<Tag>> getTagsByBeerId(List<Beer>allBeers) throws IOException;
+
+        void filterBeersWith(String searchQuery);
     }
 
     interface Navigator {

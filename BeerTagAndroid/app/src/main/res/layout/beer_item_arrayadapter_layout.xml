@@ -117,4 +117,30 @@
         android:paddingStart="@dimen/SmallPadding"
         android:textColor="@color/white" />
 
+    <TextView
+        android:id="@+id/tv_beer_tags_item_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_beer_country_item"
+        android:layout_toEndOf="@id/iv_beer_item_image"
+        android:gravity="end"
+        android:paddingEnd="@dimen/SmallPadding"
+        android:paddingStart="@dimen/SmallPadding"
+        android:textColor="@color/primary"
+        android:textSize="@dimen/BeerFieldTextSize" />
+
+    <TextView
+        android:id="@+id/tv_beer_tags_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_beer_tags_item_field"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@id/iv_beer_item_image"
+        android:gravity="end"
+        android:paddingEnd="@dimen/SmallPadding"
+        android:paddingStart="@dimen/SmallPadding"
+        android:textColor="@color/white" />
+
+
+
 </RelativeLayout>

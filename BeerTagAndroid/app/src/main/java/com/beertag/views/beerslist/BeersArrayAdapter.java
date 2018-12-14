@@ -28,6 +28,7 @@ public class BeersArrayAdapter extends ArrayAdapter<BeerDTO> {
     private static final String BEER_ABV_FIELD = "ABV";
     private static final String BEER_STYLE_FIELD = "Style";
     private static final String BEER_COUNTRY_FIELD = "Country";
+    private static final String BEER_TAGS_FIELD = "Tags";
 
     @BindView(R.id.iv_beer_item_image)
     ImageView mBeerImageView;
@@ -59,6 +60,12 @@ public class BeersArrayAdapter extends ArrayAdapter<BeerDTO> {
 
     @BindView(R.id.tv_beer_country_item)
     TextView mBeerCountryTextView;
+
+    @BindView(R.id.tv_beer_tags_item_field)
+    TextView mBeerTagsFieldTextView;
+
+    @BindView(R.id.tv_beer_tags_item)
+    TextView mBeerTagsTextView;
 
     @Inject
     public BeersArrayAdapter(@NonNull Context context) {
@@ -102,6 +109,10 @@ public class BeersArrayAdapter extends ArrayAdapter<BeerDTO> {
                 .setText(BEER_COUNTRY_FIELD);
         mBeerCountryTextView
                 .setText(beer.getOriginCountry());
+        mBeerTagsFieldTextView
+                .setText(BEER_TAGS_FIELD);
+        mBeerTagsTextView
+                .setText(beer.getTagsAsString().toString());
 
         return view;
     }
