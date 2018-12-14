@@ -66,6 +66,16 @@ public class HttpBeersService implements BeersService {
     }
 
     @Override
+    public List<Beer> getBeersByStyle(String style) throws IOException {
+        return mBeersRepository.getBeersByStyle(style);
+    }
+
+    @Override
+    public List<Beer> getBeersByCountry(String country) throws IOException {
+        return mBeersRepository.getBeersByCountry(country);
+    }
+
+    @Override
     public List<Beer> getFilteredBeers(String searchPattern) throws IOException {
 
         String searchPatternLowerCase = searchPattern.toLowerCase();

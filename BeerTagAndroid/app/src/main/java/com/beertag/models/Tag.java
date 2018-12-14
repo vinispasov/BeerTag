@@ -1,8 +1,9 @@
 package com.beertag.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Tag {
+public class Tag implements Serializable{
     private int tagId;
 
     private String tag;

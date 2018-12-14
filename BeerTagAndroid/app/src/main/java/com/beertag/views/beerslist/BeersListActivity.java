@@ -2,6 +2,7 @@ package com.beertag.views.beerslist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Window;
 
 import com.beertag.R;
@@ -11,6 +12,9 @@ import com.beertag.utils.mappers.base.BeersMapper;
 import com.beertag.views.BaseDrawerActivity;
 import com.beertag.views.beerdetails.BeerDetailsActivity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -46,11 +50,12 @@ public class BeersListActivity extends BaseDrawerActivity implements BeersListCo
 
 
     @Override
-    public void navigateToBeerDetailsWith(BeerDTO beer, BeersMapper mapper) {
+    public void navigateToBeerDetailsWith(BeerDTO beer, List<Integer> beerIds,List<BeerDTO> beerDtos) {
 
         Intent intent = new Intent(this, BeerDetailsActivity.class);
-        intent.putExtra(BeerDetailsActivity.BEER_EXTRA_KEY, beer);
-        intent.putExtra(BeerDetailsActivity.BEERS_DTO_EXTRA_KEY,mapper);
+        intent.putExtra(BeerDetailsActivity.BEER_EXTRA_KEY, (Serializable) beer);
+       intent.putIntegerArrayListExtra(BeerDetailsActivity.BEERS_IDS_EXTRA_KEY, (ArrayList<Integer>) beerIds);
+       intent.putParcelableArrayListExtra(BeerDetailsActivity.BEERS_DTO_EXTRA_KEY, (ArrayList<? extends Parcelable>) beerDtos);
 
         startActivity(intent);
     }

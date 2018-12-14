@@ -2,7 +2,7 @@ package com.beertag.utils;
 
 public class Constants {
 
-    public static final String BASE_SERVER_URL = "http://10.191.57.128:7777/api/";
+    public static final String BASE_SERVER_URL = "http://192.168.0.105:7777/api/";
 
     public static final String BASE_SERVER_URL_VALUE_NAME = "baseServerUrl";
 
@@ -10,7 +10,7 @@ public class Constants {
     public static final float TO_ALPHA_ANIMATION = 0.3F;
     public static final String ERROR_MESSAGE = "Error: ";
     public static final String NO_BEERS_AVAILABLE_MESSAGE = "Your beers list is empty";
-    public static final String NO_BEERS_FOUND_ON_SEARCH_MESSAGE = "No songs match your search";
+    public static final String NO_BEERS_FOUND_ON_SEARCH_MESSAGE = "No beers match your search";
     public static final String SUCCESSFUL_DELETION_OF_BEER = "Beer was successfully deleted!";
     public static final String ADD_OF_BEER_FAIL_MESSAGE = "You must fill in all fields correctly!";
 

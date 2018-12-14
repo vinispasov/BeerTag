@@ -14,7 +14,7 @@ public interface BeersListContracts {
 
         void setPresenter(BeersListContracts.Presenter presenter);
 
-        void showBeerDetails(BeerDTO beer,BeersMapper mapper);
+        void showBeerDetails(BeerDTO beer,List<Integer> beerIds,List<BeerDTO> beerDtos);
 
         void showProgressBarLoading();
 
@@ -24,7 +24,7 @@ public interface BeersListContracts {
 
         void showAllBeers(List<BeerDTO> allBeers);
 
-        void showSortedBeers(List<BeerDTO> beersResult);
+        void showFilteredBeers(List<BeerDTO> beersResult);
 
         //void showDetailedBeersView(List<Beer> beersResult);
 
@@ -48,9 +48,9 @@ public interface BeersListContracts {
 
         void showBeersList();
 
-        void presentBeersToView(List<Beer> allBeers, String message) throws IOException;
+        List<BeerDTO>generateBeerDtos(List<Beer> allBeers) throws IOException;
 
-        void filterBeers(String selectedOption );
+        void sortBeers(String selectedOption);
 
         void beerForDeletionIsSelected(BeerDTO beerToDelete);
 
@@ -60,7 +60,7 @@ public interface BeersListContracts {
 
         void getActionOnConfirmedDeletion(BeerDTO beerToDelete);
 
-        void filterBeersWithOption(String selectedOption);
+        void sortBeersWithOption(String selectedOption);
 
         Map<Integer,Double> loadBeerRating(List<Beer>allBeers) throws IOException;
 
@@ -76,6 +76,6 @@ public interface BeersListContracts {
     }
 
     interface Navigator {
-        void navigateToBeerDetailsWith(BeerDTO beer,BeersMapper mapper);
+        void navigateToBeerDetailsWith(BeerDTO beer,List<Integer> beerIds,List<BeerDTO> beerDtos);
     }
 }

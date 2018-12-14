@@ -30,6 +30,7 @@ public class BeersApiController {
     public List<Beer> getAllBeers() {
         return beersService.getAllBeers();
     }
+
     @RequestMapping(value = "/sort/rating",method = RequestMethod.GET)
     public List<Beer> getAllBeersSortedByRating(@RequestBody Beer beer) {
         return beersService.getAllBeersSortedByRating(beer);

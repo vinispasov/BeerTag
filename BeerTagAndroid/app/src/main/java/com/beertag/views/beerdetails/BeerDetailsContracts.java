@@ -4,6 +4,8 @@ import com.beertag.models.Beer;
 import com.beertag.models.DTO.BeerDTO;
 import com.beertag.utils.mappers.base.BeersMapper;
 
+import java.util.Map;
+
 public interface BeerDetailsContracts {
 
     interface View {
@@ -40,15 +42,17 @@ public interface BeerDetailsContracts {
 
         void beerIsRated(double ratingValue);
 
+        void setmBeerDtosByBeerId(Map<Integer, BeerDTO> beerDtosByBeerId);
+
        // void loadBeerRating();
 
-        void setMapper(BeersMapper mapper);
+      // void setMapper(BeersMapper mapper);
 
         void setUserId(int userId);
 
         int getUserId();
 
-        BeersMapper getMapper();
+       // BeersMapper getMapper();
 
     }
 }

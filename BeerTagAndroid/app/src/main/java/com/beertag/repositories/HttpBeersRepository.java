@@ -49,7 +49,7 @@ public class HttpBeersRepository implements BeersRepository {
 
     @Override
     public Beer getBeerById(int beerId) throws IOException {
-        String itemJson = mHttpRequester.get(mServerUrl + Constants.BEERS_ROOT_MAPPING + beerId);
+        String itemJson = mHttpRequester.get(mServerUrl + Constants.BEERS_ROOT_MAPPING +"/"+ beerId);
         return mJsonParser.fromJson(itemJson);
     }
 
@@ -76,6 +76,36 @@ public class HttpBeersRepository implements BeersRepository {
     @Override
     public List<Beer> getAllBeersSortedByName() throws IOException {
         String itemsJson = mHttpRequester.get(mServerUrl+Constants.BEERS_ROOT_MAPPING_SORT_BY_NAME);
+        return mJsonParser.fromJsonArray(itemsJson);
+    }
+
+    @Override
+    public List<Beer> getBeersByStyle(String style) throws IOException {
+        String url = new StringBuilder()
+                .append(mServerUrl)
+                .append("beers/")
+                .append("style")
+                .append("/")
+                .append(style)
+                .toString();
+
+        String itemsJson = mHttpRequester.get(url);
+
+        return mJsonParser.fromJsonArray(itemsJson);
+    }
+
+    @Override
+    public List<Beer> getBeersByCountry(String country) throws IOException {
+        String url = new StringBuilder()
+                .append(mServerUrl)
+                .append("beers/")
+                .append("country")
+                .append("/")
+                .append(country)
+                .toString();
+
+        String itemsJson = mHttpRequester.get(url);
+
         return mJsonParser.fromJsonArray(itemsJson);
     }
 }

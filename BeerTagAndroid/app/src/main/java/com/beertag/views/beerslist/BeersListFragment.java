@@ -126,10 +126,15 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
 
     @Override
     public void showAllBeers(List<BeerDTO> allBeers) {
-        mBeersArrayAdapter.clear();
-        mBeersArrayAdapter.addAll(allBeers);
-        mBeersArrayAdapter.notifyDataSetChanged();
-        mFilterOptionsSpinner.setVisibility(View.VISIBLE);
+        if (allBeers.isEmpty()){
+            this.showMessage(Constants.NO_BEERS_AVAILABLE_MESSAGE);
+        }
+        else {
+            mBeersArrayAdapter.clear();
+            mBeersArrayAdapter.addAll(allBeers);
+            mBeersArrayAdapter.notifyDataSetChanged();
+            mFilterOptionsSpinner.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -209,8 +214,8 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
 
 
     @Override
-    public void showBeerDetails(BeerDTO beer,BeersMapper mapper) {
-        mNavigator.navigateToBeerDetailsWith(beer,mapper);
+    public void showBeerDetails(BeerDTO beer,List<Integer> beerIds,List<BeerDTO> beerDtos) {
+        mNavigator.navigateToBeerDetailsWith(beer,beerIds,beerDtos);
     }
 
     @Override
@@ -223,12 +228,15 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
     }
 
     @Override
-    public void showSortedBeers(List<BeerDTO> beersResult) {
+    public void showFilteredBeers(List<BeerDTO> beersResult) {
        /* mNoBeersTextView.setVisibility(View.GONE);
         mFilterOptionsSpinner.setVisibility(View.VISIBLE);
         mBeersListView.setVisibility(View.VISIBLE);
         mBeersRecyclerView.setVisibility(View.GONE);*/
 
+       if(beersResult.isEmpty()){
+           this.showMessage(Constants.NO_BEERS_FOUND_ON_SEARCH_MESSAGE);
+       }
         mBeersArrayAdapter.clear();
         mBeersArrayAdapter.addAll(beersResult);
         mBeersArrayAdapter.notifyDataSetChanged();
@@ -259,7 +267,7 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         mSelectedFilterOption = mFilterOptions[position];
-        mPresenter.filterBeersWithOption(mSelectedFilterOption);
+        mPresenter.sortBeersWithOption(mSelectedFilterOption);
     }
 
     @Override

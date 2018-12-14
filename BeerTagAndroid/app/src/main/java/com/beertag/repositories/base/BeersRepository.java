@@ -19,4 +19,7 @@ public interface BeersRepository {
     List<Beer> getAllBeersSortedByRating() throws IOException;
     List<Beer> getAllBeersSortedByAbv() throws IOException;
     List<Beer> getAllBeersSortedByName() throws IOException;
+
+    List<Beer> getBeersByStyle(String style) throws IOException;
+    List<Beer> getBeersByCountry(String country) throws IOException;
 }

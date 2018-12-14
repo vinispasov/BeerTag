@@ -31,6 +31,16 @@ public class Beer implements Serializable{
        setBrewery(brewery);
        setOriginCountry(originCountry);
     }
+    public Beer(int beerId,String beerName, double beerAbv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry) {
+        setBeerId(beerId);
+        setBeerName(beerName);
+        setAbv(beerAbv);
+        setBeerStyle(beerStyle);
+        setBeerDescription(beerDescription);
+        setBeerPicture(beerPicture);
+        setBrewery(brewery);
+        setOriginCountry(originCountry);
+    }
 
     public int getBeerId() {
         return beerId;

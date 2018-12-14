@@ -1,5 +1,9 @@
 package com.beertag.models.DTO;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.beertag.models.Beer;
 import com.beertag.models.Tag;
 import com.beertag.utils.Constants;
 
@@ -8,7 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class BeerDTO implements Serializable{
+public class BeerDTO implements Serializable,Parcelable{
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public BeerDTO createFromParcel(Parcel in) {
+            return new BeerDTO(in);
+        }
+
+        public BeerDTO[] newArray(int size) {
+            return new BeerDTO[size];
+        }
+    };
     private int beerId;
     private String beerName;
     private double beerAbv;
@@ -18,7 +31,7 @@ public class BeerDTO implements Serializable{
     private String brewery;
     private String originCountry;
     private double rating;
-    private List<Tag> tags;
+    private ArrayList<Tag>tags;
 
 
 
@@ -26,7 +39,7 @@ public class BeerDTO implements Serializable{
 
     }
 
-    public BeerDTO(int beerId,String beerName, double beerAbv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry,double rating,List<Tag> tags) {
+    public BeerDTO(int beerId,String beerName, double beerAbv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry,double rating,ArrayList<Tag> tags) {
         setBeerId(beerId);
         setBeerName(beerName);
         setAbv(beerAbv);
@@ -127,7 +140,7 @@ public class BeerDTO implements Serializable{
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(ArrayList<Tag> tags) {
         this.tags = tags;
     }
     public List<String> getTagsAsString(){
@@ -137,5 +150,36 @@ public class BeerDTO implements Serializable{
             tagsAsStrings.add(tag.getTag());
         }
         return tagsAsStrings;
+    }
+    public BeerDTO(Parcel in){
+        this.beerId = in.readInt();
+        this.beerName = in.readString();
+        this.beerAbv =  in.readDouble();
+        this.beerStyle=in.readString();
+        this.beerDescription=in.readString();
+        this.beerPicture=in.readString();
+        this.brewery=in.readString();
+        this.originCountry=in.readString();
+        this.rating=in.readDouble();
+        this.tags=in.readArrayList(Tag.class.getClassLoader());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.beerId);
+        dest.writeString(this.beerName);
+        dest.writeDouble(this.beerAbv);
+        dest.writeString(this.beerStyle);
+        dest.writeString(this.beerDescription);
+        dest.writeString(this.beerPicture);
+        dest.writeString(this.brewery);
+        dest.writeString(this.originCountry);
+        dest.writeDouble(this.rating);
+        dest.writeList((List)this.tags);
     }
 }

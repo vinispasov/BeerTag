@@ -56,7 +56,7 @@ public class HttpBeerTagsRepository implements BeerTagsRepository {
     public List<BeerTag> getAllBeersTagsByBeer(int beerId) throws IOException {
         String url = new StringBuilder()
                 .append(mServerUrl)
-                .append("/")
+                .append("/beerstags/")
                 .append("beer")
                 .append("/")
                 .append(beerId)

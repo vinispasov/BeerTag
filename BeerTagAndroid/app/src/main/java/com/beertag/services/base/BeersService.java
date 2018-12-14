@@ -22,6 +22,10 @@ public interface BeersService {
 
     List<Beer> getAllBeersSortedByName() throws IOException;
 
+    List<Beer> getBeersByStyle(String style) throws IOException;
+
+    List<Beer> getBeersByCountry(String country) throws IOException;
+
     List<Beer> getFilteredBeers(String searchPattern)throws IOException;
 
 }

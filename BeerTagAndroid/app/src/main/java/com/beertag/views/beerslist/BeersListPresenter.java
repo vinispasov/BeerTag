@@ -1,5 +1,9 @@
 package com.beertag.views.beerslist;
 
+import android.app.Activity;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import com.beertag.async.base.SchedulerProvider;
 import com.beertag.models.BeerTag;
 import com.beertag.models.DTO.BeerDTO;
@@ -17,6 +21,8 @@ import org.w3c.dom.ls.LSException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +30,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 
@@ -31,6 +38,7 @@ import static com.beertag.utils.Constants.FILTER_OPTION_ALL;
 import static com.beertag.utils.Constants.SORTED_OPTION_BY_ABV;
 import static com.beertag.utils.Constants.SORTED_OPTION_BY_ALPHABET;
 import static com.beertag.utils.Constants.SORTED_OPTION_BY_RATING;
+import static java.util.Arrays.sort;
 
 public class BeersListPresenter implements BeersListContracts.Presenter {
 
@@ -43,6 +51,7 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
     private final SchedulerProvider mSchedulerProvider;
     private String mCurrentSelectedOption;
     private BeersMapper mMapper;
+    private List<BeerDTO> mCurrentBeers;
     //private Map<Integer,Double>mAverageRatingsByBeerId;
 
     @Inject
@@ -51,6 +60,7 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
         mBeerTagsService=beerTagsService;
         mDrinksService=drinksService;
         mSchedulerProvider = schedulerProvider;
+        mCurrentBeers=new ArrayList<>();
 
     }
 
@@ -71,15 +81,19 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
         mView.showProgressBarLoading();
 
         Disposable observable = Observable
-                .create((ObservableOnSubscribe<List<Beer>>) emitter -> {
+                .create((ObservableOnSubscribe<List<BeerDTO>>) emitter -> {
                     List<Beer> beers = mBeersService.getAllBeers();
-                    emitter.onNext(beers);
+                    List<BeerDTO> beersToShow=generateBeerDtos(beers);
+                    mCurrentBeers.clear();
+                    mCurrentBeers.addAll(beersToShow);
+                    emitter.onNext(beersToShow);
                     emitter.onComplete();
                 })
                 .subscribeOn(mSchedulerProvider.backgroundThread())
                 .observeOn(mSchedulerProvider.uiThread())
                 .doFinally(mView::hideProgressBarLoading)
-                .subscribe(allBeers -> presentBeersToView(allBeers, Constants.NO_BEERS_AVAILABLE_MESSAGE), mView::showError);
+                .subscribe(allBeers -> mView.showAllBeers(allBeers),
+                        error -> mView.showError(error));
     }
 
    @Override
@@ -87,34 +101,47 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
         mView.showProgressBarLoading();
 
         Disposable observable = Observable
-                .create((ObservableOnSubscribe<List<Beer>>) emitter -> {
-                    List<Beer> beersResultSet = mBeersService.getFilteredBeers(searchQuery);
-                    List<BeerTag>beersFilteredByTags= mBeerTagsService.getAllBeersTagsByTag(searchQuery);
+                .create((ObservableOnSubscribe<List<BeerDTO>>) emitter -> {
+                    List<Beer> beersResultSet=new ArrayList<>();
+                    if(searchQuery.equals(" ")||searchQuery.isEmpty()||searchQuery==null){
+                        beersResultSet=mBeersService.getAllBeers();
+                    }
+                    else {
+                        List<Beer> beersByStyle = mBeersService.getBeersByStyle(searchQuery);
+                        List<Beer> beersByCountry = mBeersService.getBeersByCountry(searchQuery);
+                        List<BeerTag> beersFilteredByTags = mBeerTagsService.getAllBeersTagsByTag(searchQuery);
 
-                    beersFilteredByTags
-                            .stream()
-                            .map(beerTag->beerTag.getBeer())
-                            .forEach(beersResultSet::add);
+                        beersResultSet.addAll(beersByStyle);
+                        beersResultSet.addAll(beersByCountry);
 
+                        beersFilteredByTags
+                                .stream()
+                                .map(beerTag -> beerTag.getBeer())
+                                .forEach(beersResultSet::add);
+                    }
+                    List<BeerDTO>beersToShow=generateBeerDtos(beersResultSet);
 
-                    emitter.onNext(beersResultSet);
+                    mCurrentBeers.clear();
+                    mCurrentBeers.addAll(beersToShow);
+
+                    emitter.onNext(beersToShow);
                     emitter.onComplete();
                 })
                 .subscribeOn(mSchedulerProvider.backgroundThread())
                 .observeOn(mSchedulerProvider.uiThread())
                 .doFinally(mView::hideProgressBarLoading)
-                .subscribe(allBeers -> presentBeersToView(allBeers, Constants.NO_BEERS_FOUND_ON_SEARCH_MESSAGE),
+                .subscribe(allBeers -> mView.showFilteredBeers(allBeers),
                         error -> mView.showError(error));
     }
 
     @Override
-    public void presentBeersToView(List<Beer> allBeers, String message) throws IOException {
+    public List<BeerDTO> generateBeerDtos(List<Beer> allBeers) throws IOException {
         Map<Integer,Double> averageRatingsByBeerId=loadBeerRating(allBeers);
         Map<Integer,List<Tag>> allTagsByBeerIds=getTagsByBeerId(allBeers);
         BeersMapper mapper=new BeersMapperImpl();
         this.setMapper(mapper);
 
-        List<BeerDTO>beersToShow=new ArrayList<>();
+        ArrayList<BeerDTO>beersToShow=new ArrayList<>();
 
         for (Beer beer:allBeers) {
             int beerId=beer.getBeerId();
@@ -122,19 +149,15 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
            if (averageRatingsByBeerId.containsKey(beerId) && allTagsByBeerIds.containsKey(beerId)){
               BeerDTO beerToShow= mapper.mapBeerToDTO(beer,
                       averageRatingsByBeerId.get(beerId),
-                      allTagsByBeerIds.get(beerId));
+                      (ArrayList<Tag>) allTagsByBeerIds.get(beerId));
                beersToShow.add(beerToShow);
                continue;
            }
-           BeerDTO beerToShow=mapper.mapBeerToDTO(beer,0,allTagsByBeerIds.get(beerId));
+           BeerDTO beerToShow=mapper.mapBeerToDTO(beer,0, (ArrayList<Tag>) allTagsByBeerIds.get(beerId));
             beersToShow.add(beerToShow);
         }
 
-        if (beersToShow.isEmpty()) {
-            mView.showMessage(message);
-        } else {
-            mView.showAllBeers(beersToShow);
-        }
+      return beersToShow;
     }
 
     @Override
@@ -170,15 +193,16 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
 
     @Override
     public void beerIsSelected(BeerDTO beer) {
-        mView.showBeerDetails(beer,getMapper());
+        mView.showBeerDetails(beer,mMapper.getBeerIds(),mMapper.getBeerDtos());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public void filterBeersWithOption(String selectedOption) {
+    public void sortBeersWithOption(String selectedOption) {
         if (selectedOption.equals(mCurrentSelectedOption)) {
             return;
         }
-        filterBeers(selectedOption);
+        sortBeers(selectedOption);
         mCurrentSelectedOption = selectedOption;
     }
 
@@ -211,24 +235,31 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public void filterBeers(String selectedOption) {
+    public void sortBeers(String selectedOption) {
         mView.showProgressBarLoading();
         Disposable observable = Observable
-                .create((ObservableOnSubscribe<List<BeerDTO>>) emitter -> {
+                .create((ObservableOnSubscribe<List<BeerDTO>>) (ObservableEmitter<List<BeerDTO>> emitter) -> {
                     List<Beer> beers = new ArrayList<>();
                     switch (selectedOption) {
                         case FILTER_OPTION_ALL:
-                            beers = mBeersService.getAllBeers();
+                          beers.addAll(mMapper.getBeersFromBeerDTO(mCurrentBeers));
                             break;
                         case SORTED_OPTION_BY_RATING:
-                            beers = mBeersService.getAllBeersSortedByRating();
+
+                            mCurrentBeers.sort(Comparator.comparing(BeerDTO::getRating));
+                            beers.addAll(mMapper.getBeersFromBeerDTO(mCurrentBeers));
+                            Collections.reverse(beers);
                             break;
                         case SORTED_OPTION_BY_ABV:
-                            beers= mBeersService.getAllBeersSortedByAbv();
+                            mCurrentBeers.sort(Comparator.comparing(BeerDTO::getAbvDouble));
+                            beers.addAll(mMapper.getBeersFromBeerDTO(mCurrentBeers));
+                            Collections.reverse(beers);
                             break;
                         case SORTED_OPTION_BY_ALPHABET:
-                            beers=mBeersService.getAllBeersSortedByName();
+                            mCurrentBeers.sort(Comparator.comparing(BeerDTO::getBeerName));
+                            beers.addAll(mMapper.getBeersFromBeerDTO(mCurrentBeers));
                             break;
                     }
                     List<BeerDTO> sortedBeerDtos=getSortedBeerDtos(beers);
@@ -239,7 +270,7 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
                 .subscribeOn(mSchedulerProvider.backgroundThread())
                 .observeOn(mSchedulerProvider.uiThread())
                 .doFinally(mView::hideProgressBarLoading)
-                .subscribe(beersResult -> mView.showSortedBeers(beersResult),
+                .subscribe(beersResult -> mView.showFilteredBeers(beersResult),
                         error -> mView.showError(error));
 
     }
@@ -294,4 +325,11 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
        }
        return sortedBeerDtos;
    }
+    public List<BeerDTO> getmCurrentBeers() {
+        return mCurrentBeers;
+    }
+
+    public void setmCurrentBeers(List<BeerDTO> mCurrentBeers) {
+        this.mCurrentBeers = mCurrentBeers;
+    }
 }
