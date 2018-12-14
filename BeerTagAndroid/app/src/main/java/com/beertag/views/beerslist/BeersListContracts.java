@@ -1,15 +1,19 @@
 package com.beertag.views.beerslist;
 
 import com.beertag.models.Beer;
+import com.beertag.models.DTO.BeerDTO;
+import com.beertag.utils.mappers.base.BeersMapper;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public interface BeersListContracts {
     interface View {
 
         void setPresenter(BeersListContracts.Presenter presenter);
 
-        void showBeerDetails(Beer beer);
+        void showBeerDetails(BeerDTO beer,BeersMapper mapper);
 
         void showProgressBarLoading();
 
@@ -17,19 +21,19 @@ public interface BeersListContracts {
 
         void showError(Throwable error);
 
-        void showAllBeers(List<Beer> allBeers);
+        void showAllBeers(List<BeerDTO> allBeers);
 
-        void showCompactBeersView(List<Beer> beersResult);
+        void showCompactBeersView(List<BeerDTO> beersResult);
 
         //void showDetailedBeersView(List<Beer> beersResult);
 
-        void showDialogForDeletion(Beer beerToDelete);
+        void showDialogForDeletion(BeerDTO beerToDelete);
 
         void hideDeletionDialog();
 
         void showMessage(String message);
 
-        void showBeerRating(double rating);
+
 
     }
 
@@ -39,28 +43,32 @@ public interface BeersListContracts {
 
         void unsubscribe();
 
-        void beerIsSelected(Beer beer);
+        void beerIsSelected(BeerDTO beer);
 
         void showBeersList();
 
-        void presentBeersToView(List<Beer> allBeers, String message);
+        void presentBeersToView(List<Beer> allBeers, String message) throws IOException;
 
         void filterBeersWith(String searchQuery);
 
-        void beerForDeletionIsSelected(Beer beerToDelete);
+        void beerForDeletionIsSelected(BeerDTO beerToDelete);
 
         void getActionOnCancelledDeletion();
 
-        void getActionOnConfirmedDeletion(Beer beerToDelete);
+        void getActionOnConfirmedDeletion(BeerDTO beerToDelete);
 
         void filterBeersWithOption(String preference, String selectedOption);
 
-        void loadBeerRating();
+        Map<Integer,Double> loadBeerRating() throws IOException;
 
         void setBeerId(int id);
+
+        BeersMapper getMapper();
+
+        void setMapper(BeersMapper mapper);
     }
 
     interface Navigator {
-        void navigateToBeerDetailsWith(Beer beer);
+        void navigateToBeerDetailsWith(BeerDTO beer,BeersMapper mapper);
     }
 }

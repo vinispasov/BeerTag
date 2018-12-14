@@ -1,10 +1,11 @@
-package com.beertag.models;
+package com.beertag.models.DTO;
 
-import com.google.gson.annotations.Expose;
+import com.beertag.utils.Constants;
 
 import java.io.Serializable;
+import java.util.Locale;
 
-public class Beer implements Serializable{
+public class BeerDTO implements Serializable{
     private int beerId;
     private String beerName;
     private double beerAbv;
@@ -13,32 +14,26 @@ public class Beer implements Serializable{
     private String beerPicture;
     private String brewery;
     private String originCountry;
+    private double rating;
 
 
 
-
-
-    public Beer(){
+    public BeerDTO(){
 
     }
 
-    public Beer(String beerName, double beerAbv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry) {
+    public BeerDTO(int beerId,String beerName, double beerAbv, String beerStyle, String beerDescription, String beerPicture, String brewery, String originCountry,double rating) {
+        setBeerId(beerId);
         setBeerName(beerName);
-       setAbv(beerAbv);
-       setBeerStyle(beerStyle);
-       setBeerDescription(beerDescription);
-       setBeerPicture(beerPicture);
-       setBrewery(brewery);
-       setOriginCountry(originCountry);
+        setAbv(beerAbv);
+        setBeerStyle(beerStyle);
+        setBeerDescription(beerDescription);
+        setBeerPicture(beerPicture);
+        setBrewery(brewery);
+        setOriginCountry(originCountry);
+        setRating(rating);
     }
 
-    public int getBeerId() {
-        return beerId;
-    }
-
-    private void setBeerId(int beerId) {
-        this.beerId = beerId;
-    }
 
     public String getBeerName() {
         return beerName;
@@ -102,5 +97,24 @@ public class Beer implements Serializable{
         return beerAbv;
     }
 
+    public double getRating() {
+        return rating;
+    }
 
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public String getRatingString() {
+        String ratingRepresentation = String.format(Locale.UK, "%.1f", rating) + Constants.RATING_REPRESENTATION;
+        return ratingRepresentation;
+    }
+
+    public int getBeerId() {
+        return beerId;
+    }
+
+    public void setBeerId(int beerId) {
+        this.beerId = beerId;
+    }
 }

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.beertag.R;
 import com.beertag.models.Beer;
+import com.beertag.models.DTO.BeerDTO;
 import com.beertag.utils.Constants;
 import com.beertag.views.BaseDrawerActivity;
 import com.squareup.picasso.Picasso;
@@ -97,7 +98,7 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
         super.onResume();
         mPresenter.subscribe(this);
         mPresenter.loadBeer();
-        mPresenter.loadBeerRating();
+       // mPresenter.loadBeerRating();
     }
 
     @Override
@@ -107,14 +108,15 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
     }
 
     @Override
-    public void showBeer(Beer beer) {
+    public void showBeer(BeerDTO beer) {
         Picasso
                 .get()
                 .load(beer.getBeerPicture())
                 .into(mBeerImageView);
 
         mRateBeerButton.setVisibility(View.VISIBLE);
-       // mBeerRatingTextView.setVisibility(View.VISIBLE);
+
+        mBeerRatingTextView.setText(beer.getRatingString());
 
         mBeerNameTextView.setText(beer.getBeerName());
 
@@ -166,11 +168,11 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
 
 
 
-    @Override
+  /*  @Override
     public void showBeerRating(double rating) {
         String ratingRepresentation = String.format(Locale.UK, "%.1f", rating) + Constants.RATING_REPRESENTATION;
         mBeerRatingTextView.setText(ratingRepresentation);
-    }
+    }*/
     @OnClick(R.id.btn_rate)
     public void onRateButtonClick() {
         mPresenter.rateButtonIsClicked();

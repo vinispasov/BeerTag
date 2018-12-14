@@ -18,4 +18,8 @@ public interface DrinksService {
     Drink rateBeer(int beerId,int userId,Drink updatedDrink);
 
     Drink getDrinkById(int drinkId);
+
+    List<Integer> getAllBeerIds();
+
+    Drink checkIfBeerIsRated(int beerId,int userId);
 }

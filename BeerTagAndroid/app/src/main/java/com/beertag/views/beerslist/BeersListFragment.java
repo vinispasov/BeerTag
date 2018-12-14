@@ -19,15 +19,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beertag.R;
-import com.beertag.models.Rating;
+import com.beertag.models.DTO.BeerDTO;
 import com.beertag.utils.Constants;
 import com.beertag.models.Beer;
+import com.beertag.utils.mappers.base.BeersMapper;
 
 import org.angmarch.views.NiceSpinner;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -74,6 +76,7 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
     private AlphaAnimation mButtonClickAnimation;
     private BeersListContracts.Presenter mPresenter;
     private BeersListContracts.Navigator mNavigator;
+    private BeersMapper mMapper;
 
 
     @Inject
@@ -112,7 +115,7 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
         super.onResume();
         mPresenter.subscribe(this);
         mPresenter.showBeersList();
-        mPresenter.loadBeerRating();
+
     }
 
     @Override
@@ -122,7 +125,7 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
     }
 
     @Override
-    public void showAllBeers(List<Beer> allBeers) {
+    public void showAllBeers(List<BeerDTO> allBeers) {
         mBeersArrayAdapter.clear();
         mBeersArrayAdapter.addAll(allBeers);
         mBeersArrayAdapter.notifyDataSetChanged();
@@ -131,7 +134,7 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
 
 
     @Override
-    public void showDialogForDeletion(Beer beerToDelete) {
+    public void showDialogForDeletion(BeerDTO beerToDelete) {
 
         setupDeletionDialog();
         mDeletionDialog.show();
@@ -165,11 +168,7 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
                 .show();
     }
 
-    @Override
-    public void showBeerRating(double rating) {
-        String ratingRepresentation = String.format(Locale.UK, "%.1f", rating) + Constants.RATING_REPRESENTATION;
-        //mBeersArrayAdapter.setTextOnBeerRatings(ratingRepresentation);
-    }
+
 
 
     @Override
@@ -196,21 +195,22 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
     @OnItemClick(R.id.lv_beers_list_view)
     public void onItemClick(int position) {
 
-        Beer selectedBeer = mBeersArrayAdapter.getItem(position);
+        BeerDTO selectedBeer = mBeersArrayAdapter.getItem(position);
         mPresenter.beerIsSelected(selectedBeer);
+
     }
 
     @OnItemLongClick(R.id.lv_beers_list_view)
     public boolean onItemLongClick(int position) {
-        Beer beerToDelete = mBeersArrayAdapter.getItem(position);
+        BeerDTO beerToDelete = mBeersArrayAdapter.getItem(position);
         mPresenter.beerForDeletionIsSelected(beerToDelete);
         return true;
     }
 
 
     @Override
-    public void showBeerDetails(Beer beer) {
-        mNavigator.navigateToBeerDetailsWith(beer);
+    public void showBeerDetails(BeerDTO beer,BeersMapper mapper) {
+        mNavigator.navigateToBeerDetailsWith(beer,mapper);
     }
 
     @Override
@@ -223,7 +223,7 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
     }
 
     @Override
-    public void showCompactBeersView(List<Beer> beersResult) {
+    public void showCompactBeersView(List<BeerDTO> beersResult) {
         mNoBeersTextView.setVisibility(View.GONE);
         mFilterOptionsSpinner.setVisibility(View.VISIBLE);
         mBeersListView.setVisibility(View.VISIBLE);
@@ -269,4 +269,11 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
     }
 
 
+    public BeersMapper getmMapper() {
+        return mMapper;
+    }
+
+    public void setmMapper(BeersMapper mMapper) {
+        this.mMapper = mMapper;
+    }
 }

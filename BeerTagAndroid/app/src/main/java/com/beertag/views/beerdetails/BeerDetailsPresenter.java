@@ -1,12 +1,19 @@
 package com.beertag.views.beerdetails;
 
 
+import android.media.Rating;
+
 import com.beertag.async.base.SchedulerProvider;
 import com.beertag.models.Beer;
-import com.beertag.models.Rating;
+import com.beertag.models.DTO.BeerDTO;
+import com.beertag.models.Drink;
 import com.beertag.services.base.BeersService;
-import com.beertag.services.base.RatingsService;
+import com.beertag.services.base.DrinksService;
 import com.beertag.utils.Constants;
+import com.beertag.utils.mappers.BeersMapperImpl;
+import com.beertag.utils.mappers.base.BeersMapper;
+
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -17,19 +24,21 @@ import io.reactivex.disposables.Disposable;
 public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
 
     private final BeersService mBeersService;
-    private final RatingsService mRatingsService;
+    private final DrinksService mDrinksService;
     private final SchedulerProvider mSchedulerProvider;
     private BeerDetailsContracts.View mView;
     private int mBeerId;
     private int mUserId;
-    private Beer mSelectedBeer;
+    private BeerDTO mSelectedBeer;
+    private BeersMapper mMapper;
 
 
     @Inject
-    public BeerDetailsPresenter(BeersService beersService,RatingsService ratingsService, SchedulerProvider schedulerProvider) {
+    public BeerDetailsPresenter(BeersService beersService, DrinksService drinksService,SchedulerProvider schedulerProvider) {
         mBeersService = beersService;
+        mDrinksService=drinksService;
         mSchedulerProvider = schedulerProvider;
-        mRatingsService=ratingsService;
+        setUserId(1);
     }
 
 
@@ -46,18 +55,23 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
     @Override
     public void loadBeer() {
         mView.showLoading();
+
         Disposable observable = Observable
-                .create((ObservableOnSubscribe<Beer>) emitter -> {
+                .create((ObservableOnSubscribe<BeerDTO>) emitter -> {
                     Beer beer = mBeersService.getBeerById(mBeerId);
-                    emitter.onNext(beer);
+                    BeerDTO beerToShow=mMapper
+                            .getBeerDtosByBeerId()
+                            .get(beer.getBeerId());
+
+                    emitter.onNext(beerToShow);
                     emitter.onComplete();
                 })
                 .subscribeOn(mSchedulerProvider.backgroundThread())
                 .observeOn(mSchedulerProvider.uiThread())
                 .doFinally(mView::hideLoading)
-                .subscribe(beer -> {
-                            mView.showBeer(beer);
-                            mSelectedBeer = beer;
+                .subscribe(beerToShow -> {
+                            mView.showBeer(beerToShow);
+                            mSelectedBeer = beerToShow;
                         },
                         error -> mView.showError(error));
     }
@@ -78,43 +92,47 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
     }
 
     @Override
-    public void beerIsRated(int ratingValue) {
+    public void beerIsRated(double ratingValue) {
 
-        Rating ratingConnectionToCheck = new Rating(mUserId,mBeerId);
         mView.showLoading();
         Disposable observable = Observable
-                .create((ObservableOnSubscribe<Rating>) emitter -> {
-                    Rating ratingCheck = mRatingsService.checkIfBeerAlreadyRatedByVoter(ratingConnectionToCheck);
-                    emitter.onNext(ratingCheck);
+                .create((ObservableOnSubscribe<Drink>) emitter -> {
+                 Drink drink = mDrinksService.checkIfBeerIsRated(mBeerId,mUserId);
+                    emitter.onNext(drink);
                     emitter.onComplete();
                 })
                 .subscribeOn(mSchedulerProvider.backgroundThread())
                 .observeOn(mSchedulerProvider.uiThread())
                 .doFinally(mView::hideLoading)
-                .subscribe(userRatingResult -> mView.showMessage(Constants.ALREADY_RATED_MESSAGE),
-                        error -> {
-                            if (error instanceof NullPointerException) {
-                                submitBeerRating(ratingValue, mUserId, mBeerId);
-                            } else {
-                                mView.showError(error);
+                .subscribe(drink-> {
+                            if(drink.getRating()!=0){
+                                mView.showMessage(Constants.ALREADY_RATED_MESSAGE);
                             }
-                        });
+                            else{
+                                submitBeerRating(drink,ratingValue);
+                            }
+                        },
+                        error -> mView.showError(error));
     }
 
-    private void submitBeerRating(int ratingValue, int voterId, int votedForId) {
-        Rating newRating = new Rating(voterId, votedForId, ratingValue);
+
+    private void submitBeerRating(Drink drink,double rating) {
 
         mView.showLoading();
         Disposable observable = Observable
-                .create((ObservableOnSubscribe<Rating>) emitter -> {
-                    Rating rating = mRatingsService.submitRating(newRating);
-                    emitter.onNext(rating);
+                .create((ObservableOnSubscribe<Drink>) emitter -> {
+
+                    //Map<Integer,BeerDTO> beersDtosByBeerId= getMapper().getBeerDtosByBeerId();
+                    drink.setRating(rating);
+                  Drink updatedDrink= mDrinksService.rateBeer(mBeerId,mUserId,drink);
+
+                    emitter.onNext(updatedDrink);
                     emitter.onComplete();
                 })
                 .subscribeOn(mSchedulerProvider.backgroundThread())
                 .observeOn(mSchedulerProvider.uiThread())
                 .doFinally(mView::hideLoading)
-                .subscribe(rating -> {
+                .subscribe(updatedDrink -> {
                             mView.showMessage(Constants.SUCCESSFUL_RATING);
                             //loadOtherBeersRating();
                         },
@@ -128,7 +146,7 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
 
     }
 
-    @Override
+   /* @Override
     public void loadBeerRating() {
         mView.showLoading();
         Disposable observable = Observable
@@ -142,5 +160,25 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
                 .doFinally(mView::hideLoading)
                 .subscribe(beerRatingResult -> mView.showBeerRating(beerRatingResult),
                         error -> mView.showError(error));
+    }*/
+
+    @Override
+    public void setMapper(BeersMapper mapper) {
+        mMapper=mapper;
+    }
+
+    @Override
+    public void setUserId(int userId) {
+        mUserId=userId;
+    }
+
+    @Override
+    public int getUserId() {
+        return mUserId;
+    }
+
+    @Override
+    public BeersMapper getMapper() {
+        return mMapper;
     }
 }

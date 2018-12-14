@@ -83,4 +83,5 @@ public class Constants {
     public static final String USER_NAME_FIELD = "Username";
     public static final String FIRST_NAME_FIELD = "First name";
     public static final String LAST_NAME_FIELD = "Last name";
+    public static final String DRINKS_ROOT_MAPPING = "drinks";
 }

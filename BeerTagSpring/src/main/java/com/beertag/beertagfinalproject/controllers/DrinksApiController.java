@@ -54,4 +54,14 @@ public class DrinksApiController {
     public Drink getDrinkById(@PathVariable int drinkId) {
         return drinksService.getDrinkById(drinkId);
     }
+
+    @RequestMapping(value = "/beerids",method = RequestMethod.GET)
+    public List<Integer> getAllBeerIds() {
+        return drinksService.getAllBeerIds();
+    }
+
+    @RequestMapping(value = "/check/{beerId}/{userId}", method=RequestMethod.GET)
+    public Drink checkIfBeerIsRated(@PathVariable int beerId,@PathVariable int userId){
+        return drinksService.checkIfBeerIsRated(beerId,userId);
+    }
 }

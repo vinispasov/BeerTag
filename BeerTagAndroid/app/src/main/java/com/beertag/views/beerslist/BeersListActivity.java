@@ -6,8 +6,12 @@ import android.view.Window;
 
 import com.beertag.R;
 import com.beertag.models.Beer;
+import com.beertag.models.DTO.BeerDTO;
+import com.beertag.utils.mappers.base.BeersMapper;
 import com.beertag.views.BaseDrawerActivity;
 import com.beertag.views.beerdetails.BeerDetailsActivity;
+
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -42,10 +46,12 @@ public class BeersListActivity extends BaseDrawerActivity implements BeersListCo
 
 
     @Override
-    public void navigateToBeerDetailsWith(Beer beer) {
+    public void navigateToBeerDetailsWith(BeerDTO beer, BeersMapper mapper) {
 
         Intent intent = new Intent(this, BeerDetailsActivity.class);
         intent.putExtra(BeerDetailsActivity.BEER_EXTRA_KEY, beer);
+        intent.putExtra(BeerDetailsActivity.BEERS_DTO_EXTRA_KEY,mapper);
+
         startActivity(intent);
     }
 

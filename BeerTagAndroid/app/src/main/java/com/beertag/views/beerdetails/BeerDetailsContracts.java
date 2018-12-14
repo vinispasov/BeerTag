@@ -1,11 +1,13 @@
 package com.beertag.views.beerdetails;
 
 import com.beertag.models.Beer;
+import com.beertag.models.DTO.BeerDTO;
+import com.beertag.utils.mappers.base.BeersMapper;
 
 public interface BeerDetailsContracts {
 
     interface View {
-        void showBeer(Beer beer);
+        void showBeer(BeerDTO beer);
 
         void setPresenter(Presenter presenter);
 
@@ -19,7 +21,7 @@ public interface BeerDetailsContracts {
 
         void showRatingDialog();
 
-        void showBeerRating(double rating);
+       // void showBeerRating(double rating);
 
     }
 
@@ -36,10 +38,17 @@ public interface BeerDetailsContracts {
 
         void ratingWasCancelled();
 
-        void beerIsRated(int ratingValue);
+        void beerIsRated(double ratingValue);
 
-        void loadBeerRating();
+       // void loadBeerRating();
 
+        void setMapper(BeersMapper mapper);
+
+        void setUserId(int userId);
+
+        int getUserId();
+
+        BeersMapper getMapper();
 
     }
 }

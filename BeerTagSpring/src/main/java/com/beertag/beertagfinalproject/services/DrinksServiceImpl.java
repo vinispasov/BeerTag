@@ -52,4 +52,15 @@ public class DrinksServiceImpl implements DrinksService {
     public Drink getDrinkById(int drinkId) {
         return drinksRepository.getDrinkById(drinkId);
     }
+
+    @Override
+    public List<Integer> getAllBeerIds() {
+        return drinksRepository.getAllBeerIds();
+    }
+
+    @Override
+    public Drink checkIfBeerIsRated(int beerId, int userId) {
+
+        return drinksRepository.checkIfBeerIsRated(beerId,userId);
+    }
 }
