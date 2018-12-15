@@ -128,6 +128,24 @@
         android:layout_below="@+id/tv_beer_description_details_field"
         android:layout_marginStart="15dp" />
 
+            <TextView
+                android:id="@+id/tv_beer_tags_details_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_beer_description_details"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="10dp"
+                android:gravity="start"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/BeerFieldTextSize" />
+
+            <TextView
+                android:id="@+id/tv_beer_tags_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_beer_tags_details_field"
+                android:layout_marginStart="15dp" />
+
 
 
 
@@ -146,6 +164,21 @@
         android:background="@drawable/rounded_button"
         android:text="@string/rate"
         android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_drink"
+                style="@style/ButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_below="@+id/btn_rate"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_button"
+                android:text="@string/want_to_drink"
+                android:visibility="gone" />
 
     <ProgressBar
         android:id="@+id/prb_load_view"

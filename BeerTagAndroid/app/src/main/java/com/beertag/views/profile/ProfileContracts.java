@@ -1,12 +1,16 @@
 package com.beertag.views.profile;
 
+import com.beertag.models.DTO.BeerDTO;
+import com.beertag.models.DTO.UserDTO;
 import com.beertag.models.User;
 import com.beertag.services.base.UsersService;
+
+import java.util.List;
 
 public interface ProfileContracts {
 
     interface View {
-        void showUser(User user);
+        void showUser(UserDTO user);
 
         void setPresenter(Presenter presenter);
 
@@ -17,6 +21,8 @@ public interface ProfileContracts {
         void hideLoading();
 
         void showMessage(String message);
+
+        void showBeers(List<BeerDTO> topThreeBeers);
 
 
     }

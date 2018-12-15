@@ -26,11 +26,13 @@ public class BeerDetailsActivity extends BaseDrawerActivity {
     public static final String BEERS_DTO_EXTRA_KEY = "BEERS_DTO";
     public static final String BEERS_IDS_EXTRA_KEY = "BEER_ID";
 
+
     @Inject
     BeerDetailsFragment mBeerDetailsFragment;
 
     @Inject
     BeerDetailsContracts.Presenter mBeerDetailsPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -49,9 +49,12 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
     @BindView(R.id.btn_rate)
     Button mRateBeerButton;
 
+    @BindView(R.id.btn_drink)
+    Button mDrinkButton;
 
     @BindView(R.id.tv_beer_abv_details_field)
     TextView mAbvFieldTextView;
+
     @BindView(R.id.tv_beer_abv_details)
     TextView mAbvTextView;
 
@@ -74,6 +77,11 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
     TextView mBeerDescriptionFieldTextView;
     @BindView(R.id.tv_beer_description_details)
     TextView mBeerDescriptionTextView;
+
+    @BindView(R.id.tv_beer_tags_details_field)
+    TextView mBeerTagsFieldTextView;
+    @BindView(R.id.tv_beer_tags_details)
+    TextView mBeerTagsTextView;
 
 
     @BindView(R.id.beer_image)
@@ -115,6 +123,7 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
                 .into(mBeerImageView);
 
         mRateBeerButton.setVisibility(View.VISIBLE);
+        mDrinkButton.setVisibility(View.VISIBLE);
 
         mBeerRatingTextView.setText(beer.getRatingString());
 
@@ -134,6 +143,9 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
 
         mBeerDescriptionFieldTextView.setText(Constants.BEER_DESCRIPTION_FIELD);
         mBeerDescriptionTextView.setText(beer.getBeerDescription());
+
+        mBeerTagsFieldTextView.setText(Constants.BEER_TAGS_FIELD);
+        mBeerTagsTextView.setText(beer.getTagsAsString().toString());
     }
 
     @Override

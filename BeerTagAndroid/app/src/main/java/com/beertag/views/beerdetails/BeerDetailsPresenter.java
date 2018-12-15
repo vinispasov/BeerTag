@@ -5,14 +5,20 @@ import android.media.Rating;
 
 import com.beertag.async.base.SchedulerProvider;
 import com.beertag.models.Beer;
+import com.beertag.models.BeerTag;
 import com.beertag.models.DTO.BeerDTO;
 import com.beertag.models.Drink;
+import com.beertag.models.Tag;
+import com.beertag.services.base.BeerTagsService;
 import com.beertag.services.base.BeersService;
 import com.beertag.services.base.DrinksService;
 import com.beertag.utils.Constants;
 import com.beertag.utils.mappers.BeersMapperImpl;
 import com.beertag.utils.mappers.base.BeersMapper;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -25,21 +31,24 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
 
     private final BeersService mBeersService;
     private final DrinksService mDrinksService;
+    private final BeerTagsService mBeerTagsService;
     private final SchedulerProvider mSchedulerProvider;
     private BeerDetailsContracts.View mView;
     private int mBeerId;
     private int mUserId;
     private BeerDTO mSelectedBeer;
     private Map<Integer,BeerDTO> mBeerDtosByBeerId;
-   // private BeersMapper mMapper;
+    private BeersMapper mMapper;
 
 
     @Inject
-    public BeerDetailsPresenter(BeersService beersService, DrinksService drinksService,SchedulerProvider schedulerProvider) {
+    public BeerDetailsPresenter(BeersService beersService, DrinksService drinksService,BeerTagsService beerTagsService,SchedulerProvider schedulerProvider) {
         mBeersService = beersService;
         mDrinksService=drinksService;
+        mBeerTagsService=beerTagsService;
         mSchedulerProvider = schedulerProvider;
         setUserId(1);
+        mMapper=new BeersMapperImpl();
     }
 
 
@@ -96,54 +105,36 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
 
         mView.showLoading();
         Disposable observable = Observable
-                .create((ObservableOnSubscribe<Drink>) emitter -> {
+                .create((ObservableOnSubscribe<BeerDTO>) emitter -> {
                  Drink drink = mDrinksService.checkIfBeerIsRated(mBeerId,mUserId);
-                    emitter.onNext(drink);
+
+                    BeerDTO ratedBeer=submitBeerRating(drink,ratingValue);
+                    emitter.onNext(ratedBeer);
                     emitter.onComplete();
                 })
                 .subscribeOn(mSchedulerProvider.backgroundThread())
                 .observeOn(mSchedulerProvider.uiThread())
                 .doFinally(mView::hideLoading)
-                .subscribe(drink-> {
-                            if(drink.getRating()!=0){
-                                mView.showMessage(Constants.ALREADY_RATED_MESSAGE);
-                            }
-                            else{
-                                submitBeerRating(drink,ratingValue);
-                            }
+                .subscribe(ratedBeer-> {
+                    mView.showBeer(ratedBeer);
                         },
                         error -> mView.showError(error));
     }
 
 
-    private void submitBeerRating(Drink drink,double rating) {
+    private BeerDTO submitBeerRating(Drink drink,double rating) throws IOException {
 
-        mView.showLoading();
-        Disposable observable = Observable
-                .create((ObservableOnSubscribe<Drink>) emitter -> {
-
-                    //Map<Integer,BeerDTO> beersDtosByBeerId= getMapper().getBeerDtosByBeerId();
-                    drink.setRating(rating);
+                  drink.setRating(rating);
                   Drink updatedDrink= mDrinksService.rateBeer(mBeerId,mUserId,drink);
+                  List<Tag> tagsByBeerId=new ArrayList<>();
+                  List<BeerTag>beerTags=mBeerTagsService.getAllBeersTagsByBeer(updatedDrink.getBeerId());
+        for (BeerTag beerTag:beerTags
+             ) {
+            tagsByBeerId.add(beerTag.getTag());
+        }
 
-                    emitter.onNext(updatedDrink);
-                    emitter.onComplete();
-                })
-                .subscribeOn(mSchedulerProvider.backgroundThread())
-                .observeOn(mSchedulerProvider.uiThread())
-                .doFinally(mView::hideLoading)
-                .subscribe(updatedDrink -> {
-                            mView.showMessage(Constants.SUCCESSFUL_RATING);
-                            //loadOtherBeersRating();
-                        },
-                        error -> {
-                            if (error instanceof NullPointerException) {
-                                mView.showMessage(Constants.UNEXPECTED_ERROR);
-                            } else {
-                                mView.showError(error);
-                            }
-                        });
-
+                  BeerDTO beerDTO=mMapper.mapBeerToDTO(updatedDrink.getBeer(),updatedDrink.getRating(), (ArrayList<Tag>) tagsByBeerId);
+                  return beerDTO;
     }
 
    /* @Override

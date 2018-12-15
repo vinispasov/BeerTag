@@ -7,6 +7,7 @@ import com.beertag.models.DTO.BeerDTO;
 import com.beertag.models.User;
 import com.beertag.views.beerslist.BeersArrayAdapter;
 import com.beertag.models.Beer;
+import com.beertag.views.profile.TopThreeBeersArrayAdapter;
 import com.beertag.views.userslist.UsersArrayAdapter;
 
 import dagger.Module;
@@ -21,6 +22,10 @@ public class AdaptersModule {
     @Provides
     public ArrayAdapter<User> getUsersArrayAdapter(Context context) {
         return new UsersArrayAdapter(context);
+    }
+    @Provides
+    public ArrayAdapter<BeerDTO> getTopThreeBeersArrayAdapter(Context context) {
+        return new TopThreeBeersArrayAdapter(context);
     }
 
 }

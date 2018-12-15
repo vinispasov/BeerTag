@@ -2,7 +2,7 @@ package com.beertag.utils;
 
 public class Constants {
 
-    public static final String BASE_SERVER_URL = "http://192.168.0.105:7777/api/";
+    public static final String BASE_SERVER_URL = "http://192.168.0.107:7777/api/";
 
     public static final String BASE_SERVER_URL_VALUE_NAME = "baseServerUrl";
 
@@ -60,6 +60,7 @@ public class Constants {
     public static final String BEER_BREWERY_FIELD = "Brewery: ";
     public static final String BEER_COUNTRY_FIELD = "Country: ";
     public static final String BEER_DESCRIPTION_FIELD = "Description: ";
+    public static final String BEER_TAGS_FIELD = "Tags: ";
 
 
     public static final String RATE_DIALOG_TITLE_MESSAGE = "RATE BEER";
