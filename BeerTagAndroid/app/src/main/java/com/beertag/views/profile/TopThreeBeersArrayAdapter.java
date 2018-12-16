@@ -79,7 +79,7 @@ public class TopThreeBeersArrayAdapter extends ArrayAdapter<BeerDTO> {
         View view = convertView;
         if (Objects.equals(view, null)) {
             LayoutInflater inflater = LayoutInflater.from(this.getContext());
-            view = inflater.inflate(R.layout.fragment_profile, parent, false);
+            view = inflater.inflate(R.layout.beer_profile_arrayadapter_layout, parent, false);
         }
 
 

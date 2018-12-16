@@ -52,6 +52,8 @@ public interface BeerDetailsContracts {
 
         int getUserId();
 
+        void setBeerToShow(BeerDTO beer);
+
        // BeersMapper getMapper();
 
     }

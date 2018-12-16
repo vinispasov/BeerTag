@@ -9,16 +9,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.beertag.R;
+import com.beertag.models.DTO.BeerDTO;
 import com.beertag.models.User;
 import com.beertag.views.BaseDrawerActivity;
+import com.beertag.views.beerdetails.BeerDetailsActivity;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 
-public class ProfileActivity extends BaseDrawerActivity {
+public class ProfileActivity extends BaseDrawerActivity implements ProfileContracts.Navigator{
 
     public static final int DRAWER_IDENTIFIER = 111;
     public static final String PROFILE_EXTRA_KEY = "PROFILE_EXTRA_KEY";
@@ -42,6 +45,7 @@ public class ProfileActivity extends BaseDrawerActivity {
 
 
 
+        mProfileFragment.setNavigator(this);
         mProfilePresenter.setUserId(user.getUserId());
         mProfileFragment.setPresenter(mProfilePresenter);
 
@@ -54,5 +58,12 @@ public class ProfileActivity extends BaseDrawerActivity {
     @Override
     protected long getIdentifier() {
         return DRAWER_IDENTIFIER;
+    }
+
+    @Override
+    public void navigateToBeerDetailsWith(BeerDTO beer) {
+        Intent intent = new Intent(this, BeerDetailsActivity.class);
+        intent.putExtra(BeerDetailsActivity.BEER_EXTRA_KEY, (Serializable) beer);
+        startActivity(intent);
     }
 }

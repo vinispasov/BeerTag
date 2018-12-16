@@ -43,14 +43,15 @@ public class BeerDetailsActivity extends BaseDrawerActivity {
         ButterKnife.bind(this);
         Intent intent = getIntent();
         BeerDTO beer = (BeerDTO) intent.getSerializableExtra(BeerDetailsActivity.BEER_EXTRA_KEY);
-        List<Integer>beerIds= intent.getExtras().getIntegerArrayList(BEERS_IDS_EXTRA_KEY);
-        List<BeerDTO>beerDtos=intent.getExtras().getParcelableArrayList(BEERS_DTO_EXTRA_KEY);
+        //List<Integer>beerIds= intent.getExtras().getIntegerArrayList(BEERS_IDS_EXTRA_KEY);
+       // List<BeerDTO>beerDtos=intent.getExtras().getParcelableArrayList(BEERS_DTO_EXTRA_KEY);
 
-        Map<Integer,BeerDTO> beerDtosByBeerId=createMapBeerDTOS(beerIds,beerDtos);
+       // Map<Integer,BeerDTO> beerDtosByBeerId=createMapBeerDTOS(beerIds,beerDtos);
 
+        mBeerDetailsPresenter.setBeerToShow(beer);
         mBeerDetailsFragment.setPresenter(mBeerDetailsPresenter);
         mBeerDetailsPresenter.setBeerId(beer.getBeerId());
-        mBeerDetailsPresenter.setmBeerDtosByBeerId(beerDtosByBeerId);
+       // mBeerDetailsPresenter.setmBeerDtosByBeerId(beerDtosByBeerId);
 
         getSupportFragmentManager()
                 .beginTransaction()

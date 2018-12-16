@@ -1,228 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.profile.ProfileFragment">
 
 
-            <ImageView
-                android:id="@+id/user_image"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:scaleType="fitXY" />
-
-
-
-            <TextView
-                android:id="@+id/tv_user_name_field"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/user_image"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="10dp"
-                android:gravity="start"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/BeerFieldTextSize" />
-
-            <TextView
-                android:id="@+id/tv_user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_user_name_field"
-                android:layout_marginStart="15dp" />
-
-            <TextView
-                android:id="@+id/tv_first_name_field"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_user_name"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="10dp"
-                android:gravity="start"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/BeerFieldTextSize" />
-
-            <TextView
-                android:id="@+id/tv_first_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_first_name_field"
-                android:layout_marginStart="15dp" />
-
-
-
-            <TextView
-                android:id="@+id/tv_last_name_field"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_first_name"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="10dp"
-                android:gravity="start"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/BeerFieldTextSize" />
-
-            <TextView
-                android:id="@+id/tv_last_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_last_name_field"
-                android:layout_marginStart="15dp" />
-
-
-
-            <ProgressBar
-                android:id="@+id/prb_load_view"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:layout_centerInParent="true"
-                android:visibility="gone" />
-
-    <ListView
-        android:id="@+id/lv_beers_profile_list_view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/tv_last_name"
-        android:visibility="gone" />
-
-    <ImageView
-    android:id="@+id/iv_beer_profile_item_image"
-    android:layout_width="150dp"
-    android:layout_height="150dp" />
+        android:layout_height="match_parent">
 
 
-
-    <TextView
-        android:id="@+id/tv_beer_profile_item_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/iv_beer_profile_item_image"
-        android:gravity="start"
-        android:paddingEnd="@dimen/SmallPadding"
-        android:paddingStart="@dimen/SmallPadding"
-        android:textColor="@color/white"
-        android:textSize="@dimen/SmallText" />
-
-    <TextView
-        android:id="@+id/tv_beer_rating_profile_item_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_profile_item_name"
-        android:layout_toEndOf="@id/iv_beer_profile_item_image"
-        android:gravity="end"
-        android:paddingEnd="@dimen/SmallPadding"
-        android:paddingStart="@dimen/SmallPadding"
-        android:textColor="@color/primary"
-        android:textSize="@dimen/BeerFieldTextSize" />
-
-    <TextView
-        android:id="@+id/tv_beer_rating_profile_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_rating_profile_item_field"
-        android:layout_marginTop="30dp"
-        android:layout_toEndOf="@id/iv_beer_profile_item_image"
-        android:gravity="end"
-        android:paddingEnd="@dimen/SmallPadding"
-        android:paddingStart="@dimen/SmallPadding"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/tv_beer_abv_profile_item_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_rating_profile_item"
-        android:layout_toEndOf="@id/iv_beer_profile_item_image"
-        android:gravity="end"
-        android:paddingEnd="@dimen/SmallPadding"
-        android:paddingStart="@dimen/SmallPadding"
-        android:textColor="@color/primary"
-        android:textSize="@dimen/BeerFieldTextSize" />
-
-    <TextView
-        android:id="@+id/tv_beer_abv_profile_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_abv_profile_item_field"
-        android:layout_marginTop="30dp"
-        android:layout_toEndOf="@id/iv_beer_profile_item_image"
-        android:gravity="end"
-        android:paddingEnd="@dimen/SmallPadding"
-        android:paddingStart="@dimen/SmallPadding"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/tv_beer_style_profile_item_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_abv_profile_item"
-        android:layout_toEndOf="@id/iv_beer_profile_item_image"
-        android:gravity="end"
-        android:paddingEnd="@dimen/SmallPadding"
-        android:paddingStart="@dimen/SmallPadding"
-        android:textColor="@color/primary"
-        android:textSize="@dimen/BeerFieldTextSize" />
-
-    <TextView
-        android:id="@+id/tv_beer_style_profile_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_style_profile_item_field"
-        android:layout_marginTop="30dp"
-        android:layout_toEndOf="@id/iv_beer_profile_item_image"
-        android:gravity="end"
-        android:paddingEnd="@dimen/SmallPadding"
-        android:paddingStart="@dimen/SmallPadding"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/tv_beer_country_profile_item_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_style_profile_item"
-        android:layout_toEndOf="@id/iv_beer_profile_item_image"
-        android:gravity="end"
-        android:paddingEnd="@dimen/SmallPadding"
-        android:paddingStart="@dimen/SmallPadding"
-        android:textColor="@color/primary"
-        android:textSize="@dimen/BeerFieldTextSize" />
-
-    <TextView
-        android:id="@+id/tv_beer_country_profile_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_country_profile_item_field"
-        android:layout_marginTop="30dp"
-        android:layout_toEndOf="@id/iv_beer_profile_item_image"
-        android:gravity="end"
-        android:paddingEnd="@dimen/SmallPadding"
-        android:paddingStart="@dimen/SmallPadding"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/tv_beer_tags_profile_item_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_country_profile_item"
-        android:layout_toEndOf="@id/iv_beer_profile_item_image"
-        android:gravity="end"
-        android:paddingEnd="@dimen/SmallPadding"
-        android:paddingStart="@dimen/SmallPadding"
-        android:textColor="@color/primary"
-        android:textSize="@dimen/BeerFieldTextSize" />
-
-    <TextView
-        android:id="@+id/tv_beer_tags_profile_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_tags_profile_item_field"
-        android:layout_marginTop="30dp"
-        android:layout_toEndOf="@id/iv_beer_profile_item_image"
-        android:gravity="end"
-        android:paddingEnd="@dimen/SmallPadding"
-        android:paddingStart="@dimen/SmallPadding"
-        android:textColor="@color/white" />
+        <ImageView
+            android:id="@+id/user_image"
+            android:layout_width="182dp"
+            android:layout_height="175dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="40dp"
+            android:scaleType="fitXY" />
 
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_user_name_field"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="51dp"
+            android:layout_marginTop="60dp"
+            android:gravity="start"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/UserFieldTextSize" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="79dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/tv_last_name"
+            android:textSize="25sp"/>
+
+        <TextView
+            android:id="@+id/tv_first_name_field"
+            android:layout_width="84dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="105dp"
+            android:layout_marginTop="127dp"
+            android:gravity="start"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/UserFieldTextSize" />
+
+        <TextView
+            android:id="@+id/tv_first_name"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/tv_user_name_field"
+            android:layout_marginTop="98dp"
+            android:textSize="25sp"/>
+
+
+        <TextView
+            android:id="@+id/tv_last_name_field"
+            android:layout_width="79dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/tv_first_name_field"
+            android:gravity="start"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/UserFieldTextSize" />
+
+        <TextView
+            android:id="@+id/tv_last_name"
+            android:layout_width="87dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/tv_first_name_field"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="1dp"
+            android:layout_marginTop="161dp"
+            android:textSize="25sp"/>
+
+
+        <ProgressBar
+            android:id="@+id/prb_load_view"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/lv_beers_profile_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/user_image"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>

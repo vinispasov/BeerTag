@@ -24,7 +24,7 @@ public interface ProfileContracts {
 
         void showBeers(List<BeerDTO> topThreeBeers);
 
-
+        void showBeerDetails(BeerDTO beer);
     }
 
     interface Presenter {
@@ -34,9 +34,12 @@ public interface ProfileContracts {
 
         void loadUser();
 
+        void beerIsSelected(BeerDTO beer);
+
         void setUserId(int id);
 
-
-
+    }
+    interface Navigator{
+        void navigateToBeerDetailsWith(BeerDTO beer);
     }
 }

@@ -103,6 +103,10 @@ public class ProfilePresenter implements ProfileContracts.Presenter {
     }
 
     @Override
+    public void beerIsSelected(BeerDTO beer) {
+        mView.showBeerDetails(beer);
+    }
+    @Override
     public void setUserId(int id) {
         mUserId=id;
     }

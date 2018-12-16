@@ -193,7 +193,7 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
 
     @Override
     public void beerIsSelected(BeerDTO beer) {
-        mView.showBeerDetails(beer,mMapper.getBeerIds(),mMapper.getBeerDtos());
+        mView.showBeerDetails(beer);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

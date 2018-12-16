@@ -14,7 +14,7 @@ public interface BeersListContracts {
 
         void setPresenter(BeersListContracts.Presenter presenter);
 
-        void showBeerDetails(BeerDTO beer,List<Integer> beerIds,List<BeerDTO> beerDtos);
+        void showBeerDetails(BeerDTO beer);
 
         void showProgressBarLoading();
 
@@ -76,6 +76,6 @@ public interface BeersListContracts {
     }
 
     interface Navigator {
-        void navigateToBeerDetailsWith(BeerDTO beer,List<Integer> beerIds,List<BeerDTO> beerDtos);
+        void navigateToBeerDetailsWith(BeerDTO beer/*,List<Integer> beerIds,List<BeerDTO> beerDtos*/);
     }
 }

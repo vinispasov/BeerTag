@@ -2,7 +2,7 @@ package com.beertag.utils;
 
 public class Constants {
 
-    public static final String BASE_SERVER_URL = "http://192.168.0.107:7777/api/";
+    public static final String BASE_SERVER_URL = "http://192.168.0.101:7777/api/";
 
     public static final String BASE_SERVER_URL_VALUE_NAME = "baseServerUrl";
 

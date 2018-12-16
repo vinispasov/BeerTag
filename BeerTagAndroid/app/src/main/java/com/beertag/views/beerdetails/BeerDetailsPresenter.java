@@ -39,6 +39,7 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
     private BeerDTO mSelectedBeer;
     private Map<Integer,BeerDTO> mBeerDtosByBeerId;
     private BeersMapper mMapper;
+    private BeerDTO mBeerToShow;
 
 
     @Inject
@@ -68,11 +69,11 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
 
         Disposable observable = Observable
                 .create((ObservableOnSubscribe<BeerDTO>) emitter -> {
-                    Beer beer = mBeersService.getBeerById(mBeerId);
-                    BeerDTO beerToShow= getmBeerDtosByBeerId()
-                            .get(beer.getBeerId());
+                    //Beer beer = mBeersService.getBeerById(mBeerId);
+                   // BeerDTO beerToShow= getmBeerDtosByBeerId()
+                      //      .get(beer.getBeerId());
 
-                    emitter.onNext(beerToShow);
+                    emitter.onNext(mBeerToShow);
                     emitter.onComplete();
                 })
                 .subscribeOn(mSchedulerProvider.backgroundThread())
@@ -179,5 +180,14 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
 
     public void setmBeerDtosByBeerId(Map<Integer, BeerDTO> mBeerDtosByBeerId) {
         this.mBeerDtosByBeerId = mBeerDtosByBeerId;
+    }
+
+    public BeerDTO getmBeerToShow() {
+        return mBeerToShow;
+    }
+
+    @Override
+    public void setBeerToShow(BeerDTO mBeerToShow) {
+        this.mBeerToShow = mBeerToShow;
     }
 }

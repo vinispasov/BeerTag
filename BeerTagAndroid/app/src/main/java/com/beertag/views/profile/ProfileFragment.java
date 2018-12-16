@@ -21,6 +21,7 @@ import com.beertag.services.base.UsersService;
 import com.beertag.utils.Constants;
 import com.beertag.views.beerdetails.BeerDetailsContracts;
 import com.beertag.views.beerslist.BeersArrayAdapter;
+import com.beertag.views.beerslist.BeersListContracts;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -29,6 +30,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 
 public class ProfileFragment extends Fragment implements ProfileContracts.View,AdapterView.OnItemSelectedListener {
 
@@ -65,6 +67,9 @@ public class ProfileFragment extends Fragment implements ProfileContracts.View,A
     ListView mBeersListView;
 
 
+    private String[] mFilterOptions;
+    private String mSelectedFilterOption;
+    private ProfileContracts.Navigator mNavigator;
 
     @Inject
     public ProfileFragment() {
@@ -79,6 +84,10 @@ public class ProfileFragment extends Fragment implements ProfileContracts.View,A
         View view=inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this, view);
         mBeersListView.setAdapter(mBeersArrayAdapter);
+
+        mFilterOptions = getResources().getStringArray(R.array.filter_options);
+        mSelectedFilterOption = mFilterOptions[0];
+
         return view;
     }
 
@@ -124,6 +133,10 @@ public class ProfileFragment extends Fragment implements ProfileContracts.View,A
         mPresenter=presenter;
     }
 
+    public void setNavigator(ProfileContracts.Navigator navigator) {
+        mNavigator = navigator;
+    }
+
     @Override
     public void showError(Throwable error) {
         String errorMessage = Constants.ERROR_MESSAGE + error.getMessage();
@@ -158,14 +171,26 @@ public class ProfileFragment extends Fragment implements ProfileContracts.View,A
         mBeersArrayAdapter.notifyDataSetChanged();
     }
 
+    @OnItemClick(R.id.lv_beers_profile_list_view)
+    public void onItemClick(int position) {
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        BeerDTO selectedBeer = mBeersArrayAdapter.getItem(position);
+        mPresenter.beerIsSelected(selectedBeer);
 
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void showBeerDetails(BeerDTO beer) {
+        mNavigator.navigateToBeerDetailsWith(beer);
+    }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        mSelectedFilterOption = mFilterOptions[position];
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        mSelectedFilterOption=mFilterOptions[0];
     }
 }

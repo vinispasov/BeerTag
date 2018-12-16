@@ -105,6 +105,7 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
         mFilterOptionsSpinner.attachDataSource(Arrays.asList(mFilterOptions));
         mSelectedFilterOption = mFilterOptions[0];
 
+
         mFilterOptionsSpinner.setOnItemSelectedListener(this);
 
         return view;
@@ -214,8 +215,8 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
 
 
     @Override
-    public void showBeerDetails(BeerDTO beer,List<Integer> beerIds,List<BeerDTO> beerDtos) {
-        mNavigator.navigateToBeerDetailsWith(beer,beerIds,beerDtos);
+    public void showBeerDetails(BeerDTO beer) {
+        mNavigator.navigateToBeerDetailsWith(beer);
     }
 
     @Override

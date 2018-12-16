@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/iv_beer_item_image"
+        android:id="@+id/iv_beer_profile_item_image"
         android:layout_width="150dp"
-        android:layout_height="150dp" />
-
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        />
 
 
     <TextView
-        android:id="@+id/tv_beer_item_name"
+        android:id="@+id/tv_beer_profile_item_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/iv_beer_item_image"
+        android:layout_toEndOf="@+id/iv_beer_profile_item_image"
         android:gravity="start"
         android:paddingEnd="@dimen/SmallPadding"
         android:paddingStart="@dimen/SmallPadding"
         android:textColor="@color/white"
-        android:textSize="25sp" />
+        android:textSize="@dimen/ParametersFieldTextSize" />
 
     <TextView
-        android:id="@+id/tv_beer_rating_item_field"
+        android:id="@+id/tv_beer_rating_profile_item_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_item_name"
-        android:layout_toEndOf="@id/iv_beer_item_image"
+        android:layout_below="@id/tv_beer_profile_item_name"
+        android:layout_toEndOf="@id/iv_beer_profile_item_image"
         android:gravity="end"
         android:paddingEnd="@dimen/SmallPadding"
         android:paddingStart="@dimen/SmallPadding"
@@ -34,12 +36,12 @@
         android:textSize="@dimen/BeerFieldTextSize" />
 
     <TextView
-        android:id="@+id/tv_beer_rating_item"
+        android:id="@+id/tv_beer_rating_profile_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_rating_item_field"
+        android:layout_below="@id/tv_beer_rating_profile_item_field"
         android:layout_marginTop="30dp"
-        android:layout_toEndOf="@id/iv_beer_item_image"
+        android:layout_toEndOf="@id/iv_beer_profile_item_image"
         android:gravity="end"
         android:paddingEnd="@dimen/SmallPadding"
         android:paddingStart="@dimen/SmallPadding"
@@ -47,11 +49,11 @@
         android:textSize="@dimen/ParametersFieldTextSize"/>
 
     <TextView
-        android:id="@+id/tv_beer_abv_item_field"
+        android:id="@+id/tv_beer_abv_profile_item_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_rating_item"
-        android:layout_toEndOf="@id/iv_beer_item_image"
+        android:layout_below="@id/tv_beer_rating_profile_item"
+        android:layout_toEndOf="@id/iv_beer_profile_item_image"
         android:gravity="end"
         android:paddingEnd="@dimen/SmallPadding"
         android:paddingStart="@dimen/SmallPadding"
@@ -59,12 +61,12 @@
         android:textSize="@dimen/BeerFieldTextSize" />
 
     <TextView
-        android:id="@+id/tv_beer_abv_item"
+        android:id="@+id/tv_beer_abv_profile_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_abv_item_field"
+        android:layout_below="@id/tv_beer_abv_profile_item_field"
         android:layout_marginTop="30dp"
-        android:layout_toEndOf="@id/iv_beer_item_image"
+        android:layout_toEndOf="@id/iv_beer_profile_item_image"
         android:gravity="end"
         android:paddingEnd="@dimen/SmallPadding"
         android:paddingStart="@dimen/SmallPadding"
@@ -72,11 +74,11 @@
         android:textSize="@dimen/ParametersFieldTextSize"/>
 
     <TextView
-        android:id="@+id/tv_beer_style_item_field"
+        android:id="@+id/tv_beer_style_profile_item_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_abv_item"
-        android:layout_toEndOf="@id/iv_beer_item_image"
+        android:layout_below="@id/tv_beer_abv_profile_item"
+        android:layout_toEndOf="@id/iv_beer_profile_item_image"
         android:gravity="end"
         android:paddingEnd="@dimen/SmallPadding"
         android:paddingStart="@dimen/SmallPadding"
@@ -84,12 +86,12 @@
         android:textSize="@dimen/BeerFieldTextSize" />
 
     <TextView
-        android:id="@+id/tv_beer_style_item"
+        android:id="@+id/tv_beer_style_profile_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_style_item_field"
+        android:layout_below="@id/tv_beer_style_profile_item_field"
         android:layout_marginTop="30dp"
-        android:layout_toEndOf="@id/iv_beer_item_image"
+        android:layout_toEndOf="@id/iv_beer_profile_item_image"
         android:gravity="end"
         android:paddingEnd="@dimen/SmallPadding"
         android:paddingStart="@dimen/SmallPadding"
@@ -97,11 +99,11 @@
         android:textSize="@dimen/ParametersFieldTextSize"/>
 
     <TextView
-        android:id="@+id/tv_beer_country_item_field"
+        android:id="@+id/tv_beer_country_profile_item_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_style_item"
-        android:layout_toEndOf="@id/iv_beer_item_image"
+        android:layout_below="@id/tv_beer_style_profile_item"
+        android:layout_toEndOf="@id/iv_beer_profile_item_image"
         android:gravity="end"
         android:paddingEnd="@dimen/SmallPadding"
         android:paddingStart="@dimen/SmallPadding"
@@ -109,12 +111,12 @@
         android:textSize="@dimen/BeerFieldTextSize" />
 
     <TextView
-        android:id="@+id/tv_beer_country_item"
+        android:id="@+id/tv_beer_country_profile_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_country_item_field"
+        android:layout_below="@id/tv_beer_country_profile_item_field"
         android:layout_marginTop="30dp"
-        android:layout_toEndOf="@id/iv_beer_item_image"
+        android:layout_toEndOf="@id/iv_beer_profile_item_image"
         android:gravity="end"
         android:paddingEnd="@dimen/SmallPadding"
         android:paddingStart="@dimen/SmallPadding"
@@ -122,11 +124,11 @@
         android:textSize="@dimen/ParametersFieldTextSize"/>
 
     <TextView
-        android:id="@+id/tv_beer_tags_item_field"
+        android:id="@+id/tv_beer_tags_profile_item_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_country_item"
-        android:layout_toEndOf="@id/iv_beer_item_image"
+        android:layout_below="@id/tv_beer_country_profile_item"
+        android:layout_toEndOf="@id/iv_beer_profile_item_image"
         android:gravity="end"
         android:paddingEnd="@dimen/SmallPadding"
         android:paddingStart="@dimen/SmallPadding"
@@ -134,18 +136,16 @@
         android:textSize="@dimen/BeerFieldTextSize" />
 
     <TextView
-        android:id="@+id/tv_beer_tags_item"
+        android:id="@+id/tv_beer_tags_profile_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_beer_tags_item_field"
+        android:layout_below="@id/tv_beer_tags_profile_item_field"
         android:layout_marginTop="30dp"
-        android:layout_toEndOf="@id/iv_beer_item_image"
+        android:layout_toEndOf="@id/iv_beer_profile_item_image"
         android:gravity="end"
         android:paddingEnd="@dimen/SmallPadding"
         android:paddingStart="@dimen/SmallPadding"
         android:textColor="@color/white"
         android:textSize="@dimen/ParametersFieldTextSize"/>
-
-
 
 </RelativeLayout>

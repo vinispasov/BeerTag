@@ -50,12 +50,12 @@ public class BeersListActivity extends BaseDrawerActivity implements BeersListCo
 
 
     @Override
-    public void navigateToBeerDetailsWith(BeerDTO beer, List<Integer> beerIds,List<BeerDTO> beerDtos) {
+    public void navigateToBeerDetailsWith(BeerDTO beer) {
 
         Intent intent = new Intent(this, BeerDetailsActivity.class);
         intent.putExtra(BeerDetailsActivity.BEER_EXTRA_KEY, (Serializable) beer);
-       intent.putIntegerArrayListExtra(BeerDetailsActivity.BEERS_IDS_EXTRA_KEY, (ArrayList<Integer>) beerIds);
-       intent.putParcelableArrayListExtra(BeerDetailsActivity.BEERS_DTO_EXTRA_KEY, (ArrayList<? extends Parcelable>) beerDtos);
+     //  intent.putIntegerArrayListExtra(BeerDetailsActivity.BEERS_IDS_EXTRA_KEY, (ArrayList<Integer>) beerIds);
+       //intent.putParcelableArrayListExtra(BeerDetailsActivity.BEERS_DTO_EXTRA_KEY, (ArrayList<? extends Parcelable>) beerDtos);
 
         startActivity(intent);
     }
