@@ -17,6 +17,11 @@ public class Drink {
         setBeerId(beerId);
         setUserId(userId);
     }
+    public Drink(int beerId,int userId,double rating){
+        setBeerId(beerId);
+        setUserId(userId);
+        setRating(rating);
+    }
 
     public int getDrinkId() {
         return drinkId;

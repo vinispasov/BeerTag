@@ -5,6 +5,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.beertag.R;
 import com.beertag.views.beerslist.BeersListActivity;
+import com.beertag.views.createbeer.BeerCreateActivity;
 import com.beertag.views.profile.ProfileActivity;
 import com.beertag.views.userslist.UsersListActivity;
 import com.mikepenz.materialdrawer.Drawer;
@@ -22,6 +23,7 @@ public abstract class BaseDrawerActivity extends DaggerAppCompatActivity{
     private static final String MY_PROFILE_DRAWER_NAME = "My profile";
     private static final String BEERS_LIST_DRAWER_NAME = "Beers";
     private static final String USERS_LIST_DRAWER_NAME = "Users";
+    private static final String ADD_BEER_DRAWER_NAME = "Add new beer";
 
 
     @BindView(R.id.tb_drawer_toolbar)
@@ -50,6 +52,10 @@ public abstract class BaseDrawerActivity extends DaggerAppCompatActivity{
                 .withIdentifier(UsersListActivity.DRAWER_IDENTIFIER)
                 .withName(USERS_LIST_DRAWER_NAME);
 
+        SecondaryDrawerItem addBeerItem = new SecondaryDrawerItem()
+                .withIdentifier(BeerCreateActivity.DRAWER_IDENTIFIER)
+                .withName(ADD_BEER_DRAWER_NAME);
+
 
         mDrawer = new DrawerBuilder()
                 .withActivity(this)
@@ -64,6 +70,9 @@ public abstract class BaseDrawerActivity extends DaggerAppCompatActivity{
                         new DividerDrawerItem(),
                         usersListItem
                                 .withIcon(R.drawable.usersicon),
+                        new DividerDrawerItem(),
+                        addBeerItem
+                                .withIcon(R.drawable.addicon),
                         new DividerDrawerItem()
 
                 )
@@ -120,6 +129,9 @@ public abstract class BaseDrawerActivity extends DaggerAppCompatActivity{
             return nextIntent;
         } else if (identifier == BeersListActivity.DRAWER_IDENTIFIER) {
             nextIntent = new Intent(this, BeersListActivity.class);
+            return nextIntent;
+        }else if (identifier == BeerCreateActivity.DRAWER_IDENTIFIER) {
+            nextIntent = new Intent(this, BeerCreateActivity.class);
             return nextIntent;
         } else {
             return null;

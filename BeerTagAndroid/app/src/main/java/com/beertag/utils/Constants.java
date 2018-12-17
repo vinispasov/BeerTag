@@ -2,7 +2,7 @@ package com.beertag.utils;
 
 public class Constants {
 
-    public static final String BASE_SERVER_URL = "http://192.168.0.101:7777/api/";
+    public static final String BASE_SERVER_URL = "http://192.168.0.105:7777/api/";
 
     public static final String BASE_SERVER_URL_VALUE_NAME = "baseServerUrl";
 
@@ -85,4 +85,10 @@ public class Constants {
     public static final String FIRST_NAME_FIELD = "First name";
     public static final String LAST_NAME_FIELD = "Last name";
     public static final String DRINKS_ROOT_MAPPING = "drinks";
+    public static final int MY_USER_ID = 1;
+    public static final String ADD_OF_BEER_SUCCESS_MESSAGE = "Beer was added successfully";
+    public static final String CHEERS = "Cheers";
+    public static final String ALREADY_DRINKED_MESSAGE = "The beer is already drinked";
+    public static final String DRANK = "DRANK";
+    public static final String INVALID_PARAMETERS = "Invalid parameters entered.Try again.";
 }

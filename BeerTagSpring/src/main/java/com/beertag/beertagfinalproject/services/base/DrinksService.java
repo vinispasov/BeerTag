@@ -13,7 +13,7 @@ public interface DrinksService {
 
     void deleteDrinksByBeerId(int beerId);
 
-    Drink setDrankBeer(int beerId,int userId);
+    Drink setDrankBeer(int drinkId,Drink drink);
 
     Drink rateBeer(int beerId,int userId,Drink updatedDrink);
 

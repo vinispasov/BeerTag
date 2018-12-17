@@ -14,7 +14,7 @@ public interface DrinksService {
 
     void deleteDrinksByBeerId(int beerId);
 
-    Drink setDrankBeer(int beerId,int userId) throws IOException;
+    Drink setDrankBeer(int drinkId,Drink drink) throws IOException;
 
     Drink rateBeer(int beerId,int userId,Drink updatedDrink) throws IOException;
 

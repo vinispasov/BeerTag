@@ -39,8 +39,8 @@ public class DrinksServiceImpl implements DrinksService {
     }
 
     @Override
-    public Drink setDrankBeer(int beerId, int userId) {
-        return drinksRepository.setDrankBeer(beerId,userId);
+    public Drink setDrankBeer(int drinkId,Drink updatedDrink) {
+        return drinksRepository.setDrankBeer(drinkId,updatedDrink);
     }
 
     @Override

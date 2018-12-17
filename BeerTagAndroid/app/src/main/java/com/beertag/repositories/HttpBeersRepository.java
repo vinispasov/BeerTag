@@ -26,7 +26,7 @@ public class HttpBeersRepository implements BeersRepository {
     @Override
     public Beer addBeer(Beer newBeer) throws IOException {
         String requestBody = mJsonParser.toJson(newBeer);
-        String responseBody=mHttpRequester.post(mServerUrl, requestBody);
+        String responseBody=mHttpRequester.post(mServerUrl+Constants.BEERS_ROOT_MAPPING, requestBody);
         return mJsonParser.fromJson(responseBody);
     }
 

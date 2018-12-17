@@ -21,11 +21,13 @@ public class SqlDrinksRepositoryImpl implements DrinksRepository {
     private static final String GET_TOP_THREE_DRINKS_BY_USER_QUERY = "FROM Drink WHERE userId=:userId ORDER BY rating DESC";
     private static final String USER_ID_PARAMETER = "userId";
     private static final String BEER_ID_PARAMETER = "beerId";
+    private static final String IS_DRANK_PARAMETER = "isDrank";
     private static final String GET_DRINKS_BY_BEER_QUERY = "FROM Drink WHERE beerId=:beerId";
     private static final String GET_DRINK_BY_BEER_AND_USER_QUERY = "FROM Drink WHERE beerId=:beerId AND userId=:userId";
     private static final String DELETE_DRINKS_BY_BEER_QUERY = "DELETE FROM Drink WHERE beerId=:beerId";
     private static final String GET_ALL_BEER_IDS_QUERY = "SELECT DISTINCT beerId FROM Drink";
     private static final String CHECK_IF_BEER_IS_RATED_QUERY = "FROM Drink WHERE rating IS NOT NULL AND beerId=:beerId AND userId=:userId";
+    private static final String SET_DRANK_BY_BEER_AND_USER_QUERY = "UPDATE Drink set isDrank=:isDrank WHERE beerId=:beerId AND userId=:userId";
     private final SessionFactory sessionFactory;
 
     @Autowired
@@ -111,21 +113,16 @@ public class SqlDrinksRepositoryImpl implements DrinksRepository {
     }
 
     @Override
-    public Drink setDrankBeer(int beerId, int userId) {
+    public Drink setDrankBeer(int drinkId,Drink updatedDrink) {
 
-        Drink drinkToUpdate=null;
 
         try (Session session = sessionFactory.openSession()) {
 
             Transaction transaction = session.beginTransaction();
 
-         drinkToUpdate = session
-                 .createQuery(GET_DRINK_BY_BEER_AND_USER_QUERY, Drink.class)
-                 .setParameter(BEER_ID_PARAMETER, beerId)
-                 .setParameter(USER_ID_PARAMETER, userId)
-                 .uniqueResult();
-
-         drinkToUpdate.setDrank(true);
+        Drink drinkToUpdate = session
+                 .get(Drink.class,drinkId);
+        drinkToUpdate.setDrank(updatedDrink.isDrank());
 
             transaction.commit();
 
@@ -133,7 +130,7 @@ public class SqlDrinksRepositoryImpl implements DrinksRepository {
             e.printStackTrace();
         }
 
-        return drinkToUpdate;
+        return getDrinkById(drinkId);
     }
 
     @Override

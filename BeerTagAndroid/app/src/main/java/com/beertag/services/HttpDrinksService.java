@@ -36,8 +36,8 @@ public class HttpDrinksService implements DrinksService{
     }
 
     @Override
-    public Drink setDrankBeer(int beerId, int userId) throws IOException {
-        return mDrinksRepository.setDrankBeer(beerId,userId);
+    public Drink setDrankBeer(int drinkId,Drink updatedDrink) throws IOException {
+        return mDrinksRepository.setDrankBeer(drinkId,updatedDrink);
     }
 
     @Override

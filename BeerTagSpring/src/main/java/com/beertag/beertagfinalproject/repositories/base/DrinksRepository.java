@@ -14,7 +14,7 @@ public interface DrinksRepository {
 
     void deleteDrinksByBeerId(int beerId);
 
-    Drink setDrankBeer(int beerId,int userId);
+    Drink setDrankBeer(int drinkId,Drink updatedDrink);
 
     Drink rateBeer(int beerId,int userId,Drink updatedDrink);
 

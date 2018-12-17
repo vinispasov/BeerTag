@@ -68,15 +68,16 @@ public class HttpDrinksRepository implements DrinksRepository{
     }
 
     @Override
-    public Drink setDrankBeer(int beerId, int userId) throws IOException {
+    public Drink setDrankBeer(int drinkId,Drink updatedDrink) throws IOException {
         String updateServerUrl = mServerUrl
                 +Constants.DRINKS_ROOT_MAPPING
-                +"/drank/"
-                +beerId
                 +"/"
-                +userId;
+                +drinkId;
 
-        String responseBody = mHttpRequester.update(updateServerUrl, beerId,userId);
+        String requestBody = mJsonParser.toJson(updatedDrink);
+
+        String responseBody = mHttpRequester.update(updateServerUrl, requestBody,drinkId);
+
 
         return mJsonParser.fromJson(responseBody);
     }

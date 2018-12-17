@@ -23,7 +23,20 @@
     <string name="toolbar_title_my_users">USERS</string>
 
     <string name="rate">RATE</string>
-    <string name="want_to_drink">WANT TO DRINK</string>
+
+    <string name="drink">DRINK</string>
+    <string name="toolbar_title_add_new_beer">Add new beer</string>
+
+    <string name="add_beer">ADD</string>
+    <string name="enter_beer_title">Beer title</string>
+    <string name="enter_beer_abv">ABV</string>
+    <string name="enter_beer_style">Style</string>
+    <string name="enter_beer_description">Description</string>
+    <string name="enter_brewery">Brewery</string>
+    <string name="enter_beer_country">Origin country</string>
+    <string name="enter_beer_rating">Rating</string>
+    <string name="enter_beer_tag">Tag</string>
+    <string name="enter_image_url">Image url</string>
 
     <string name="toolbar_title_beer_details">Beer details</string>
 

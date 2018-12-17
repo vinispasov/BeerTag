@@ -54,7 +54,7 @@ public class BeersListActivity extends BaseDrawerActivity implements BeersListCo
 
         Intent intent = new Intent(this, BeerDetailsActivity.class);
         intent.putExtra(BeerDetailsActivity.BEER_EXTRA_KEY, (Serializable) beer);
-     //  intent.putIntegerArrayListExtra(BeerDetailsActivity.BEERS_IDS_EXTRA_KEY, (ArrayList<Integer>) beerIds);
+     // intent.putIntegerArrayListExtra(BeerDetailsActivity.BEERS_IDS_EXTRA_KEY, (ArrayList<Integer>) beerIds);
        //intent.putParcelableArrayListExtra(BeerDetailsActivity.BEERS_DTO_EXTRA_KEY, (ArrayList<? extends Parcelable>) beerDtos);
 
         startActivity(intent);

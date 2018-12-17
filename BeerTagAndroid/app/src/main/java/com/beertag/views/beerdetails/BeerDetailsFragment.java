@@ -146,6 +146,13 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
 
         mBeerTagsFieldTextView.setText(Constants.BEER_TAGS_FIELD);
         mBeerTagsTextView.setText(beer.getTagsAsString().toString());
+
+
+
+            if (mPresenter.getDrink().isDrank()){
+                mDrinkButton.setText(Constants.DRANK);
+            }
+
     }
 
     @Override
@@ -173,6 +180,9 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
 
     @Override
     public void showMessage(String message) {
+        if (message.equals(Constants.CHEERS)){
+            mDrinkButton.setText(Constants.DRANK);
+        }
         Toast
                 .makeText(getContext(), message, Toast.LENGTH_SHORT)
                 .show();
@@ -197,6 +207,11 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
     @Override
     public void onNeutralButtonClicked() {
         mPresenter.ratingWasCancelled();
+    }
+
+    @OnClick(R.id.btn_drink)
+    public void onDrinkButtonClick() {
+        mPresenter.drinkButtonIsClicked();
     }
 
     @Override

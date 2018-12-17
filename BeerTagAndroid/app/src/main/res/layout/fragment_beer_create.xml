@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.createbeer.BeerCreateFragment">
+
+    <EditText
+        android:id="@+id/et_new_beer_title"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:inputType="text"
+        android:hint="@string/enter_beer_title"/>
+
+    <EditText
+        android:id="@+id/et_new_beer_abv"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_new_beer_title"
+        android:layout_centerHorizontal="true"
+        android:inputType="numberDecimal"
+        android:hint="@string/enter_beer_abv"/>
+
+    <EditText
+        android:id="@+id/et_new_beer_style"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_new_beer_abv"
+        android:layout_centerHorizontal="true"
+        android:inputType="text"
+        android:hint="@string/enter_beer_style"/>
+
+    <EditText
+        android:id="@+id/et_new_beer_description"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_new_beer_style"
+        android:layout_centerHorizontal="true"
+        android:inputType="text"
+        android:hint="@string/enter_beer_description"/>
+    <EditText
+        android:id="@+id/et_new_beer_brewery"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_new_beer_description"
+        android:layout_centerHorizontal="true"
+        android:inputType="text"
+        android:hint="@string/enter_brewery"/>
+    <EditText
+        android:id="@+id/et_new_beer_country"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_new_beer_brewery"
+        android:layout_centerHorizontal="true"
+        android:inputType="text"
+        android:hint="@string/enter_beer_country"/>
+    <EditText
+        android:id="@+id/et_new_beer_rating"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_new_beer_country"
+        android:layout_centerHorizontal="true"
+        android:inputType="numberDecimal"
+        android:hint="@string/enter_beer_rating"/>
+    <EditText
+        android:id="@+id/et_new_beer_tag"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_new_beer_rating"
+        android:layout_centerHorizontal="true"
+        android:inputType="text"
+        android:hint="@string/enter_beer_tag"/>
+
+
+    <EditText
+        android:id="@+id/et_new_beer_image"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_new_beer_tag"
+        android:layout_centerHorizontal="true"
+        android:inputType="text"
+        android:hint="@string/enter_image_url"/>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_new_beer_image"
+        android:background="@color/colorPrimaryDark"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/add_beer" />
+
+    <ProgressBar
+        android:id="@+id/prb_load_bar_on_add_beer"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

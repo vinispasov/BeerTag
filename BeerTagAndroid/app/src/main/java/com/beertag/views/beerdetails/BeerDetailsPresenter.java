@@ -18,6 +18,7 @@ import com.beertag.utils.mappers.base.BeersMapper;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +41,8 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
     private Map<Integer,BeerDTO> mBeerDtosByBeerId;
     private BeersMapper mMapper;
     private BeerDTO mBeerToShow;
-
+    private Drink mDrink;
+    private Map<Integer,Boolean> isDrankBeersByDrinkId;
 
     @Inject
     public BeerDetailsPresenter(BeersService beersService, DrinksService drinksService,BeerTagsService beerTagsService,SchedulerProvider schedulerProvider) {
@@ -50,6 +52,7 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
         mSchedulerProvider = schedulerProvider;
         setUserId(1);
         mMapper=new BeersMapperImpl();
+        isDrankBeersByDrinkId=new HashMap<>();
     }
 
 
@@ -72,6 +75,20 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
                     //Beer beer = mBeersService.getBeerById(mBeerId);
                    // BeerDTO beerToShow= getmBeerDtosByBeerId()
                       //      .get(beer.getBeerId());
+                    List<Drink>drinksByBeerId=mDrinksService.getAllDrinksByBeerId(mBeerToShow.getBeerId());
+                    for (Drink drink:drinksByBeerId
+                         ) {
+                        if (drink.getUserId()==Constants.MY_USER_ID){
+                            setDrink(drink);
+                            break;
+                        }
+                    }
+
+                    if (mDrink==null){
+                        Drink drink=new Drink(mBeerToShow.getBeerId(),Constants.MY_USER_ID);
+                                mDrinksService.addDrink(drink);
+                                setDrink(drink);
+                    }
 
                     emitter.onNext(mBeerToShow);
                     emitter.onComplete();
@@ -94,6 +111,66 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
     @Override
     public void rateButtonIsClicked() {
         mView.showRatingDialog();
+    }
+
+    @Override
+    public void drinkButtonIsClicked() {
+        mView.showLoading();
+        final String[] message = {""};
+        Disposable observable = Observable
+                .create((ObservableOnSubscribe<BeerDTO>) emitter -> {
+                  //  List<Tag> tagsByBeerId=new ArrayList<>();
+                    List<Drink> drinksByBeerId=mDrinksService.getAllDrinksByBeerId(mBeerId);
+                    Drink drink=null;
+                    BeerDTO beerDTO= null;
+
+                    for (Drink drinkByBeerId:drinksByBeerId
+                         ) {
+                        if (drinkByBeerId.getUserId()==Constants.MY_USER_ID){
+                            drink=drink;
+                            break;
+                        }
+                    }
+
+                    if (drink==null){
+                        drink=mDrinksService.addDrink(new Drink(mBeerId,Constants.MY_USER_ID));
+                    }
+
+                    if(mDrink==null){
+                        setDrink(drink);
+                    }
+
+                   /* List<BeerTag> beerTags=mBeerTagsService.getAllBeersTagsByBeer(drink.getBeerId());
+                    for (BeerTag beerTag:beerTags
+                            ) {
+                        tagsByBeerId.add(beerTag.getTag());
+                    }*/
+
+
+                    if (mDrink.isDrank()){
+                       message[0] =Constants.ALREADY_DRINKED_MESSAGE;
+                       beerDTO=mMapper.mapBeerToDTO(drink.getBeer(),drink.getRating(), (ArrayList<Tag>) mBeerToShow.getTags());
+                    }
+                    else {
+                        drink.setDrank(true);
+                        setDrink(drink);
+                        getDrankBeersByDrinkId().put(drink.getDrinkId(),true);
+                        mDrinksService.setDrankBeer(drink.getDrinkId(),drink);
+                        message[0] =Constants.CHEERS;
+                        beerDTO=mMapper.mapBeerToDTO(drink.getBeer(), drink.getRating(), (ArrayList<Tag>) mBeerToShow.getTags());
+                    }
+
+                    emitter.onNext(beerDTO);
+                    emitter.onComplete();
+                })
+                .subscribeOn(mSchedulerProvider.backgroundThread())
+                .observeOn(mSchedulerProvider.uiThread())
+                .doFinally(mView::hideLoading)
+                .subscribe(beerDTO-> {
+                            mView.showMessage(message[0].toString());
+                            mView.showBeer(beerDTO);
+                        },
+                        error -> mView.showError(error));
     }
 
     @Override
@@ -189,5 +266,23 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
     @Override
     public void setBeerToShow(BeerDTO mBeerToShow) {
         this.mBeerToShow = mBeerToShow;
+    }
+
+    @Override
+    public Drink getDrink() {
+        return mDrink;
+    }
+
+    public void setDrink(Drink drink) {
+        this.mDrink = drink;
+    }
+
+    @Override
+    public Map<Integer, Boolean> getDrankBeersByDrinkId() {
+        return isDrankBeersByDrinkId;
+    }
+
+    public void setIsDrankBeersByDrinkId(Map<Integer, Boolean> isDrankBeersByDrinkId) {
+        this.isDrankBeersByDrinkId = isDrankBeersByDrinkId;
     }
 }

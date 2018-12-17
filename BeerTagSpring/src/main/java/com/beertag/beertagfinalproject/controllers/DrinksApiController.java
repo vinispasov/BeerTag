@@ -40,9 +40,9 @@ public class DrinksApiController {
         deleteDrinksByBeerId(beerId);
     }
 
-    @RequestMapping(value = "/drank/{beerId}/{userId}", method = RequestMethod.PUT)
-    public Drink setDrankBeer(@PathVariable int beerId, @PathVariable int userId) {
-        return drinksService.setDrankBeer(beerId,userId);
+    @RequestMapping(value = "/{drinkId}", method = RequestMethod.PUT)
+    public Drink setDrankBeer(@PathVariable int drinkId,@RequestBody @Valid Drink updatedDrink) {
+        return drinksService.setDrankBeer(drinkId,updatedDrink);
     }
 
     @RequestMapping(value = "/rate/{beerId}/{userId}", method = RequestMethod.PUT)

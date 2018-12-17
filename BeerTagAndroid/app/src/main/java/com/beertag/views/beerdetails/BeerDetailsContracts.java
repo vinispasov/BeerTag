@@ -2,6 +2,7 @@ package com.beertag.views.beerdetails;
 
 import com.beertag.models.Beer;
 import com.beertag.models.DTO.BeerDTO;
+import com.beertag.models.Drink;
 import com.beertag.utils.mappers.base.BeersMapper;
 
 import java.util.Map;
@@ -38,6 +39,8 @@ public interface BeerDetailsContracts {
 
         void rateButtonIsClicked();
 
+        void drinkButtonIsClicked();
+
         void ratingWasCancelled();
 
         void beerIsRated(double ratingValue);
@@ -54,7 +57,11 @@ public interface BeerDetailsContracts {
 
         void setBeerToShow(BeerDTO beer);
 
+        Drink getDrink();
+
        // BeersMapper getMapper();
+
+        Map<Integer,Boolean>getDrankBeersByDrinkId();
 
     }
 }
