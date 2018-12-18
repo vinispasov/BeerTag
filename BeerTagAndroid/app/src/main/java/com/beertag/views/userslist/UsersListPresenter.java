@@ -67,7 +67,7 @@ public class UsersListPresenter implements UsersListContracts.Presenter {
         }
     }
 
-    @Override
+    /*@Override
     public void showMyProfile() {
         mView.showProgressBarLoading();
 
@@ -82,6 +82,7 @@ public class UsersListPresenter implements UsersListContracts.Presenter {
                 .doFinally(mView::hideProgressBarLoading)
                 .subscribe(user ->mView.showMyProfile(user), mView::showError);
     }
+    */
 
 
 }

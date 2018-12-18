@@ -38,7 +38,6 @@ public class UsersListFragment extends Fragment implements UsersListContracts.Vi
     UsersArrayAdapter mUsersArrayAdapter;
 
 
-    private AlphaAnimation mButtonClickAnimation;
     private UsersListContracts.Presenter mPresenter;
     private UsersListContracts.Navigator mNavigator;
 

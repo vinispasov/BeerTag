@@ -26,9 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class BeerCreateFragment extends Fragment implements BeerCreateContracts.View{
 
 

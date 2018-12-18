@@ -24,10 +24,9 @@ public class SqlDrinksRepositoryImpl implements DrinksRepository {
     private static final String IS_DRANK_PARAMETER = "isDrank";
     private static final String GET_DRINKS_BY_BEER_QUERY = "FROM Drink WHERE beerId=:beerId";
     private static final String GET_DRINK_BY_BEER_AND_USER_QUERY = "FROM Drink WHERE beerId=:beerId AND userId=:userId";
-   // private static final String DELETE_DRINKS_BY_BEER_QUERY = "DELETE FROM Drink  WHERE drinkId in (:ids) and drinkId =:drinkId";
     private static final String GET_ALL_BEER_IDS_QUERY = "SELECT DISTINCT beerId FROM Drink";
     private static final String CHECK_IF_BEER_IS_RATED_QUERY = "FROM Drink WHERE rating IS NOT NULL AND beerId=:beerId AND userId=:userId";
-    private static final String SET_DRANK_BY_BEER_AND_USER_QUERY = "UPDATE Drink set isDrank=:isDrank WHERE beerId=:beerId AND userId=:userId";
+    //private static final String SET_DRANK_BY_BEER_AND_USER_QUERY = "UPDATE Drink set isDrank=:isDrank WHERE beerId=:beerId AND userId=:userId";
     private final SessionFactory sessionFactory;
 
     @Autowired

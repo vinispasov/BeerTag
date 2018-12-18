@@ -27,8 +27,6 @@ public interface BeerDetailsContracts {
         void showDialogForAddingTag();
 
         void hideAddTagDialog();
-       // void showBeerRating(double rating);
-
     }
 
     interface Presenter {
@@ -50,10 +48,6 @@ public interface BeerDetailsContracts {
 
         void setmBeerDtosByBeerId(Map<Integer, BeerDTO> beerDtosByBeerId);
 
-       // void loadBeerRating();
-
-      // void setMapper(BeersMapper mapper);
-
         void setUserId(int userId);
 
         int getUserId();
@@ -62,13 +56,12 @@ public interface BeerDetailsContracts {
 
         Drink getDrink();
 
-       // BeersMapper getMapper();
-
         Map<Integer,Boolean>getDrankBeersByDrinkId();
 
         void getActionOnAddingTag(String tag);
 
         void getActionOnCancelledAddTag();
+
         void addTagButtonIsClicked();
     }
 }

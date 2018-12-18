@@ -23,8 +23,7 @@ public class BeerDetailsActivity extends BaseDrawerActivity {
 
     public static final String BEER_EXTRA_KEY = "BEER_EXTRA_KEY";
     public static final int DRAWER_IDENTIFIER = 120;
-    public static final String BEERS_DTO_EXTRA_KEY = "BEERS_DTO";
-    public static final String BEERS_IDS_EXTRA_KEY = "BEER_ID";
+
 
 
     @Inject
@@ -43,15 +42,10 @@ public class BeerDetailsActivity extends BaseDrawerActivity {
         ButterKnife.bind(this);
         Intent intent = getIntent();
         BeerDTO beer = (BeerDTO) intent.getSerializableExtra(BeerDetailsActivity.BEER_EXTRA_KEY);
-        //List<Integer>beerIds= intent.getExtras().getIntegerArrayList(BEERS_IDS_EXTRA_KEY);
-       // List<BeerDTO>beerDtos=intent.getExtras().getParcelableArrayList(BEERS_DTO_EXTRA_KEY);
-
-       // Map<Integer,BeerDTO> beerDtosByBeerId=createMapBeerDTOS(beerIds,beerDtos);
 
         mBeerDetailsPresenter.setBeerToShow(beer);
         mBeerDetailsFragment.setPresenter(mBeerDetailsPresenter);
         mBeerDetailsPresenter.setBeerId(beer.getBeerId());
-       // mBeerDetailsPresenter.setmBeerDtosByBeerId(beerDtosByBeerId);
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -68,7 +62,7 @@ public class BeerDetailsActivity extends BaseDrawerActivity {
     }
 
 
-    //should not return valid identifier
+
     @Override
     protected long getIdentifier() {
         return DRAWER_IDENTIFIER;

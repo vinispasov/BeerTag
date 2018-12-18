@@ -21,10 +21,6 @@ public interface UsersListContracts {
 
         void showAllUsers(List<User> allUsers);
 
-       // void showDialogForDeletion(User userToDelete);
-
-        //void hideDeletionDialog();
-
         void showMessage(String message);
     }
 
@@ -40,15 +36,6 @@ public interface UsersListContracts {
 
         void presentUsersToView(List<User> allUsers, String message);
 
-        void showMyProfile();
-
-        //void filterUsersWith(String searchQuery);
-
-        //void userForDeletionIsSelected(User userToDelete);
-
-        //void getActionOnCancelledDeletion();
-
-       // void getActionOnConfirmedDeletion(User user);
     }
 
     interface Navigator {

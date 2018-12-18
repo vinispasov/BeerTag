@@ -93,9 +93,6 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
 
         mBeersListView.setAdapter(mBeersArrayAdapter);
 
-       // mBeersAdapter.setOnBeerItemClickListener(this);
-       // mBeersRecyclerView.setAdapter(mPsAdapter);
-
 
         mBeersGridLayoutManager = new LinearLayoutManager(getContext());
         mBeersRecyclerView.setLayoutManager(mBeersGridLayoutManager);
@@ -200,10 +197,8 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
 
     @OnItemClick(R.id.lv_beers_list_view)
     public void onItemClick(int position) {
-
         BeerDTO selectedBeer = mBeersArrayAdapter.getItem(position);
         mPresenter.beerIsSelected(selectedBeer);
-
     }
 
     @OnItemLongClick(R.id.lv_beers_list_view)
@@ -230,11 +225,6 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
 
     @Override
     public void showFilteredBeers(List<BeerDTO> beersResult) {
-       /* mNoBeersTextView.setVisibility(View.GONE);
-        mFilterOptionsSpinner.setVisibility(View.VISIBLE);
-        mBeersListView.setVisibility(View.VISIBLE);
-        mBeersRecyclerView.setVisibility(View.GONE);*/
-
        if(beersResult.isEmpty()){
            this.showMessage(Constants.NO_BEERS_FOUND_ON_SEARCH_MESSAGE);
        }
@@ -252,18 +242,6 @@ public class BeersListFragment extends Fragment implements BeersListContracts.Vi
                 .toString();
         mPresenter.filterBeersWith(searchQuery);
     }
-
-   /* @Override
-    public void showDetailedBeersView(List<Beer> beersResult) {
-        mNoPropertiesTextView.setVisibility(View.GONE);
-        mFilterOptionsSpinner.setVisibility(View.VISIBLE);
-        mPropertiesRecyclerView.setVisibility(View.VISIBLE);
-        mPropertiesListView.setVisibility(View.GONE);
-
-        mBeersAdapter.clear();
-        mBeersAdapter.addAll(beersResult);
-        mBeersAdapter.notifyDataSetChanged();
-    }*/
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {

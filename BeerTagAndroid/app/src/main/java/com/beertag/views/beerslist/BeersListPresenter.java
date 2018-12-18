@@ -52,7 +52,7 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
     private String mCurrentSelectedOption;
     private BeersMapper mMapper;
     private List<BeerDTO> mCurrentBeers;
-    //private Map<Integer,Double>mAverageRatingsByBeerId;
+
 
     @Inject
     BeersListPresenter(BeersService beersService,BeerTagsService beerTagsService,DrinksService drinksService, SchedulerProvider schedulerProvider) {
@@ -236,7 +236,7 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
 
         for (Beer beer:allBeers) {
             List<Drink> drinksByBeerId = mDrinksService.getAllDrinksByBeerId(beer.getBeerId());
-           double rating=0;
+
             for (Drink drink : drinksByBeerId) {
                 if (drink.getUserId()==Constants.MY_USER_ID) {
                     ratingsByBeerId.put(beer.getBeerId(),drink.getRating() );
@@ -268,10 +268,7 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
 
                     }
 
-                    //this.setAverageRatingsByBeerId(averageRatingsByBeerId);
-
                     return averageRatingsByBeerId;
-
     }
 
 
@@ -348,13 +345,6 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
 
     }
 
-   /* public Map<Integer, Double> getAverageRatingsByBeerId() {
-        return mAverageRatingsByBeerId;
-    }
-
-    public void setAverageRatingsByBeerId(Map<Integer, Double> averageRatingsByBeerId) {
-        this.mAverageRatingsByBeerId = averageRatingsByBeerId;
-    }*/
 
    public List<BeerDTO>getSortedBeerDtos(List<Beer>beers){
        List<BeerDTO> sortedBeerDtos=new ArrayList<>();

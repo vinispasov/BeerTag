@@ -26,8 +26,6 @@ public interface BeersListContracts {
 
         void showFilteredBeers(List<BeerDTO> beersResult);
 
-        //void showDetailedBeersView(List<Beer> beersResult);
-
         void showDialogForDeletion(BeerDTO beerToDelete);
 
         void hideDeletionDialog();
@@ -56,8 +54,6 @@ public interface BeersListContracts {
 
         void getActionOnCancelledDeletion();
 
-       // void presentSortedBeersToView(List<BeerDTO> sortedBeers);
-
         void getActionOnConfirmedDeletion(BeerDTO beerToDelete);
 
         void sortBeersWithOption(String selectedOption);
@@ -78,6 +74,6 @@ public interface BeersListContracts {
     }
 
     interface Navigator {
-        void navigateToBeerDetailsWith(BeerDTO beer/*,List<Integer> beerIds,List<BeerDTO> beerDtos*/);
+        void navigateToBeerDetailsWith(BeerDTO beer);
     }
 }
