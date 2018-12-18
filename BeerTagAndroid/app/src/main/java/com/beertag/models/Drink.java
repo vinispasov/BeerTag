@@ -9,6 +9,7 @@ public class Drink {
     private double rating;
     private boolean isDrank;
 
+
     public Drink(){
 
     }
@@ -21,6 +22,32 @@ public class Drink {
         setBeerId(beerId);
         setUserId(userId);
         setRating(rating);
+    }
+    public Drink(int beerId,int userId,double rating,boolean isDrank){
+        setBeerId(beerId);
+        setUserId(userId);
+        setRating(rating);
+        setDrank(isDrank);
+    }
+
+
+    public Drink(int beerId, int userId, Beer beer, User user, double rating, boolean isDrank) {
+        this.beerId = beerId;
+        this.userId = userId;
+        this.beer = beer;
+        this.user = user;
+        this.rating = rating;
+        this.isDrank = isDrank;
+    }
+
+    public Drink(int drinkId, int beerId, int userId, Beer beer, User user, double rating, boolean isDrank) {
+        this.drinkId = drinkId;
+        this.beerId = beerId;
+        this.userId = userId;
+        this.beer = beer;
+        this.user = user;
+        this.rating = rating;
+        this.isDrank = isDrank;
     }
 
     public int getDrinkId() {
@@ -78,4 +105,5 @@ public class Drink {
     public void setDrank(boolean drank) {
         isDrank = drank;
     }
+
 }

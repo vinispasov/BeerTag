@@ -64,6 +64,8 @@ public interface BeersListContracts {
 
         Map<Integer,Double> loadBeerRating(List<Beer>allBeers) throws IOException;
 
+        Map<Integer,Double> loadBeerAverageRating(List<Beer>allBeers) throws IOException;
+
         void setBeerId(int id);
 
         BeersMapper getMapper();

@@ -49,6 +49,26 @@ public class BeersMapperImpl implements BeersMapper{
     }
 
     @Override
+    public Beer mapBeerDTOToBeer(BeerDTO beerDTO) {
+        Beer beer = null;
+        if (!Objects.equals(beerDTO,null)) {
+
+            beer = new Beer(
+                    beerDTO.getBeerId(),
+                    beerDTO.getBeerName(),
+                    beerDTO.getAbvDouble(),
+                    beerDTO.getBeerStyle(),
+                    beerDTO.getBeerDescription(),
+                    beerDTO.getBeerPicture(),
+                    beerDTO.getBrewery(),
+                    beerDTO.getOriginCountry()
+            );
+
+        }
+        return beer;
+    }
+
+    @Override
     public Map<Integer, BeerDTO> getBeerDtosByBeerId() {
         return beerDtosByBeerId;
     }

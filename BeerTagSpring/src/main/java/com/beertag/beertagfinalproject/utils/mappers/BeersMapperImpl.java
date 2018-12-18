@@ -25,7 +25,6 @@ public class BeersMapperImpl implements BeersMapper {
                         beer.getBeerPicture(),
                         beer.getBrewery(),
                         beer.getOriginCountry()
-
                 );
 
 

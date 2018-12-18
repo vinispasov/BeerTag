@@ -85,20 +85,36 @@ public class BeerCreateFragment extends Fragment implements BeerCreateContracts.
     @OnClick(R.id.btn_save)
     public void onBeerAddButtonClick(View view)  {
         String newTitle = mNewBeerTitle.getText().toString();
-        double newBeerAbv = Double.parseDouble(mNewBeerAbv.getText().toString());
+        String newBeerAbv = mNewBeerAbv.getText().toString();
         String newBeerStyle = mNewBeerStyle.getText().toString();
         String newBeerDescription = mNewBeerDescription.getText().toString();
         String newBeerBrewery = mNewBeerBrewery.getText().toString();
         String newBeerCountry = mNewBeerCountry.getText().toString();
-        double newBeerRating = Double.parseDouble(mNewBeerRating.getText().toString());
+        String newBeerRating = mNewBeerRating.getText().toString();
         String newBeerTag = mNewBeerTag.getText().toString();
         String newImageUrl = mNewBeerImage.getText().toString();
 
 
-        Beer newBeer=new Beer(newTitle,newBeerAbv,newBeerStyle,newBeerDescription,newImageUrl,newBeerBrewery,newBeerCountry);
+        if(newTitle.isEmpty()
+                ||mNewBeerAbv.getText().toString().isEmpty()
+                ||newBeerStyle.isEmpty()
+                ||newBeerDescription.isEmpty()
+                ||newBeerBrewery.isEmpty()
+                ||newBeerCountry.isEmpty()
+                ||mNewBeerRating.getText().toString().isEmpty()
+                ||newBeerTag.isEmpty()
+                ||newImageUrl.isEmpty()
+                ||newImageUrl.length()<Constants.MIN_BEER_IMAGE_URL_LENGTH){
 
-       // view.startAnimation(new AlphaAnimation(Constants.FROM_ALPHA_ANIMATION, Constants.TO_ALPHA_ANIMATION));
-        mPresenter.save(newBeer,Constants.MY_USER_ID,newBeerRating);
+            showMessage(Constants.SHOULD_FILL_ALL_FIELDS);
+        }
+        else {
+            double newBeerAbvDouble=Double.parseDouble(newBeerAbv);
+            double newBeerRatingDouble=Double.parseDouble(newBeerRating);
+            Beer newBeer = new Beer(newTitle, newBeerAbvDouble, newBeerStyle, newBeerDescription, newImageUrl, newBeerBrewery, newBeerCountry);
+
+            mPresenter.save(newBeer, Constants.MY_USER_ID, newBeerRatingDouble);
+        }
     }
 
     @Override

@@ -34,8 +34,8 @@ public class DrinksServiceImpl implements DrinksService {
     }
 
     @Override
-    public void deleteDrinksByBeerId(int beerId) {
-        deleteDrinksByBeerId(beerId);
+    public void deleteDrinkById(int drinkId) {
+        drinksRepository.deleteDrinkById(drinkId);
     }
 
     @Override

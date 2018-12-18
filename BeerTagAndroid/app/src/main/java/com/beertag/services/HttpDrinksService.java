@@ -5,10 +5,13 @@ import com.beertag.repositories.base.DrinksRepository;
 import com.beertag.services.base.DrinksService;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HttpDrinksService implements DrinksService{
     private final DrinksRepository mDrinksRepository;
+
 
 
     public HttpDrinksService(DrinksRepository drinksRepository) {
@@ -27,12 +30,13 @@ public class HttpDrinksService implements DrinksService{
 
     @Override
     public List<Drink> getAllDrinksByBeerId(int beerId) throws IOException {
+
         return mDrinksRepository.getAllDrinksByBeerId(beerId);
     }
 
     @Override
-    public void deleteDrinksByBeerId(int beerId) {
-
+    public void deleteDrinkByDrinkId(int drinkId) throws IOException {
+        mDrinksRepository.deleteDrinkByDrinkId( drinkId);
     }
 
     @Override
@@ -59,4 +63,6 @@ public class HttpDrinksService implements DrinksService{
     public Drink checkIfBeerIsRated(int beerId, int userId) throws IOException {
         return mDrinksRepository.checkIfBeerIsRated(beerId,userId);
     }
+
+
 }

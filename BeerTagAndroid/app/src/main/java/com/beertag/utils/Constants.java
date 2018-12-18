@@ -91,4 +91,9 @@ public class Constants {
     public static final String ALREADY_DRINKED_MESSAGE = "The beer is already drinked";
     public static final String DRANK = "DRANK";
     public static final String INVALID_PARAMETERS = "Invalid parameters entered.Try again.";
+    public static final String SHOULD_FILL_ALL_FIELDS = "You should fill all fields correctly.";
+    public static final String SHOULD_FILL_THE_FIELD = "You should fill the field correctly";
+    public static final String ADD_OF_TAG_SUCCESS_MESSAGE = "Tag was successfully added!";
+    public static final String BEERSTAGS_ROOT_MAPPING = "beerstags";
+    public static String TAGS_ROOT_MAPPING = "tags";
 }

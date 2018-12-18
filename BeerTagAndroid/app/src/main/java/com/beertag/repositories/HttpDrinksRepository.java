@@ -51,7 +51,7 @@ public class HttpDrinksRepository implements DrinksRepository{
     public List<Drink> getAllDrinksByBeerId(int beerId) throws IOException {
         String url = new StringBuilder()
                 .append(mServerUrl)
-                .append("/drinks/")
+                .append("drinks/")
                 .append("beer")
                 .append("/")
                 .append(beerId)
@@ -63,8 +63,9 @@ public class HttpDrinksRepository implements DrinksRepository{
     }
 
     @Override
-    public void deleteDrinksByBeerId(int beerId) {
-
+    public void deleteDrinkByDrinkId(int drinkId) throws IOException {
+        String deleteServerUrl = mServerUrl + Constants.DRINKS_ROOT_MAPPING +"/"+drinkId;
+        mHttpRequester.delete(deleteServerUrl,drinkId);
     }
 
     @Override
@@ -99,7 +100,7 @@ public class HttpDrinksRepository implements DrinksRepository{
 
     @Override
     public Drink getDrinkById(int drinkId) throws IOException {
-        String itemJson = mHttpRequester.get(mServerUrl + Constants.DRINKS_ROOT_MAPPING + drinkId);
+        String itemJson = mHttpRequester.get(mServerUrl + Constants.DRINKS_ROOT_MAPPING +"/"+ drinkId);
         return mJsonParser.fromJson(itemJson);
     }
 

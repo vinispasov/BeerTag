@@ -136,7 +136,8 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
 
     @Override
     public List<BeerDTO> generateBeerDtos(List<Beer> allBeers) throws IOException {
-        Map<Integer,Double> averageRatingsByBeerId=loadBeerRating(allBeers);
+        Map<Integer,Double> averageRatingsByBeerId=loadBeerAverageRating(allBeers);
+        Map<Integer,Double> ratingsByBeerId=loadBeerRating(allBeers);
         Map<Integer,List<Tag>> allTagsByBeerIds=getTagsByBeerId(allBeers);
         BeersMapper mapper=new BeersMapperImpl();
         this.setMapper(mapper);
@@ -149,7 +150,8 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
            if (averageRatingsByBeerId.containsKey(beerId) && allTagsByBeerIds.containsKey(beerId)){
               BeerDTO beerToShow= mapper.mapBeerToDTO(beer,
                       averageRatingsByBeerId.get(beerId),
-                      (ArrayList<Tag>) allTagsByBeerIds.get(beerId));
+                      (ArrayList<Tag>) allTagsByBeerIds.get(beerId)
+                      );
                beersToShow.add(beerToShow);
                continue;
            }
@@ -172,7 +174,15 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
 
         Disposable observable = Observable
                 .create((ObservableOnSubscribe<Void>) emitter -> {
+                   List<Drink>drinksForDelete= mDrinksService.getAllDrinksByBeerId(beerToDelete.getBeerId());
+                    List<Integer>idsOfDrinksToDelete=new ArrayList<>();
+                    for (Drink drink:drinksForDelete
+                         ) {
+                       mDrinksService.deleteDrinkByDrinkId(drink.getDrinkId());
+                    }
+
                     mBeersService.deleteBeer(idOfBeerToDelete);
+
                     emitter.onComplete();
                 })
                 .subscribeOn(mSchedulerProvider.backgroundThread())
@@ -193,7 +203,21 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
 
     @Override
     public void beerIsSelected(BeerDTO beer) {
-        mView.showBeerDetails(beer);
+
+        mView.showProgressBarLoading();
+
+        Disposable observable = Observable
+                .create((ObservableOnSubscribe<BeerDTO>) emitter -> {
+                    Drink drink=mDrinksService.checkIfBeerIsRated(beer.getBeerId(),Constants.MY_USER_ID);
+                    beer.setRating(drink.getRating());
+                    emitter.onNext(beer);
+                    emitter.onComplete();
+                })
+                .subscribeOn(mSchedulerProvider.backgroundThread())
+                .observeOn(mSchedulerProvider.uiThread())
+                .doFinally(mView::hideProgressBarLoading)
+                .subscribe(beerToShow -> mView.showBeerDetails(beerToShow),
+                        error -> mView.showError(error));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -207,8 +231,24 @@ public class BeersListPresenter implements BeersListContracts.Presenter {
     }
 
     @Override
-    public Map<Integer,Double> loadBeerRating(List<Beer>allBeers) throws IOException {
+    public Map<Integer, Double> loadBeerRating(List<Beer> allBeers) throws IOException {
+        Map<Integer,Double> ratingsByBeerId=new HashMap<>();
 
+        for (Beer beer:allBeers) {
+            List<Drink> drinksByBeerId = mDrinksService.getAllDrinksByBeerId(beer.getBeerId());
+           double rating=0;
+            for (Drink drink : drinksByBeerId) {
+                if (drink.getUserId()==Constants.MY_USER_ID) {
+                    ratingsByBeerId.put(beer.getBeerId(),drink.getRating() );
+                }
+            }
+        }
+
+        return ratingsByBeerId;
+    }
+
+    @Override
+    public Map<Integer,Double> loadBeerAverageRating(List<Beer>allBeers) throws IOException {
 
                     Map<Integer,Double> averageRatingsByBeerId=new HashMap<>();
 

@@ -180,8 +180,9 @@
                 android:background="@drawable/rounded_button"
                 android:text="@string/drink"
                 android:visibility="gone" />
+
             <Button
-                android:id="@+id/btn_drank"
+                android:id="@+id/btn_add_tag"
                 style="@style/ButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
@@ -192,7 +193,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/rounded_button"
-                android:text="@string/drink"
+                android:text="@string/add_tag"
                 android:visibility="gone" />
 
     <ProgressBar

@@ -24,7 +24,7 @@ public class SqlDrinksRepositoryImpl implements DrinksRepository {
     private static final String IS_DRANK_PARAMETER = "isDrank";
     private static final String GET_DRINKS_BY_BEER_QUERY = "FROM Drink WHERE beerId=:beerId";
     private static final String GET_DRINK_BY_BEER_AND_USER_QUERY = "FROM Drink WHERE beerId=:beerId AND userId=:userId";
-    private static final String DELETE_DRINKS_BY_BEER_QUERY = "DELETE FROM Drink WHERE beerId=:beerId";
+   // private static final String DELETE_DRINKS_BY_BEER_QUERY = "DELETE FROM Drink  WHERE drinkId in (:ids) and drinkId =:drinkId";
     private static final String GET_ALL_BEER_IDS_QUERY = "SELECT DISTINCT beerId FROM Drink";
     private static final String CHECK_IF_BEER_IS_RATED_QUERY = "FROM Drink WHERE rating IS NOT NULL AND beerId=:beerId AND userId=:userId";
     private static final String SET_DRANK_BY_BEER_AND_USER_QUERY = "UPDATE Drink set isDrank=:isDrank WHERE beerId=:beerId AND userId=:userId";
@@ -95,15 +95,13 @@ public class SqlDrinksRepositoryImpl implements DrinksRepository {
     }
 
     @Override
-    public void deleteDrinksByBeerId(int beerId) {
-        List<Drink> drinksToDelete = new ArrayList<>();
-
+    public void deleteDrinkById(int drinkId) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
 
-            Query<Drink> query = session.createQuery(DELETE_DRINKS_BY_BEER_QUERY, Drink.class);
-            query.setParameter(BEER_ID_PARAMETER, beerId);
-            query.executeUpdate();
+            Drink drinkToDelete = session.get(Drink.class, drinkId);
+
+            session.delete(drinkToDelete);
 
             transaction.commit();
 
@@ -145,6 +143,7 @@ public class SqlDrinksRepositoryImpl implements DrinksRepository {
                     .createQuery(GET_DRINK_BY_BEER_AND_USER_QUERY, Drink.class)
                     .setParameter(BEER_ID_PARAMETER, beerId)
                     .setParameter(USER_ID_PARAMETER, userId)
+                    .setMaxResults(1)
                     .uniqueResult();
 
             drinkToUpdate.setRating(updatedDrink.getRating());
@@ -209,7 +208,7 @@ public class SqlDrinksRepositoryImpl implements DrinksRepository {
             Query<Drink> query = session.createQuery(CHECK_IF_BEER_IS_RATED_QUERY, Drink.class);
             query.setParameter(BEER_ID_PARAMETER, beerId);
             query.setParameter(USER_ID_PARAMETER,userId);
-            drink=query.uniqueResult();
+            drink=query.setMaxResults(1).uniqueResult();
 
             transaction.commit();
 

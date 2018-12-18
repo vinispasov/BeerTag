@@ -37,6 +37,8 @@ public class Drink {
 
 
 
+
+
     public Drink(){
 
     }
@@ -44,6 +46,15 @@ public class Drink {
     public Drink(@NotNull int beerId, @NotNull int userId) {
         setBeerId(beerId);
         setUserId(userId);
+    }
+
+    public Drink(@NotNull int beerId, @NotNull int userId, Beer beer, User user, double rating, boolean isDrank) {
+        this.beerId = beerId;
+        this.userId = userId;
+        this.beer = beer;
+        this.user = user;
+        this.rating = rating;
+        this.isDrank = isDrank;
     }
 
     public int getDrinkId() {

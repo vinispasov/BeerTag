@@ -4,15 +4,17 @@ import com.beertag.models.Drink;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public interface DrinksService {
+
     Drink addDrink(Drink newDrink) throws IOException;
 
     List<Drink> getTopThreeRatedDrinksByUser(int userId) throws IOException;
 
     List<Drink> getAllDrinksByBeerId(int beerId) throws IOException;
 
-    void deleteDrinksByBeerId(int beerId);
+    void deleteDrinkByDrinkId(int drinkId) throws IOException;
 
     Drink setDrankBeer(int drinkId,Drink drink) throws IOException;
 

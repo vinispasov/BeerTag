@@ -13,6 +13,7 @@ import java.util.Map;
 
 public interface BeersMapper extends Serializable{
     BeerDTO mapBeerToDTO(Beer beer, double rating, ArrayList<Tag> tags);
+    Beer mapBeerDTOToBeer(BeerDTO beerDTO);
     Map<Integer,BeerDTO> getBeerDtosByBeerId();
     List<Beer> getBeersFromBeerDTO(List<BeerDTO> beerDTOS);
     List<Integer> getBeerIds();

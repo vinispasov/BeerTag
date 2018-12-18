@@ -1,6 +1,7 @@
 package com.beertag.http.base;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface HttpRequester {
     String get(String url) throws IOException;
@@ -8,6 +9,8 @@ public interface HttpRequester {
     String post(String url, String body) throws IOException;
 
     void delete(String url, int id) throws IOException;
+
+    void delete(String url, int id,List<Integer> ids) throws IOException;
 
     String update(String url,String body , int id) throws IOException;
 

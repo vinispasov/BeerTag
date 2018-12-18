@@ -1,12 +1,13 @@
 package com.beertag.services.base;
 
 import com.beertag.models.BeerTag;
+import com.beertag.models.DTO.BeerTagDTO;
 
 import java.io.IOException;
 import java.util.List;
 
 public interface BeerTagsService {
-    BeerTag createBeerTag(BeerTag newBeerTag) throws IOException;
+    BeerTagDTO createBeerTag(BeerTagDTO newBeerTag) throws IOException;
 
     BeerTag getBeerTagByBeerAndTag(BeerTag beerTag) throws IOException;
 

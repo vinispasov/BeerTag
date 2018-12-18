@@ -1,17 +1,20 @@
 package com.beertag.views.beerdetails;
 
 
+import android.media.DrmInitData;
 import android.media.Rating;
 
 import com.beertag.async.base.SchedulerProvider;
 import com.beertag.models.Beer;
 import com.beertag.models.BeerTag;
 import com.beertag.models.DTO.BeerDTO;
+import com.beertag.models.DTO.BeerTagDTO;
 import com.beertag.models.Drink;
 import com.beertag.models.Tag;
 import com.beertag.services.base.BeerTagsService;
 import com.beertag.services.base.BeersService;
 import com.beertag.services.base.DrinksService;
+import com.beertag.services.base.TagsService;
 import com.beertag.utils.Constants;
 import com.beertag.utils.mappers.BeersMapperImpl;
 import com.beertag.utils.mappers.base.BeersMapper;
@@ -33,6 +36,7 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
     private final BeersService mBeersService;
     private final DrinksService mDrinksService;
     private final BeerTagsService mBeerTagsService;
+    private final TagsService mTagsService;
     private final SchedulerProvider mSchedulerProvider;
     private BeerDetailsContracts.View mView;
     private int mBeerId;
@@ -42,17 +46,18 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
     private BeersMapper mMapper;
     private BeerDTO mBeerToShow;
     private Drink mDrink;
-    private Map<Integer,Boolean> isDrankBeersByDrinkId;
+    private  Map<Integer,Boolean> mDrankBeersByDrinkId;
 
     @Inject
-    public BeerDetailsPresenter(BeersService beersService, DrinksService drinksService,BeerTagsService beerTagsService,SchedulerProvider schedulerProvider) {
+    public BeerDetailsPresenter(BeersService beersService, DrinksService drinksService,BeerTagsService beerTagsService,TagsService tagsService,SchedulerProvider schedulerProvider) {
         mBeersService = beersService;
         mDrinksService=drinksService;
         mBeerTagsService=beerTagsService;
+        mTagsService=tagsService;
         mSchedulerProvider = schedulerProvider;
         setUserId(1);
         mMapper=new BeersMapperImpl();
-        isDrankBeersByDrinkId=new HashMap<>();
+        mDrankBeersByDrinkId=new HashMap<>();
     }
 
 
@@ -72,9 +77,7 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
 
         Disposable observable = Observable
                 .create((ObservableOnSubscribe<BeerDTO>) emitter -> {
-                    //Beer beer = mBeersService.getBeerById(mBeerId);
-                   // BeerDTO beerToShow= getmBeerDtosByBeerId()
-                      //      .get(beer.getBeerId());
+
                     List<Drink>drinksByBeerId=mDrinksService.getAllDrinksByBeerId(mBeerToShow.getBeerId());
                     for (Drink drink:drinksByBeerId
                          ) {
@@ -86,9 +89,14 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
 
                     if (mDrink==null){
                         Drink drink=new Drink(mBeerToShow.getBeerId(),Constants.MY_USER_ID);
-                                mDrinksService.addDrink(drink);
-                                setDrink(drink);
+                               Drink newDrink= mDrinksService.addDrink(drink);
+                                setDrink(newDrink);
                     }
+
+                    if (getDrankBeersByDrinkId().containsKey(mDrink.getDrinkId())){
+                        mDrink.setDrank(getDrankBeersByDrinkId().get(mDrink.getDrinkId()));
+                    }
+                   // mBeerToShow.setRating(mDrink.getRating());
 
                     emitter.onNext(mBeerToShow);
                     emitter.onComplete();
@@ -127,7 +135,7 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
                     for (Drink drinkByBeerId:drinksByBeerId
                          ) {
                         if (drinkByBeerId.getUserId()==Constants.MY_USER_ID){
-                            drink=drink;
+                            drink=drinkByBeerId;
                             break;
                         }
                     }
@@ -140,12 +148,9 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
                         setDrink(drink);
                     }
 
-                   /* List<BeerTag> beerTags=mBeerTagsService.getAllBeersTagsByBeer(drink.getBeerId());
-                    for (BeerTag beerTag:beerTags
-                            ) {
-                        tagsByBeerId.add(beerTag.getTag());
-                    }*/
-
+                    if (getDrankBeersByDrinkId().containsKey(mDrink.getDrinkId())){
+                        mDrink.setDrank(getDrankBeersByDrinkId().get(mDrink.getDrinkId()));
+                    }
 
                     if (mDrink.isDrank()){
                        message[0] =Constants.ALREADY_DRINKED_MESSAGE;
@@ -279,10 +284,45 @@ public class BeerDetailsPresenter implements BeerDetailsContracts.Presenter{
 
     @Override
     public Map<Integer, Boolean> getDrankBeersByDrinkId() {
-        return isDrankBeersByDrinkId;
+        return mDrankBeersByDrinkId;
+    }
+
+    @Override
+    public void getActionOnAddingTag(String tag) {
+
+        mView.showLoading();
+        Disposable disposable = Observable
+                .create((ObservableOnSubscribe<Void>) emitter -> {
+                    Tag newTag=new Tag(tag);
+                newTag=mTagsService.addNewTag(newTag);
+                    Beer beer=mMapper.mapBeerDTOToBeer(getmBeerToShow());
+                  BeerTagDTO newBeerTag=new BeerTagDTO(beer.getBeerId(),newTag.getTagId());
+                     mBeerTagsService.createBeerTag(newBeerTag);
+                     mBeerToShow.getTags().add(newTag);
+                    emitter.onComplete();
+                })
+                .subscribeOn(mSchedulerProvider.backgroundThread())
+                .observeOn(mSchedulerProvider.uiThread())
+                .doOnError(error -> mView.showError(error))
+                .doOnComplete(() -> {
+                    mView.showMessage(Constants.ADD_OF_TAG_SUCCESS_MESSAGE);
+                    mView.hideAddTagDialog();
+                    mView.showBeer(mBeerToShow);
+                })
+                .doFinally(mView::hideLoading)
+                        .subscribe();
     }
 
     public void setIsDrankBeersByDrinkId(Map<Integer, Boolean> isDrankBeersByDrinkId) {
-        this.isDrankBeersByDrinkId = isDrankBeersByDrinkId;
+        this.mDrankBeersByDrinkId = isDrankBeersByDrinkId;
+    }
+    @Override
+    public void getActionOnCancelledAddTag() {
+        mView.hideAddTagDialog();
+    }
+
+    @Override
+    public void addTagButtonIsClicked() {
+        mView.showDialogForAddingTag();
     }
 }

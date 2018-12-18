@@ -46,11 +46,6 @@ public class Constants {
     public static final String TAGS_TABLE_TAG_NAME_COLUMN_NAME = "tag";
 
 
-
-
-
-
-
     public static final int TEXT_VALIDATION_MIN_VALUE = 3;
     public static final int TEXT_VALIDATION_MAX_VALUE = 45;
 
@@ -76,4 +71,5 @@ public class Constants {
     public static final String DRINKS_TABLE_RATING_FIELD = "rating";
     public static final String DRINKS_TABLE_IS_DRANK_FIELD = "isDrank";
     public static final String DRINKS_ROOT_MAPPING = "/api/drinks";
+    public static final String DRINKS_TABLE_AVG_RATING_FIELD = "avg_rating";
 }

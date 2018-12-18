@@ -21,7 +21,7 @@
         android:paddingEnd="@dimen/SmallPadding"
         android:paddingStart="@dimen/SmallPadding"
         android:textColor="@color/white"
-        android:textSize="@dimen/ParametersFieldTextSize" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv_beer_rating_profile_item_field"

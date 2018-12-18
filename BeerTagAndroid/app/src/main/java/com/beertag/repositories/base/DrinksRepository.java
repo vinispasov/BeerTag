@@ -12,7 +12,7 @@ public interface DrinksRepository {
 
     List<Drink> getAllDrinksByBeerId(int beerId) throws IOException;
 
-    void deleteDrinksByBeerId(int beerId);
+    void deleteDrinkByDrinkId(int drinkId) throws IOException;
 
     Drink setDrankBeer(int drinkId,Drink drink) throws IOException;
 

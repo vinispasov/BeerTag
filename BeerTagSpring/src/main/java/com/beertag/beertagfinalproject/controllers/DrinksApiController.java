@@ -35,9 +35,9 @@ public class DrinksApiController {
         return drinksService.getAllDrinksByBeerId(beerId);
     }
 
-    @RequestMapping(value = "/{beerId}", method = RequestMethod.DELETE)
-    public void deleteDrinksByBeerId(@PathVariable(value = "beerId") @Valid int beerId) {
-        deleteDrinksByBeerId(beerId);
+    @RequestMapping(value="/{drinkId}",method = RequestMethod.DELETE)
+    public void deleteDrinksByBeerId(@PathVariable int drinkId) {
+        drinksService.deleteDrinkById(drinkId);
     }
 
     @RequestMapping(value = "/{drinkId}", method = RequestMethod.PUT)

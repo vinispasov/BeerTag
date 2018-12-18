@@ -32,7 +32,7 @@ public class HttpBeersRepository implements BeersRepository {
 
     @Override
     public void deleteBeer(int beerId) throws IOException {
-        String deleteServerUrl = mServerUrl + Constants.BEERS_ROOT_MAPPING + beerId;
+        String deleteServerUrl = mServerUrl + Constants.BEERS_ROOT_MAPPING +"/"+ beerId;
         mHttpRequester.delete(deleteServerUrl, beerId);
 
     }

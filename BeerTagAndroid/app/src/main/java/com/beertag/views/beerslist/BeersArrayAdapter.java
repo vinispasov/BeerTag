@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 
 public class BeersArrayAdapter extends ArrayAdapter<BeerDTO> {
 
-    private static final String BEER_RATING_FIELD = "Rating";
+    private static final String BEER_RATING_FIELD = "Avg rating";
     private static final String BEER_ABV_FIELD = "ABV";
     private static final String BEER_STYLE_FIELD = "Style";
     private static final String BEER_COUNTRY_FIELD = "Country";

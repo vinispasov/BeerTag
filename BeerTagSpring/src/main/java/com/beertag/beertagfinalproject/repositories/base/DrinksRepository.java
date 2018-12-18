@@ -12,7 +12,7 @@ public interface DrinksRepository {
 
     List<Drink> getAllDrinksByBeerId(int beerId);
 
-    void deleteDrinksByBeerId(int beerId);
+    void deleteDrinkById(int drinkId);
 
     Drink setDrankBeer(int drinkId,Drink updatedDrink);
 

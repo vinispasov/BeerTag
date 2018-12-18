@@ -1,6 +1,7 @@
 package com.beertag.services;
 
 import com.beertag.models.BeerTag;
+import com.beertag.models.DTO.BeerTagDTO;
 import com.beertag.repositories.base.BeerTagsRepository;
 import com.beertag.services.base.BeerTagsService;
 
@@ -17,7 +18,7 @@ public class HttpBeerTagsService implements BeerTagsService {
 
 
     @Override
-    public BeerTag createBeerTag(BeerTag newBeerTag) throws IOException {
+    public BeerTagDTO createBeerTag(BeerTagDTO newBeerTag) throws IOException {
         return mBeerTagsRepository.createBeerTag(newBeerTag);
     }
 

@@ -3,6 +3,7 @@ package com.beertag.repositories;
 import com.beertag.http.base.HttpRequester;
 
 import com.beertag.models.BeerTag;
+import com.beertag.models.DTO.BeerTagDTO;
 import com.beertag.parsers.base.JsonParser;
 import com.beertag.repositories.base.BeerTagsRepository;
 import com.beertag.utils.Constants;
@@ -14,21 +15,23 @@ public class HttpBeerTagsRepository implements BeerTagsRepository {
     private final HttpRequester mHttpRequester;
     private final String mServerUrl;
     private final JsonParser<BeerTag> mJsonParser;
+    private final JsonParser<BeerTagDTO> mJsonParserDTO;
 
 
-    public HttpBeerTagsRepository(String serverUrl, HttpRequester httpRequester, JsonParser<BeerTag> jsonParser) {
+    public HttpBeerTagsRepository(String serverUrl, HttpRequester httpRequester, JsonParser<BeerTag> jsonParser,JsonParser<BeerTagDTO> jsonParserDTO) {
         mServerUrl = serverUrl;
         mHttpRequester = httpRequester;
         mJsonParser = jsonParser;
+        mJsonParserDTO=jsonParserDTO;
     }
 
 
     @Override
-    public BeerTag createBeerTag(BeerTag newBeerTag) throws IOException {
-        String requestBody = mJsonParser.toJson(newBeerTag);
-        String responseBody = mHttpRequester.post(mServerUrl, requestBody);
+    public BeerTagDTO createBeerTag(BeerTagDTO newBeerTag) throws IOException {
+        String requestBody = mJsonParserDTO.toJson(newBeerTag);
+        String responseBody = mHttpRequester.post(mServerUrl+Constants.BEERSTAGS_ROOT_MAPPING, requestBody);
 
-        return mJsonParser.fromJson(responseBody);
+        return mJsonParserDTO.fromJson(responseBody);
     }
 
     @Override

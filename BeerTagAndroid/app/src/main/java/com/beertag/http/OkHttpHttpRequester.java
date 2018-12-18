@@ -3,6 +3,7 @@ package com.beertag.http;
 import com.beertag.http.base.HttpRequester;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -58,6 +59,19 @@ public class OkHttpHttpRequester implements HttpRequester {
 
     @Override
     public void delete(String url, int id) throws IOException {
+
+        Request request = new Request.Builder()
+                .delete()
+                .url(url)
+                .build();
+
+        client
+                .newCall(request)
+                .execute();
+
+    }
+    @Override
+    public void delete(String url, int id,List<Integer> ids) throws IOException {
 
         Request request = new Request.Builder()
                 .delete()

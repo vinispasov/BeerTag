@@ -35,6 +35,7 @@ public class BeerDTO implements Serializable,Parcelable{
 
 
 
+
     public BeerDTO(){
 
     }
@@ -182,4 +183,5 @@ public class BeerDTO implements Serializable,Parcelable{
         dest.writeDouble(this.rating);
         dest.writeList((List)this.tags);
     }
+
 }

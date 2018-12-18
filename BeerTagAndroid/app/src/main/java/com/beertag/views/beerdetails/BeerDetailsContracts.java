@@ -24,6 +24,9 @@ public interface BeerDetailsContracts {
 
         void showRatingDialog();
 
+        void showDialogForAddingTag();
+
+        void hideAddTagDialog();
        // void showBeerRating(double rating);
 
     }
@@ -63,5 +66,9 @@ public interface BeerDetailsContracts {
 
         Map<Integer,Boolean>getDrankBeersByDrinkId();
 
+        void getActionOnAddingTag(String tag);
+
+        void getActionOnCancelledAddTag();
+        void addTagButtonIsClicked();
     }
 }

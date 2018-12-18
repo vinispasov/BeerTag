@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -17,6 +18,7 @@ import com.beertag.models.Beer;
 import com.beertag.models.DTO.BeerDTO;
 import com.beertag.utils.Constants;
 import com.beertag.views.BaseDrawerActivity;
+import com.beertag.views.beerslist.DeletionDialog;
 import com.squareup.picasso.Picasso;
 import com.stepstone.apprating.AppRatingDialog;
 import com.stepstone.apprating.listener.RatingDialogListener;
@@ -37,6 +39,8 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
 
     private BeerDetailsContracts.Presenter mPresenter;
 
+    private AddTagDialog mAddTagDialog;
+
     @BindView(R.id.prb_load_view)
     ProgressBar mProgressLoadView;
 
@@ -48,6 +52,9 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
 
     @BindView(R.id.btn_rate)
     Button mRateBeerButton;
+
+    @BindView(R.id.btn_add_tag)
+    Button mAddTagButton;
 
     @BindView(R.id.btn_drink)
     Button mDrinkButton;
@@ -124,6 +131,7 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
 
         mRateBeerButton.setVisibility(View.VISIBLE);
         mDrinkButton.setVisibility(View.VISIBLE);
+        mAddTagButton.setVisibility(View.VISIBLE);
 
         mBeerRatingTextView.setText(beer.getRatingString());
 
@@ -190,14 +198,14 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
 
 
 
-  /*  @Override
-    public void showBeerRating(double rating) {
-        String ratingRepresentation = String.format(Locale.UK, "%.1f", rating) + Constants.RATING_REPRESENTATION;
-        mBeerRatingTextView.setText(ratingRepresentation);
-    }*/
     @OnClick(R.id.btn_rate)
     public void onRateButtonClick() {
         mPresenter.rateButtonIsClicked();
+    }
+
+    @OnClick(R.id.btn_add_tag)
+    public void onAddTagButtonClick() {
+        mPresenter.addTagButtonIsClicked();
     }
     @Override
     public void onNegativeButtonClicked() {
@@ -237,5 +245,38 @@ public class BeerDetailsFragment extends Fragment implements BeerDetailsContract
                 .create(getActivity())
                 .setTargetFragment(this, 0)
                 .show();
+    }
+    @Override
+    public void showDialogForAddingTag() {
+
+        setupAddTagDialog();
+        mAddTagDialog.show();
+
+        mAddTagDialog.mPositiveDialogButton
+                .setOnClickListener(view -> {
+                    //view.startAnimation(mButtonClickAnimation);
+                    String newBeerTag = mAddTagDialog.mEnteredTag.getText().toString();
+
+                    if (newBeerTag.isEmpty()||newBeerTag==null||newBeerTag==" "){
+                        showMessage(Constants.SHOULD_FILL_THE_FIELD);
+                    }
+                    else {
+                        mPresenter.getActionOnAddingTag(newBeerTag);
+                    }
+                });
+        mAddTagDialog.mNegativeDialogButton
+                .setOnClickListener(view -> {
+                   // view.startAnimation(mButtonClickAnimation);
+                    mPresenter.getActionOnCancelledAddTag();
+                });
+    }
+
+    private void setupAddTagDialog() {
+        mAddTagDialog = new AddTagDialog(this.getContext());
+    }
+
+    @Override
+    public void hideAddTagDialog() {
+        mAddTagDialog.cancel();
     }
 }

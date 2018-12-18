@@ -78,6 +78,7 @@ public class BeerCreatePresenter implements BeerCreateContracts.Presenter {
             beer = mBeersService.addBeer(newBeer);
         } catch (Exception e) {
             e.printStackTrace();
+
         }
         return beer;
     }
