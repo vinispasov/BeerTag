@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 
 import com.beertag.R;
+import com.beertag.models.User;
+import com.beertag.services.HttpUsersService;
+import com.beertag.services.base.UsersService;
+import com.beertag.utils.Constants;
 import com.beertag.views.beerslist.BeersListActivity;
 import com.beertag.views.createbeer.BeerCreateActivity;
 import com.beertag.views.profile.ProfileActivity;
@@ -24,7 +28,6 @@ public abstract class BaseDrawerActivity extends DaggerAppCompatActivity{
     private static final String BEERS_LIST_DRAWER_NAME = "Beers";
     private static final String USERS_LIST_DRAWER_NAME = "Users";
     private static final String ADD_BEER_DRAWER_NAME = "Add new beer";
-
 
     @BindView(R.id.tb_drawer_toolbar)
     Toolbar mToolbar;
@@ -123,6 +126,7 @@ public abstract class BaseDrawerActivity extends DaggerAppCompatActivity{
 
         if (identifier == ProfileActivity.DRAWER_IDENTIFIER) {
             nextIntent = new Intent(this, ProfileActivity.class);
+            nextIntent.putExtra(ProfileActivity.PROFILE_EXTRA_KEY_MY_PROFILE, Constants.MY_USER_ID);
             return nextIntent;
         } else if (identifier == UsersListActivity.DRAWER_IDENTIFIER) {
             nextIntent = new Intent(this, UsersListActivity.class);

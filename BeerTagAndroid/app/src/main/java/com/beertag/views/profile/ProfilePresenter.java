@@ -18,6 +18,7 @@ import com.beertag.utils.mappers.UsersMapperImpl;
 import com.beertag.utils.mappers.base.BeersMapper;
 import com.beertag.utils.mappers.base.UsersMapper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -110,6 +111,5 @@ public class ProfilePresenter implements ProfileContracts.Presenter {
     public void setUserId(int id) {
         mUserId=id;
     }
-
 
 }

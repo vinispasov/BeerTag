@@ -37,7 +37,6 @@ public interface ProfileContracts {
         void beerIsSelected(BeerDTO beer);
 
         void setUserId(int id);
-
     }
     interface Navigator{
         void navigateToBeerDetailsWith(BeerDTO beer);

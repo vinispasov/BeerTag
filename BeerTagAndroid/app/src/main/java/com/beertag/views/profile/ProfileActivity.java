@@ -27,6 +27,7 @@ public class ProfileActivity extends BaseDrawerActivity implements ProfileContra
     public static final String PROFILE_EXTRA_KEY = "PROFILE_EXTRA_KEY";
     public static final String PROFILE_EXTRA_KEY_MY_PROFILE = "PROFILE_EXTRA_KEY_MY_PROFILE";
 
+
     @Inject
     ProfileFragment mProfileFragment;
 
@@ -39,15 +40,23 @@ public class ProfileActivity extends BaseDrawerActivity implements ProfileContra
         setContentView(R.layout.activity_profile);
 
         ButterKnife.bind(this);
+        mProfileFragment.setNavigator(this);
+        mProfileFragment.setPresenter(mProfilePresenter);
+
+
 
         Intent intent = getIntent();
-        User user = (User) intent.getSerializableExtra(ProfileActivity.PROFILE_EXTRA_KEY);
+        if (intent.getSerializableExtra(PROFILE_EXTRA_KEY_MY_PROFILE)!=null){
+            int userId=(Integer)intent.getSerializableExtra(PROFILE_EXTRA_KEY_MY_PROFILE);
+             mProfilePresenter.setUserId(userId);
+        }
+        else {
+             User user = (User) intent.getSerializableExtra(ProfileActivity.PROFILE_EXTRA_KEY);
+            mProfilePresenter.setUserId(user.getUserId());
+        }
 
 
 
-        mProfileFragment.setNavigator(this);
-        mProfilePresenter.setUserId(user.getUserId());
-        mProfileFragment.setPresenter(mProfilePresenter);
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -66,4 +75,5 @@ public class ProfileActivity extends BaseDrawerActivity implements ProfileContra
         intent.putExtra(BeerDetailsActivity.BEER_EXTRA_KEY, (Serializable) beer);
         startActivity(intent);
     }
+
 }
