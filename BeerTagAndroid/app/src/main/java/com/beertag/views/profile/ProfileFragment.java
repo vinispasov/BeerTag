@@ -66,6 +66,9 @@ public class ProfileFragment extends Fragment implements ProfileContracts.View,A
     @BindView(R.id.lv_beers_profile_list_view)
     ListView mBeersListView;
 
+    @BindView(R.id.top_rated_field)
+    TextView mTopRatedTextView;
+
 
     private String[] mFilterOptions;
     private String mSelectedFilterOption;
